@@ -30,7 +30,7 @@ def main():
     print("=" * 60)
     print(f"  Dataset : {DATA_YAML}")
     print(f"  Output  : {OUTPUT_DIR}/{RUN_NAME}")
-    print(f"  Epochs  : 100")
+    print(f"  Epochs  : 150")
     print(f"  ImgSize : 640")
     print()
 
@@ -54,10 +54,10 @@ def main():
     # Training
     results = model.train(
         data=DATA_YAML,
-        epochs=100,
+        epochs=150,
         imgsz=640,
         batch=16,
-        patience=20,
+        patience=25,
         project=OUTPUT_DIR,
         name=RUN_NAME,
         exist_ok=True,
@@ -78,6 +78,7 @@ def main():
         fliplr=0.5,
         mosaic=1.0,
         mixup=0.1,
+        close_mosaic=10,
         # Output
         plots=True,
         save=True,
