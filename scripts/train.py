@@ -20,7 +20,7 @@ from ultralytics import YOLO
 BASE_DIR = Path(__file__).resolve().parent.parent        # skripsi_yolov13_engagement/
 DATA_YAML = str(BASE_DIR / 'datasets' / 'master_combined_dataset' / 'data.yaml')
 OUTPUT_DIR = str(BASE_DIR / 'runs')
-RUN_NAME = 'yolov13_master_combined'
+RUN_NAME = 'yolov13_master_combined_v2'
 
 
 def main():
@@ -40,9 +40,16 @@ def main():
         print("        Pastikan folder datasets/master_combined_dataset/ ada.")
         sys.exit(1)
 
-    # Load pretrained YOLOv13n
-    print("[INFO] Loading pretrained YOLOv13n...")
-    model = YOLO('yolov13n.pt')
+    # Cek ketersediaan weights (apakah fine-tune dari model terdahulu atau dari yolov13n.pt)
+    prev_best = BASE_DIR / 'runs' / 'yolov13_master_combined' / 'weights' / 'best.pt'
+    if prev_best.exists():
+        print(f"[INFO] Fine-tuning dari bobot terbaik sebelumnya: {prev_best}")
+        model_weights = str(prev_best)
+    else:
+        print("[INFO] Loading pretrained YOLOv13n base weights...")
+        model_weights = 'yolov13n.pt'
+
+    model = YOLO(model_weights)
 
     # Training
     results = model.train(
