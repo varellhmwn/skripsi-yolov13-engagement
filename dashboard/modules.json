@@ -1,0 +1,233 @@
+[
+  {
+    "id": 1,
+    "title": "Pengenalan Machine Learning",
+    "description": "Memahami konsep dasar Machine Learning, jenis-jenis ML, dan aplikasinya dalam kehidupan sehari-hari.",
+    "duration_minutes": 2,
+    "content": [
+      {
+        "section": "Apa itu Machine Learning?",
+        "text": "Machine Learning (ML) adalah cabang dari kecerdasan buatan (Artificial Intelligence) yang memungkinkan sistem komputer untuk belajar dan meningkatkan kinerjanya dari pengalaman tanpa diprogram secara eksplisit. ML menggunakan algoritma untuk mengidentifikasi pola dalam data dan membuat keputusan berdasarkan pola tersebut.\n\nKonsep dasar ML melibatkan tiga komponen utama:\n1. **Data** — Kumpulan informasi yang digunakan untuk melatih model\n2. **Model** — Representasi matematis yang belajar dari data\n3. **Algoritma** — Prosedur yang digunakan untuk mengoptimalkan model"
+      },
+      {
+        "section": "Jenis-Jenis Machine Learning",
+        "text": "Terdapat tiga kategori utama Machine Learning:\n\n**Supervised Learning** — Model dilatih dengan data berlabel. Contoh: klasifikasi email spam, prediksi harga rumah.\n\n**Unsupervised Learning** — Model menemukan pola dalam data tanpa label. Contoh: segmentasi pelanggan, deteksi anomali.\n\n**Reinforcement Learning** — Model belajar melalui interaksi dengan lingkungan dan mendapat reward/punishment. Contoh: game AI, robot navigasi."
+      },
+      {
+        "section": "Aplikasi Machine Learning",
+        "text": "Machine Learning digunakan secara luas dalam berbagai bidang:\n\n- **Kesehatan**: Diagnosis penyakit dari gambar medis\n- **Keuangan**: Deteksi penipuan kartu kredit\n- **Transportasi**: Kendaraan otonom (self-driving car)\n- **Pendidikan**: Sistem pembelajaran adaptif\n- **E-commerce**: Sistem rekomendasi produk\n\nDalam konteks pendidikan, ML dapat digunakan untuk mendeteksi tingkat keterlibatan (engagement) mahasiswa melalui analisis ekspresi wajah secara real-time."
+      }
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Apa definisi yang paling tepat untuk Machine Learning?",
+        "options": [
+          "Program komputer yang menjalankan instruksi secara berurutan",
+          "Cabang AI yang memungkinkan sistem belajar dari data tanpa diprogram secara eksplisit",
+          "Teknik untuk membuat website yang responsif",
+          "Bahasa pemrograman untuk membuat aplikasi mobile"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q2",
+        "question": "Jenis Machine Learning yang menggunakan data berlabel untuk pelatihan disebut?",
+        "options": [
+          "Unsupervised Learning",
+          "Reinforcement Learning",
+          "Supervised Learning",
+          "Transfer Learning"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "q3",
+        "question": "Manakah yang merupakan contoh aplikasi Unsupervised Learning?",
+        "options": [
+          "Klasifikasi email spam",
+          "Prediksi harga saham",
+          "Segmentasi pelanggan",
+          "Pengenalan suara"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "q4",
+        "question": "Komponen utama Machine Learning TIDAK termasuk...",
+        "options": [
+          "Data",
+          "Model",
+          "Algoritma",
+          "Compiler"
+        ],
+        "correct": 3
+      },
+      {
+        "id": "q5",
+        "question": "Reinforcement Learning belajar melalui...",
+        "options": [
+          "Data berlabel",
+          "Clustering data",
+          "Interaksi dengan lingkungan dan reward/punishment",
+          "Transfer dari model lain"
+        ],
+        "correct": 2
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Deep Learning & Neural Networks",
+    "description": "Mempelajari arsitektur Neural Network, konsep Deep Learning, dan bagaimana jaringan saraf tiruan memproses informasi.",
+    "duration_minutes": 2,
+    "content": [
+      {
+        "section": "Apa itu Neural Network?",
+        "text": "Neural Network (Jaringan Saraf Tiruan) adalah model komputasi yang terinspirasi dari cara kerja otak manusia. Sebuah neural network terdiri dari node-node (neuron) yang terhubung dalam lapisan-lapisan (layers).\n\nStruktur dasar Neural Network:\n1. **Input Layer** — Menerima data masukan\n2. **Hidden Layer(s)** — Memproses data melalui transformasi matematis\n3. **Output Layer** — Menghasilkan prediksi atau keputusan\n\nSetiap koneksi antar neuron memiliki **weight** (bobot) yang disesuaikan selama proses pelatihan untuk meminimalkan error."
+      },
+      {
+        "section": "Deep Learning",
+        "text": "Deep Learning adalah subset dari Machine Learning yang menggunakan Neural Network dengan banyak hidden layer (deep). Kedalaman ini memungkinkan model untuk mempelajari representasi data yang sangat kompleks.\n\n**Mengapa Deep Learning Powerful?**\n- Dapat memproses data mentah tanpa feature engineering manual\n- Performa meningkat seiring bertambahnya data\n- Mampu menangkap pola hierarkis dalam data\n\n**Arsitektur populer:**\n- CNN (Convolutional Neural Network) — untuk data gambar\n- RNN (Recurrent Neural Network) — untuk data sekuensial\n- Transformer — untuk NLP dan vision modern"
+      },
+      {
+        "section": "Proses Training",
+        "text": "Proses pelatihan Neural Network melibatkan langkah-langkah berikut:\n\n1. **Forward Pass** — Data mengalir dari input ke output, menghasilkan prediksi\n2. **Loss Calculation** — Menghitung selisih antara prediksi dan nilai sebenarnya\n3. **Backpropagation** — Menghitung gradient error terhadap setiap weight\n4. **Weight Update** — Mengupdate weight menggunakan optimizer (SGD, Adam, dll)\n\nProses ini diulang berkali-kali (epochs) hingga model mencapai performa yang diinginkan. Teknik regularisasi seperti Dropout dan Batch Normalization digunakan untuk mencegah overfitting."
+      }
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Lapisan pada Neural Network yang memproses data disebut?",
+        "options": [
+          "Input Layer",
+          "Output Layer",
+          "Hidden Layer",
+          "Data Layer"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "q2",
+        "question": "Deep Learning berbeda dari ML tradisional karena...",
+        "options": [
+          "Tidak membutuhkan data",
+          "Menggunakan Neural Network dengan banyak hidden layer",
+          "Hanya bisa digunakan untuk teks",
+          "Tidak memerlukan GPU"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q3",
+        "question": "Arsitektur Neural Network yang cocok untuk data gambar adalah?",
+        "options": [
+          "RNN",
+          "LSTM",
+          "CNN",
+          "GAN"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "q4",
+        "question": "Proses menghitung gradient error terhadap weight disebut?",
+        "options": [
+          "Forward Pass",
+          "Backpropagation",
+          "Regularization",
+          "Normalization"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q5",
+        "question": "Teknik untuk mencegah overfitting pada Neural Network adalah...",
+        "options": [
+          "Menambah layer",
+          "Mengurangi data",
+          "Dropout dan Batch Normalization",
+          "Menghilangkan activation function"
+        ],
+        "correct": 2
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Computer Vision & Object Detection",
+    "description": "Memahami Computer Vision, teknik Object Detection, dan bagaimana YOLO bekerja untuk mendeteksi objek secara real-time.",
+    "duration_minutes": 2,
+    "content": [
+      {
+        "section": "Apa itu Computer Vision?",
+        "text": "Computer Vision adalah bidang AI yang memungkinkan komputer untuk memahami dan menginterpretasi informasi visual dari dunia nyata. Tujuannya adalah agar komputer dapat 'melihat' dan memahami gambar atau video seperti manusia.\n\nTugas utama dalam Computer Vision:\n- **Image Classification** — Menentukan kategori sebuah gambar\n- **Object Detection** — Menemukan dan melokalisasi objek dalam gambar\n- **Image Segmentation** — Memisahkan objek dari background\n- **Face Recognition** — Mengidentifikasi wajah seseorang\n- **Pose Estimation** — Mendeteksi posisi tubuh manusia"
+      },
+      {
+        "section": "Object Detection",
+        "text": "Object Detection adalah tugas untuk mendeteksi dan melokalisasi objek dalam gambar dengan bounding box. Berbeda dengan klasifikasi yang hanya menentukan 'apa' yang ada, object detection juga menjawab 'di mana' objek tersebut berada.\n\n**Pendekatan Object Detection:**\n\n1. **Two-Stage Detectors** — Menggunakan region proposal terlebih dahulu (R-CNN, Fast R-CNN, Faster R-CNN). Akurasi tinggi tapi lambat.\n\n2. **One-Stage Detectors** — Langsung memprediksi bounding box dan kelas (YOLO, SSD, RetinaNet). Cepat dan cocok untuk real-time.\n\nMetrik evaluasi yang umum digunakan adalah mAP (mean Average Precision) yang mengukur akurasi deteksi pada berbagai threshold IoU."
+      },
+      {
+        "section": "YOLO (You Only Look Once)",
+        "text": "YOLO adalah arsitektur object detection yang revolusioner karena kemampuannya mendeteksi objek dalam satu kali forward pass, membuatnya sangat cepat untuk aplikasi real-time.\n\n**Evolusi YOLO:**\n- YOLOv1 (2016) — Konsep awal one-stage detection\n- YOLOv3-v5 — Peningkatan arsitektur dan performa\n- YOLOv8 — Arsitektur modern dengan anchor-free design\n- YOLOv13 (2025) — Versi terbaru dengan HyperScale Feature Fusion\n\n**Cara Kerja YOLO:**\n1. Gambar dibagi menjadi grid cells\n2. Setiap cell memprediksi bounding boxes + confidence\n3. Non-Maximum Suppression (NMS) memfilter prediksi duplikat\n4. Output final: bounding box + kelas + confidence score\n\nDalam proyek ini, YOLOv13 digunakan untuk mendeteksi emosi mahasiswa (engaged, confused, bored, frustrated) secara real-time melalui analisis ekspresi wajah."
+      }
+    ],
+    "questions": [
+      {
+        "id": "q1",
+        "question": "Perbedaan utama Object Detection dengan Image Classification adalah...",
+        "options": [
+          "Object Detection lebih lambat",
+          "Object Detection juga melokalisasi posisi objek dalam gambar",
+          "Image Classification lebih akurat",
+          "Tidak ada perbedaan"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q2",
+        "question": "YOLO termasuk kategori detector jenis apa?",
+        "options": [
+          "Two-Stage Detector",
+          "Three-Stage Detector",
+          "One-Stage Detector",
+          "Multi-Stage Detector"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "q3",
+        "question": "Apa kepanjangan dari YOLO?",
+        "options": [
+          "Your Own Learning Output",
+          "You Only Look Once",
+          "Yield Optimized Layer Output",
+          "You Only Learn Once"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q4",
+        "question": "Metrik evaluasi yang umum digunakan untuk Object Detection adalah?",
+        "options": [
+          "Accuracy",
+          "F1-Score",
+          "mAP (mean Average Precision)",
+          "RMSE"
+        ],
+        "correct": 2
+      },
+      {
+        "id": "q5",
+        "question": "Teknik yang digunakan YOLO untuk memfilter prediksi duplikat adalah?",
+        "options": [
+          "Dropout",
+          "Batch Normalization",
+          "Non-Maximum Suppression (NMS)",
+          "Data Augmentation"
+        ],
+        "correct": 2
+      }
+    ]
+  }
+]

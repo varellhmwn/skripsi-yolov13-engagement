@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard Pembelajaran dengan Deteksi Emosi Real-time">
+    <title>Dashboard — Engagement Learning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="topbar">
+        <div class="topbar-left">
+            <div class="topbar-logo">🎓</div>
+            <span class="topbar-title">Engagement Learning</span>
+        </div>
+        <div class="topbar-right">
+            <div class="user-info">
+                <div class="user-avatar">{{ name[0] | upper }}</div>
+                <div class="user-details">
+                    <span class="user-name">{{ name }}</span>
+                    <span class="user-nim">{{ nim }}</span>
+                </div>
+            </div>
+            <a href="/logout" class="btn-logout" title="Logout">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+            </a>
+        </div>
+    </nav>
+
+    <div class="app-layout">
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!--                    MAIN CONTENT                        -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <main class="main-content" id="mainContent">
+
+            <!-- ─── STEP 1: Module Selection ─── -->
+            <div class="step-view active" id="stepModules">
+                <div class="step-header">
+                    <div class="step-badge">Langkah 1 dari 4</div>
+                    <h1>Pilih Modul Pembelajaran</h1>
+                    <p>Pilih modul yang ingin kamu pelajari. Kamera akan otomatis aktif untuk mendeteksi emosi selama belajar.</p>
+                </div>
+
+                <div class="modules-grid" id="modulesGrid">
+                    {% for mod in modules %}
+                    <div class="module-card" data-module-id="{{ mod.id }}" onclick="selectModule({{ mod.id }})">
+                        <div class="module-card-icon">
+                            {% if loop.index == 1 %}🤖{% elif loop.index == 2 %}🧠{% else %}👁️{% endif %}
+                        </div>
+                        <div class="module-card-content">
+                            <h3>{{ mod.title }}</h3>
+                            <p>{{ mod.description }}</p>
+                        </div>
+                        <div class="module-card-meta">
+                            <span class="meta-item">📖 {{ mod.content | length }} Bagian</span>
+                            <span class="meta-item">📝 {{ mod.questions | length }} Soal</span>
+                            <span class="meta-item">⏱️ {{ mod.duration_minutes }} menit</span>
+                        </div>
+                        <div class="module-card-arrow">→</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- ─── STEP 2: Camera Activation ─── -->
+            <div class="step-view" id="stepCamera">
+                <div class="step-header">
+                    <div class="step-badge">Langkah 2 dari 4</div>
+                    <h1>Aktifkan Kamera</h1>
+                    <p>Kamera diperlukan untuk mendeteksi emosi kamu selama proses belajar secara real-time.</p>
+                </div>
+
+                <div class="camera-activation-card">
+                    <div class="camera-icon-large">📹</div>
+                    <h2>Izinkan Akses Kamera</h2>
+                    <p>Pastikan webcam sudah terhubung ke komputer. Emosi yang terdeteksi: <strong>Engaged, Confused, Bored, Frustrated, Neutral</strong></p>
+                    <button class="btn-primary btn-glow" onclick="activateCamera()">
+                        <span>🔴 Nyalakan Kamera</span>
+                    </button>
+                    <div class="camera-status" id="cameraStatus">
+                        <span class="status-dot"></span>
+                        <span>Menunggu aktivasi kamera...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── STEP 3: Read Module ─── -->
+            <div class="step-view" id="stepRead">
+                <div class="step-header">
+                    <div class="step-badge">Langkah 3 dari 4</div>
+                    <h1 id="readModuleTitle">Membaca Modul</h1>
+                    <p>Baca materi dengan seksama. Durasi membaca akan dicatat.</p>
+                </div>
+
+                <div class="reading-content" id="readingContent">
+                    <!-- Filled dynamically -->
+                </div>
+
+                <div class="reading-footer">
+                    <div class="reading-timer">
+                        <span class="timer-icon">⏱️</span>
+                        <span>Durasi membaca: <strong id="readTimer">00:00</strong></span>
+                    </div>
+                    <button class="btn-primary" id="btnNextToQuiz" onclick="goToQuiz()" disabled>
+                        <span>Lanjut ke Soal →</span>
+                    </button>
+                    <span class="min-time-note" id="minTimeNote">Minimal 1 menit membaca</span>
+                </div>
+            </div>
+
+            <!-- ─── STEP 4: Quiz ─── -->
+            <div class="step-view" id="stepQuiz">
+                <div class="step-header">
+                    <div class="step-badge">Langkah 4 dari 4</div>
+                    <h1>Soal Evaluasi</h1>
+                    <p>Jawab soal berikut. Waktu mengerjakan dibatasi <strong>5 menit</strong>.</p>
+                </div>
+
+                <div class="quiz-timer-bar" id="quizTimerBar">
+                    <div class="quiz-timer-fill" id="quizTimerFill"></div>
+                    <div class="quiz-timer-text">
+                        <span>⏱️ Sisa Waktu:</span>
+                        <strong id="quizTimerValue">05:00</strong>
+                    </div>
+                </div>
+
+                <div class="quiz-questions" id="quizQuestions">
+                    <!-- Filled dynamically -->
+                </div>
+
+                <div class="quiz-footer">
+                    <div class="quiz-progress">
+                        <span id="quizProgress">0 / 5 dijawab</span>
+                    </div>
+                    <button class="btn-primary btn-submit" id="btnSubmitQuiz" onclick="submitQuiz()">
+                        <span>📩 Submit Jawaban</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ─── STEP 5: Finish / Results ─── -->
+            <div class="step-view" id="stepFinish">
+                <div class="finish-container">
+                    <div class="finish-icon">🏁</div>
+                    <h1>Sesi Selesai!</h1>
+                    <p class="finish-subtitle" id="finishModuleName">Modul: -</p>
+
+                    <div class="results-grid">
+                        <div class="result-card result-score">
+                            <div class="result-label">Skor Belajar</div>
+                            <div class="result-value" id="finalScore">0</div>
+                            <div class="result-unit">/ 100</div>
+                        </div>
+                        <div class="result-card result-correct">
+                            <div class="result-label">Jawaban Benar</div>
+                            <div class="result-value" id="finalCorrect">0</div>
+                            <div class="result-unit">dari <span id="finalTotal">5</span> soal</div>
+                        </div>
+                        <div class="result-card result-duration">
+                            <div class="result-label">Durasi Sesi</div>
+                            <div class="result-value" id="finalDuration">0:00</div>
+                            <div class="result-unit">menit</div>
+                        </div>
+                        <div class="result-card result-emotion">
+                            <div class="result-label">Emosi Dominan</div>
+                            <div class="result-value result-emoji" id="finalEmotionEmoji">😊</div>
+                            <div class="result-unit" id="finalEmotionName">Engaged</div>
+                        </div>
+                    </div>
+
+                    <!-- Emotion Distribution Chart in Finish -->
+                    <div class="finish-emotion-chart">
+                        <h3>Distribusi Emosi Selama Sesi</h3>
+                        <div class="finish-bars" id="finishBars">
+                            <div class="finish-bar-row">
+                                <span class="finish-bar-label">😊 Engaged</span>
+                                <div class="finish-bar-track"><div class="finish-bar-fill engaged" id="finishBar-engaged" style="width: 0%"></div></div>
+                                <span class="finish-bar-pct" id="finishPct-engaged">0%</span>
+                            </div>
+                            <div class="finish-bar-row">
+                                <span class="finish-bar-label">😕 Confused</span>
+                                <div class="finish-bar-track"><div class="finish-bar-fill confused" id="finishBar-confused" style="width: 0%"></div></div>
+                                <span class="finish-bar-pct" id="finishPct-confused">0%</span>
+                            </div>
+                            <div class="finish-bar-row">
+                                <span class="finish-bar-label">😴 Bored</span>
+                                <div class="finish-bar-track"><div class="finish-bar-fill bored" id="finishBar-bored" style="width: 0%"></div></div>
+                                <span class="finish-bar-pct" id="finishPct-bored">0%</span>
+                            </div>
+                            <div class="finish-bar-row">
+                                <span class="finish-bar-label">😤 Frustrated</span>
+                                <div class="finish-bar-track"><div class="finish-bar-fill frustrated" id="finishBar-frustrated" style="width: 0%"></div></div>
+                                <span class="finish-bar-pct" id="finishPct-frustrated">0%</span>
+                            </div>
+                            <div class="finish-bar-row">
+                                <span class="finish-bar-label">😐 Neutral</span>
+                                <div class="finish-bar-track"><div class="finish-bar-fill neutral" id="finishBar-neutral" style="width: 0%"></div></div>
+                                <span class="finish-bar-pct" id="finishPct-neutral">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary" onclick="backToModules()">
+                        <span>← Kembali ke Pilih Modul</span>
+                    </button>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!--                      SIDEBAR                           -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Live Camera -->
+            <div class="sidebar-section camera-section">
+                <div class="sidebar-section-header">
+                    <h3>📹 Live Camera</h3>
+                    <div class="live-badge" id="liveBadge">
+                        <span class="live-dot"></span>LIVE
+                    </div>
+                </div>
+                <div class="camera-feed" id="cameraFeed">
+                    <canvas id="cameraCanvas" width="320" height="240"></canvas>
+                    <div class="camera-placeholder" id="cameraPlaceholder">
+                        <div class="camera-placeholder-icon">📷</div>
+                        <span>Kamera belum aktif</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Emotion -->
+            <div class="sidebar-section emotion-section">
+                <div class="sidebar-section-header">
+                    <h3>😊 Live Emotion</h3>
+                </div>
+                <div class="current-emotion" id="currentEmotion">
+                    <div class="current-emotion-emoji" id="currentEmotionEmoji">—</div>
+                    <div class="current-emotion-label" id="currentEmotionLabel">Menunggu...</div>
+                    <div class="current-emotion-conf" id="currentEmotionConf">—</div>
+                </div>
+                <div class="emotion-bars" id="emotionBars">
+                    <div class="emotion-bar-row" data-emotion="engaged">
+                        <span class="emotion-bar-label">😊 Engaged</span>
+                        <div class="emotion-bar-track"><div class="emotion-bar-fill engaged" style="width: 0%"></div></div>
+                        <span class="emotion-bar-value">0%</span>
+                    </div>
+                    <div class="emotion-bar-row" data-emotion="confused">
+                        <span class="emotion-bar-label">😕 Confused</span>
+                        <div class="emotion-bar-track"><div class="emotion-bar-fill confused" style="width: 0%"></div></div>
+                        <span class="emotion-bar-value">0%</span>
+                    </div>
+                    <div class="emotion-bar-row" data-emotion="bored">
+                        <span class="emotion-bar-label">😴 Bored</span>
+                        <div class="emotion-bar-track"><div class="emotion-bar-fill bored" style="width: 0%"></div></div>
+                        <span class="emotion-bar-value">0%</span>
+                    </div>
+                    <div class="emotion-bar-row" data-emotion="frustrated">
+                        <span class="emotion-bar-label">😤 Frustrated</span>
+                        <div class="emotion-bar-track"><div class="emotion-bar-fill frustrated" style="width: 0%"></div></div>
+                        <span class="emotion-bar-value">0%</span>
+                    </div>
+                    <div class="emotion-bar-row" data-emotion="neutral">
+                        <span class="emotion-bar-label">😐 Neutral</span>
+                        <div class="emotion-bar-track"><div class="emotion-bar-fill neutral" style="width: 0%"></div></div>
+                        <span class="emotion-bar-value">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detail Emotion Button -->
+            <div class="sidebar-section">
+                <button class="btn-detail-emotion" onclick="toggleDetailEmotion()">
+                    <span>📊 Detail Emotion</span>
+                    <svg id="detailArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Detail Emotion Panel (Hidden by default) -->
+            <div class="sidebar-section detail-emotion-panel" id="detailEmotionPanel" style="display: none;">
+                <div class="sidebar-section-header">
+                    <h3>📊 Emotion Detail</h3>
+                </div>
+                <div class="detail-bars" id="detailBars">
+                    <div class="detail-bar-item" data-emotion="engaged">
+                        <div class="detail-bar-header">
+                            <span>😊 Engaged</span>
+                            <strong class="detail-bar-val" id="detailVal-engaged">0%</strong>
+                        </div>
+                        <div class="detail-bar-track"><div class="detail-bar-fill engaged" id="detailBar-engaged" style="width: 0%"></div></div>
+                    </div>
+                    <div class="detail-bar-item" data-emotion="confused">
+                        <div class="detail-bar-header">
+                            <span>😕 Confused</span>
+                            <strong class="detail-bar-val" id="detailVal-confused">0%</strong>
+                        </div>
+                        <div class="detail-bar-track"><div class="detail-bar-fill confused" id="detailBar-confused" style="width: 0%"></div></div>
+                    </div>
+                    <div class="detail-bar-item" data-emotion="bored">
+                        <div class="detail-bar-header">
+                            <span>😴 Bored</span>
+                            <strong class="detail-bar-val" id="detailVal-bored">0%</strong>
+                        </div>
+                        <div class="detail-bar-track"><div class="detail-bar-fill bored" id="detailBar-bored" style="width: 0%"></div></div>
+                    </div>
+                    <div class="detail-bar-item" data-emotion="frustrated">
+                        <div class="detail-bar-header">
+                            <span>😤 Frustrated</span>
+                            <strong class="detail-bar-val" id="detailVal-frustrated">0%</strong>
+                        </div>
+                        <div class="detail-bar-track"><div class="detail-bar-fill frustrated" id="detailBar-frustrated" style="width: 0%"></div></div>
+                    </div>
+                    <div class="detail-bar-item" data-emotion="neutral">
+                        <div class="detail-bar-header">
+                            <span>😐 Neutral</span>
+                            <strong class="detail-bar-val" id="detailVal-neutral">0%</strong>
+                        </div>
+                        <div class="detail-bar-track"><div class="detail-bar-fill neutral" id="detailBar-neutral" style="width: 0%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Duration & Learning Detail -->
+            <div class="sidebar-section learning-section">
+                <div class="sidebar-section-header">
+                    <h3>📋 Detail Learning</h3>
+                </div>
+                <div class="learning-details">
+                    <div class="learning-detail-row">
+                        <span class="detail-label">⏱️ Duration</span>
+                        <span class="detail-value" id="sidebarDuration">00:00</span>
+                    </div>
+                    <div class="learning-detail-row">
+                        <span class="detail-label">📝 Total Soal</span>
+                        <span class="detail-value" id="sidebarTotalQ">—</span>
+                    </div>
+                    <div class="learning-detail-row">
+                        <span class="detail-label">🏆 Score</span>
+                        <span class="detail-value" id="sidebarScore">—</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+
+
+    <!-- Pass modules data to JS -->
+    <script>
+        const MODULES_DATA = {{ modules | tojson }};
+        const USER_NAME = "{{ name }}";
+        const USER_NIM = "{{ nim }}";
+    </script>
+    <script src="/static/app.js"></script>
+</body>
+</html>

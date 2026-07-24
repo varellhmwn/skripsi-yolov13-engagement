@@ -1,0 +1,52 @@
+# ══════════════════════════════════════════════════════════════
+# Training Configuration — YOLOv13n Master Combined (100 Epoch)
+# ══════════════════════════════════════════════════════════════
+# Konfigurasi ini merangkum parameter training yang digunakan
+# untuk melatih model YOLOv13n pada Master Combined Dataset.
+
+# ─── Model ───────────────────────────────────────────────────
+model: yolov13n.pt           # Pretrained YOLOv13 Nano
+task: detect
+device: 0                    # GPU CUDA:0
+
+# ─── Dataset ─────────────────────────────────────────────────
+data: datasets/master_combined_dataset/data.yaml
+classes:
+  0: engaged
+  1: confused
+  2: bored
+  3: frustrated
+num_classes: 4
+
+# ─── Training Hyperparameters ────────────────────────────────
+epochs: 100
+batch: 16
+imgsz: 640
+optimizer: AdamW
+lr0: 0.001                   # Initial learning rate
+lrf: 0.01                    # Final learning rate (lr0 × lrf)
+weight_decay: 0.0005
+momentum: 0.937
+warmup_epochs: 3
+patience: 20                 # Early stopping patience
+
+# ─── Data Augmentation ──────────────────────────────────────
+hsv_h: 0.015                 # Hue shift
+hsv_s: 0.7                   # Saturation shift
+hsv_v: 0.4                   # Brightness/Value shift
+degrees: 10.0                # Rotation (±10°)
+translate: 0.1               # Translation (±10%)
+scale: 0.5                   # Scale variation
+fliplr: 0.5                  # Horizontal flip probability
+mosaic: 1.0                  # Mosaic augmentation
+mixup: 0.1                   # MixUp augmentation
+copy_paste: 0.1              # Copy-Paste augmentation
+erasing: 0.4                 # Random erasing
+auto_augment: randaugment    # Automatic augmentation policy
+
+# ─── Training Settings ──────────────────────────────────────
+amp: true                    # Automatic Mixed Precision
+close_mosaic: 10             # Disable mosaic in last 10 epochs
+plots: true                  # Generate training plots
+save: true                   # Save checkpoints
+val: true                    # Validate during training

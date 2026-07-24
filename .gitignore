@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+.env
+.venv
+env/
+venv/
+
+# YOLO & Heavy ML Data
+*.pt
+*.pth
+*.onnx
+runs/
+datasets/
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
