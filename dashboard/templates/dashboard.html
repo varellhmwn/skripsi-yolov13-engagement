@@ -26,6 +26,9 @@
                     <span class="user-nim">{{ nim }}</span>
                 </div>
             </div>
+            <button class="btn-history" onclick="openHistoryModal()" title="Riwayat Belajar">
+                <span>📜 Riwayat Belajar</span>
+            </button>
             <a href="/logout" class="btn-logout" title="Logout">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -354,6 +357,57 @@
         </aside>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--                  HISTORY MODAL                         -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="historyModalOverlay" onclick="closeHistoryModalOnOverlay(event)">
+        <div class="history-modal">
+            <div class="history-modal-header">
+                <div>
+                    <h2>📜 Riwayat Sesi Belajar</h2>
+                    <p>Daftar pembelajaran & evaluasi emosi yang telah kamu selesaikan</p>
+                </div>
+                <button class="btn-close-modal" onclick="closeHistoryModal()">&times;</button>
+            </div>
+
+            <!-- Stats Summary Cards -->
+            <div class="history-stats-grid">
+                <div class="history-stat-card">
+                    <div class="stat-card-icon">📚</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-val" id="histStatTotal">0</div>
+                        <div class="stat-card-lbl">Total Sesi Selesai</div>
+                    </div>
+                </div>
+                <div class="history-stat-card">
+                    <div class="stat-card-icon">🏆</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-val" id="histStatAvgScore">0%</div>
+                        <div class="stat-card-lbl">Rata-Rata Skor</div>
+                    </div>
+                </div>
+                <div class="history-stat-card">
+                    <div class="stat-card-icon">⏱️</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-val" id="histStatTotalTime">0 mnt</div>
+                        <div class="stat-card-lbl">Total Waktu Belajar</div>
+                    </div>
+                </div>
+                <div class="history-stat-card">
+                    <div class="stat-card-icon">😊</div>
+                    <div class="stat-card-info">
+                        <div class="stat-card-val" id="histStatDominant">—</div>
+                        <div class="stat-card-lbl">Emosi Dominan</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Items List -->
+            <div class="history-items-container" id="historyItemsContainer">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
 
 
     <!-- Pass modules data to JS -->

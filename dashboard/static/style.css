@@ -1316,3 +1316,312 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* ─── History Button in Topbar ───────────────────────────────── */
+.btn-history {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: #818cf8;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-history:hover {
+    background: rgba(99, 102, 241, 0.25);
+    color: #a5b4fc;
+    border-color: rgba(99, 102, 241, 0.5);
+    transform: translateY(-1px);
+}
+
+/* ─── History Modal ──────────────────────────────────────────── */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.history-modal {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-xl);
+    width: 90%;
+    max-width: 860px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.history-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(30, 41, 59, 0.5);
+}
+
+.history-modal-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.history-modal-header p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.btn-close-modal {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.btn-close-modal:hover {
+    color: var(--text-primary);
+}
+
+/* History Stats Grid */
+.history-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(15, 23, 42, 0.4);
+}
+
+.history-stat-card {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.stat-card-icon {
+    font-size: 1.5rem;
+}
+
+.stat-card-val {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.stat-card-lbl {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 2px;
+}
+
+/* History Items List Container */
+.history-items-container {
+    padding: 24px 28px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.history-empty {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.history-empty .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.history-empty h3 {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.history-empty p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+}
+
+.history-item-card {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    transition: var(--transition);
+}
+
+.history-item-card:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+.history-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.history-item-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.history-item-badge {
+    background: rgba(99, 102, 241, 0.2);
+    color: #818cf8;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.history-item-title-group h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.history-item-time {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+.history-item-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.history-meta-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    background: rgba(15, 23, 42, 0.5);
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+}
+
+.meta-box-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.meta-box-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+}
+
+.meta-box-val {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.meta-box-val.score small {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.meta-box-val.emotion.engaged { color: #22c55e; }
+.meta-box-val.emotion.confused { color: #f59e0b; }
+.meta-box-val.emotion.bored { color: #f97316; }
+.meta-box-val.emotion.frustrated { color: #ef4444; }
+.meta-box-val.emotion.neutral { color: #94a3b8; }
+
+/* Distribution Mini Bars */
+.history-dist-wrapper {
+    background: rgba(15, 23, 42, 0.3);
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+}
+
+.history-dist-title {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.history-dist-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.hist-dist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+}
+
+.hist-dist-label {
+    width: 100px;
+    color: var(--text-secondary);
+}
+
+.hist-dist-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.hist-dist-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+}
+
+.hist-dist-fill.engaged { background: #22c55e; }
+.hist-dist-fill.confused { background: #f59e0b; }
+.hist-dist-fill.bored { background: #f97316; }
+.hist-dist-fill.frustrated { background: #ef4444; }
+.hist-dist-fill.neutral { background: #94a3b8; }
+
+.hist-dist-val {
+    width: 45px;
+    text-align: right;
+    color: var(--text-dim);
+    font-weight: 600;
+}

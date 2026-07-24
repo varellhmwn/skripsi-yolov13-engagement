@@ -35,6 +35,7 @@ socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 # ─── Model Configuration ────────────────────────────────────────────
 MODEL_PATH = str(BASE_DIR / 'runs' / 'yolov13_master_combined' / 'weights' / 'best.pt')
 MODULES_PATH = Path(__file__).resolve().parent / 'modules.json'
+HISTORY_PATH = Path(__file__).resolve().parent / 'study_history.json'
 
 TARGET_CLASSES = {0: 'engaged', 1: 'confused', 2: 'bored', 3: 'frustrated'}
 ALL_EMOTIONS = ['engaged', 'confused', 'bored', 'frustrated', 'neutral']
@@ -75,6 +76,29 @@ def load_modules():
     """Load learning modules from JSON."""
     with open(MODULES_PATH, 'r', encoding='utf-8') as f:
         return json.load(f)
+
+
+def load_history():
+    """Load study session history from JSON."""
+    if not HISTORY_PATH.exists():
+        return []
+    try:
+        with open(HISTORY_PATH, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"[ERROR] Failed to load history: {e}")
+        return []
+
+
+def save_history(history_data):
+    """Save study session history to JSON."""
+    try:
+        with open(HISTORY_PATH, 'w', encoding='utf-8') as f:
+            json.dump(history_data, f, indent=2, ensure_ascii=False)
+        return True
+    except Exception as e:
+        print(f"[ERROR] Failed to save history: {e}")
+        return False
 
 
 def get_device():
@@ -326,6 +350,77 @@ def check_answer():
         'score': score,
         'results': results
     })
+
+
+@app.route('/api/history', methods=['GET'])
+def get_history():
+    """API to get study session history for the logged-in student."""
+    if 'name' not in session or 'nim' not in session:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    user_nim = session['nim']
+    history = load_history()
+
+    # Filter history for current logged-in user
+    user_history = [item for item in history if item.get('nim') == user_nim]
+
+    # Calculate overall statistics
+    total_sessions = len(user_history)
+    avg_score = round(sum(item.get('score', 0) for item in user_history) / total_sessions) if total_sessions > 0 else 0
+    total_duration_sec = sum(item.get('duration_seconds', 0) for item in user_history)
+
+    # Calculate overall dominant emotion
+    emotion_counts = Counter([item.get('dominant_emotion') for item in user_history if item.get('dominant_emotion')])
+    overall_dominant = emotion_counts.most_common(1)[0][0] if emotion_counts else 'neutral'
+
+    return jsonify({
+        'history': user_history,
+        'stats': {
+            'total_sessions': total_sessions,
+            'avg_score': avg_score,
+            'total_duration_sec': total_duration_sec,
+            'overall_dominant': overall_dominant
+        }
+    })
+
+
+@app.route('/api/save-session', methods=['POST'])
+def save_session():
+    """API to record a completed study session into history."""
+    if 'name' not in session or 'nim' not in session:
+        return jsonify({'error': 'Unauthorized'}), 401
+
+    data = request.json or {}
+    if not data.get('module_id'):
+        return jsonify({'error': 'Invalid session data'}), 400
+
+    from datetime import datetime
+    import uuid
+
+    history = load_history()
+
+    new_record = {
+        'id': str(uuid.uuid4())[:8],
+        'nim': session['nim'],
+        'name': session['name'],
+        'module_id': data.get('module_id'),
+        'module_title': data.get('module_title', 'Modul Pembelajaran'),
+        'completed_at': datetime.now().strftime("%d %b %Y, %H:%M"),
+        'score': data.get('score', 0),
+        'correct_answers': data.get('correct_answers', 0),
+        'total_questions': data.get('total_questions', 0),
+        'duration_seconds': data.get('duration_seconds', 0),
+        'dominant_emotion': data.get('dominant_emotion', 'neutral'),
+        'emotion_distribution': data.get('emotion_distribution', {})
+    }
+
+    history.insert(0, new_record)  # Insert newest at top
+    saved = save_history(history)
+
+    if saved:
+        return jsonify({'message': 'Session saved successfully', 'record': new_record}), 201
+    else:
+        return jsonify({'error': 'Failed to save session'}), 500
 
 
 @app.route('/logout')

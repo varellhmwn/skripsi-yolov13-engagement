@@ -413,6 +413,27 @@ function showFinish(quizResult) {
 
     // Draw finish emotion bars (use small delay to ensure DOM is ready)
     setTimeout(() => drawFinishEmotionBars(), 100);
+
+    // Auto-save session to backend history
+    const sessionPayload = {
+        module_id: selectedModuleData ? selectedModuleData.id : 1,
+        module_title: selectedModuleData ? selectedModuleData.title : 'Modul Pembelajaran',
+        score: quizResult.score,
+        correct_answers: quizResult.correct,
+        total_questions: quizResult.total,
+        duration_seconds: duration,
+        dominant_emotion: dominantEmotion ? dominantEmotion[0] : 'neutral',
+        emotion_distribution: currentDistribution
+    };
+
+    fetch('/api/save-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(sessionPayload)
+    })
+    .then(res => res.json())
+    .then(data => console.log('[History] Session auto-saved:', data))
+    .catch(err => console.error('[History] Failed to auto-save session:', err));
 }
 
 function drawFinishEmotionBars() {
@@ -496,6 +517,119 @@ function backToModules() {
     });
 
     showStep('modules');
+}
+
+// ─── History Modal Functions ──────────────────────────────────
+function openHistoryModal() {
+    const overlay = document.getElementById('historyModalOverlay');
+    overlay.classList.add('active');
+
+    // Fetch history from backend
+    fetch('/api/history')
+        .then(res => res.json())
+        .then(data => {
+            if (data.history && data.stats) {
+                renderHistory(data.history, data.stats);
+            }
+        })
+        .catch(err => {
+            console.error('[History] Error fetching history:', err);
+        });
+}
+
+function closeHistoryModal() {
+    document.getElementById('historyModalOverlay').classList.remove('active');
+}
+
+function closeHistoryModalOnOverlay(event) {
+    if (event.target.id === 'historyModalOverlay') {
+        closeHistoryModal();
+    }
+}
+
+function renderHistory(items, stats) {
+    // Stats Summary
+    document.getElementById('histStatTotal').textContent = stats.total_sessions || 0;
+    document.getElementById('histStatAvgScore').textContent = (stats.avg_score || 0) + '%';
+
+    const totalMins = Math.round((stats.total_duration_sec || 0) / 60);
+    document.getElementById('histStatTotalTime').textContent = totalMins + ' mnt';
+
+    const domEmoji = EMOTION_EMOJI[stats.overall_dominant] || '😐';
+    document.getElementById('histStatDominant').textContent = `${domEmoji} ${stats.overall_dominant || '—'}`;
+
+    // Items List
+    const container = document.getElementById('historyItemsContainer');
+    if (!items || items.length === 0) {
+        container.innerHTML = `
+            <div class="history-empty">
+                <div class="empty-icon">📭</div>
+                <h3>Belum Ada Riwayat Sesi Belajar</h3>
+                <p>Selesaikan modul pembelajaran untuk mencatat sesi belajar pertamamu!</p>
+            </div>
+        `;
+        return;
+    }
+
+    let html = '';
+    items.forEach(item => {
+        const durationMins = Math.floor((item.duration_seconds || 0) / 60);
+        const durationSecs = (item.duration_seconds || 0) % 60;
+        const durationStr = `${durationMins}m ${durationSecs}s`;
+        const domEm = item.dominant_emotion || 'neutral';
+        const emoji = EMOTION_EMOJI[domEm] || '😐';
+
+        let distBars = '';
+        const dist = item.emotion_distribution || {};
+        ['engaged', 'confused', 'bored', 'frustrated', 'neutral'].forEach(em => {
+            const val = dist[em] || 0;
+            distBars += `
+                <div class="hist-dist-item">
+                    <span class="hist-dist-label">${EMOTION_EMOJI[em]} ${em}</span>
+                    <div class="hist-dist-track"><div class="hist-dist-fill ${em}" style="width: ${val}%"></div></div>
+                    <span class="hist-dist-val">${val}%</span>
+                </div>
+            `;
+        });
+
+        html += `
+            <div class="history-item-card">
+                <div class="history-item-header">
+                    <div class="history-item-title-group">
+                        <span class="history-item-badge">Modul ${item.module_id || 1}</span>
+                        <h3>${item.module_title}</h3>
+                    </div>
+                    <span class="history-item-time">🕒 ${item.completed_at}</span>
+                </div>
+
+                <div class="history-item-body">
+                    <div class="history-meta-box">
+                        <div class="meta-box-item">
+                            <span class="meta-box-label">Skor Kuis</span>
+                            <span class="meta-box-val score">${item.score}/100 <small>(${item.correct_answers}/${item.total_questions} benar)</small></span>
+                        </div>
+                        <div class="meta-box-item">
+                            <span class="meta-box-label">Durasi Sesi</span>
+                            <span class="meta-box-val">${durationStr}</span>
+                        </div>
+                        <div class="meta-box-item">
+                            <span class="meta-box-label">Emosi Dominan</span>
+                            <span class="meta-box-val emotion ${domEm}">${emoji} ${domEm}</span>
+                        </div>
+                    </div>
+
+                    <div class="history-dist-wrapper">
+                        <div class="history-dist-title">Distribusi Emosi Sesi</div>
+                        <div class="history-dist-grid">
+                            ${distBars}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
 }
 
 // ─── SocketIO Connection Status ─────────────────────────────
