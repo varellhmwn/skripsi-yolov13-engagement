@@ -44,10 +44,10 @@ ALL_EMOTIONS = ['engaged', 'confused', 'bored', 'frustrated', 'neutral']
 
 # Inference parameters
 IMGSZ = 640
-CONF_THRESHOLD = 0.25
-MIN_VOTE_RATIO = 0.50
-MIN_AVG_CONFIDENCE = 0.65
-WINDOW_SIZE = 30
+CONF_THRESHOLD = 0.20
+MIN_VOTE_RATIO = 0.40
+MIN_AVG_CONFIDENCE = 0.40
+WINDOW_SIZE = 10
 
 # ─── Global State ────────────────────────────────────────────────────
 model = None
@@ -308,6 +308,35 @@ def dashboard():
                            modules=modules)
 
 
+def generate_academic_interpretation(score, concept_correct, problem_solving_correct, emotion_dist):
+    """
+    Rule-based non-clinical academic emotion interpretation based on learning score
+    and facial expression-based emotion detection.
+    """
+    eng = emotion_dist.get('engaged', 0)
+    conf = emotion_dist.get('confused', 0)
+    frust = emotion_dist.get('frustrated', 0)
+
+    # Priority Rules:
+    # Rule 1: High score AND High Engagement
+    if score >= 75 and eng >= 40.0:
+        return "Mahasiswa menunjukkan keterlibatan belajar yang baik."
+
+    # Rule 2: Low Problem Solving score AND High Confusion
+    if problem_solving_correct < 3 and conf >= 25.0:
+        return "Mahasiswa menunjukkan indikasi kesulitan memahami materi."
+
+    # Rule 3: High/Increasing Frustration
+    if frust >= 20.0:
+        return "Terdapat peningkatan indikasi kesulitan selama proses pembelajaran."
+
+    # Default Rule:
+    if score >= 70:
+        return "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil dengan hasil pemahaman yang baik."
+    else:
+        return "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+
+
 @app.route('/api/modules')
 def api_modules():
     """API to get module data."""
@@ -317,10 +346,12 @@ def api_modules():
 
 @app.route('/api/check-answer', methods=['POST'])
 def check_answer():
-    """API to check quiz answers."""
-    data = request.json
+    """API to check quiz or coding exercise answers."""
+    data = request.json or {}
     module_id = data.get('module_id')
     answers = data.get('answers', {})
+    is_coding_mode = data.get('is_coding_mode', False)
+    emotion_dist = data.get('emotion_distribution', {})
 
     modules = load_modules()
     module = next((m for m in modules if m['id'] == module_id), None)
@@ -329,27 +360,100 @@ def check_answer():
         return jsonify({'error': 'Module not found'}), 404
 
     correct = 0
-    total = len(module['questions'])
     results = []
 
-    for q in module['questions']:
-        user_answer = answers.get(q['id'])
-        is_correct = user_answer == q['correct']
-        if is_correct:
-            correct += 1
-        results.append({
-            'question_id': q['id'],
-            'correct_answer': q['correct'],
-            'user_answer': user_answer,
-            'is_correct': is_correct
-        })
+    if is_coding_mode:
+        coding_exercises = module.get('coding_exercises', [])
+        total = len(coding_exercises)
+        for ex in coding_exercises:
+            user_val = str(answers.get(ex['id'], '')).strip()
+            expected_val = str(ex.get('expected_answer', '')).strip()
+            is_correct = user_val.lower() == expected_val.lower()
+            if is_correct:
+                correct += 1
 
-    score = round((correct / total) * 100) if total > 0 else 0
+            results.append({
+                'question_id': ex['id'],
+                'category': 'Coding Exercise',
+                'correct_answer': expected_val,
+                'user_answer': user_val,
+                'is_correct': is_correct
+            })
+
+        score = round((correct / total) * 100) if total > 0 else 0
+        concept_correct = None
+        concept_total = None
+        concept_score_pct = None
+        problem_solving_correct = correct
+        problem_solving_total = total
+        problem_solving_score_pct = score
+
+    else:
+        questions = module.get('questions', [])
+        total = len(questions)
+        concept_correct = 0
+        concept_total = 0
+        problem_solving_correct = 0
+        problem_solving_total = 0
+
+        letter_map = {'A': 0, 'B': 1, 'C': 2, 'D': 3}
+        rev_letter_map = {0: 'A', 1: 'B', 2: 'C', 3: 'D'}
+
+        for q in questions:
+            cat = q.get('category', 'Concept')
+            if cat == 'Concept':
+                concept_total += 1
+            elif cat == 'Problem Solving':
+                problem_solving_total += 1
+
+            user_answer = answers.get(q['id'])
+            correct_target = q.get('correct_answer')
+
+            is_correct = False
+            if correct_target is not None:
+                if isinstance(user_answer, str) and user_answer.upper() == str(correct_target).upper():
+                    is_correct = True
+                elif isinstance(user_answer, int) and rev_letter_map.get(user_answer) == str(correct_target).upper():
+                    is_correct = True
+            elif 'correct' in q:
+                if user_answer == q['correct'] or (isinstance(user_answer, str) and letter_map.get(user_answer.upper()) == q['correct']):
+                    is_correct = True
+
+            if is_correct:
+                correct += 1
+                if cat == 'Concept':
+                    concept_correct += 1
+                elif cat == 'Problem Solving':
+                    problem_solving_correct += 1
+
+            results.append({
+                'question_id': q['id'],
+                'category': cat,
+                'correct_answer': q.get('correct_answer', rev_letter_map.get(q.get('correct', 0))),
+                'user_answer': user_answer,
+                'is_correct': is_correct
+            })
+
+        score = round((correct / total) * 100) if total > 0 else 0
+        concept_score_pct = round((concept_correct / concept_total) * 100) if concept_total > 0 else 0
+        problem_solving_score_pct = round((problem_solving_correct / problem_solving_total) * 100) if problem_solving_total > 0 else 0
+
+    interpretation = generate_academic_interpretation(
+        score, concept_correct, problem_solving_correct, emotion_dist
+    )
 
     return jsonify({
+        'is_coding_mode': is_coding_mode,
         'correct': correct,
         'total': total,
         'score': score,
+        'concept_correct': concept_correct,
+        'concept_total': concept_total,
+        'concept_score_pct': concept_score_pct,
+        'problem_solving_correct': problem_solving_correct,
+        'problem_solving_total': problem_solving_total,
+        'problem_solving_score_pct': problem_solving_score_pct,
+        'interpretation': interpretation,
         'results': results
     })
 
@@ -401,6 +505,15 @@ def save_session():
 
     history = load_history()
 
+    score = data.get('score', 0)
+    concept_correct = data.get('concept_correct', 0)
+    problem_solving_correct = data.get('problem_solving_correct', 0)
+    emotion_dist = data.get('emotion_distribution', {})
+
+    interpretation = data.get('interpretation') or generate_academic_interpretation(
+        score, concept_correct, problem_solving_correct, emotion_dist
+    )
+
     new_record = {
         'id': str(uuid.uuid4())[:8],
         'nim': session['nim'],
@@ -408,12 +521,19 @@ def save_session():
         'module_id': data.get('module_id'),
         'module_title': data.get('module_title', 'Modul Pembelajaran'),
         'completed_at': datetime.now().strftime("%d %b %Y, %H:%M"),
-        'score': data.get('score', 0),
+        'score': score,
         'correct_answers': data.get('correct_answers', 0),
-        'total_questions': data.get('total_questions', 0),
+        'total_questions': data.get('total_questions', 10),
+        'concept_correct': concept_correct,
+        'concept_total': data.get('concept_total', 5),
+        'problem_solving_correct': problem_solving_correct,
+        'problem_solving_total': data.get('problem_solving_total', 5),
         'duration_seconds': data.get('duration_seconds', 0),
         'dominant_emotion': data.get('dominant_emotion', 'neutral'),
-        'emotion_distribution': data.get('emotion_distribution', {})
+        'emotion_distribution': emotion_dist,
+        'timeline': data.get('timeline', []),
+        'question_tracking': data.get('question_tracking', []),
+        'interpretation': interpretation
     }
 
     history.insert(0, new_record)  # Insert newest at top
@@ -423,6 +543,7 @@ def save_session():
         return jsonify({'message': 'Session saved successfully', 'record': new_record}), 201
     else:
         return jsonify({'error': 'Failed to save session'}), 500
+
 
 
 @app.route('/logout')
@@ -529,15 +650,107 @@ def handle_emotion_report():
     # Find dominant emotion
     dominant = max(distribution, key=distribution.get)
 
-    # Create timeline (sample every 5 seconds)
+    # Create timeline with narrow window sampling & transition detection
     duration = history[-1]['timestamp'] if history else 0
     timeline = []
-    step = 5  # seconds
-    for t in range(0, int(duration) + 1, step):
-        nearby = [h for h in history if abs(h['timestamp'] - t) < step / 2]
-        if nearby:
-            most_common = Counter([h['emotion'] for h in nearby]).most_common(1)[0][0]
-            timeline.append({'time': t, 'emotion': most_common})
+
+    if history:
+        # Select base step interval based on total duration
+        if duration <= 180:
+            step = 10
+        elif duration <= 600:
+            step = 20
+        else:
+            step = 30
+
+        raw_points = []
+        for t in range(0, int(duration) + 1, step):
+            nearby = [h for h in history if abs(h['timestamp'] - t) <= 4.0]
+            if nearby:
+                # Active Cognitive Emotion Prioritization:
+                # If any active cognitive emotion (engaged, confused, bored, frustrated) is present,
+                # prioritize it over neutral to highlight learning state changes.
+                active_emotions = [h['emotion'] for h in nearby if h['emotion'] != 'neutral']
+                if active_emotions:
+                    best_em = Counter(active_emotions).most_common(1)[0][0]
+                else:
+                    best_em = 'neutral'
+                raw_points.append({'time': t, 'emotion': best_em})
+            else:
+                closest = min(history, key=lambda h: abs(h['timestamp'] - t))
+                raw_points.append({'time': t, 'emotion': closest['emotion']})
+
+        # Detect transition points where emotion changes
+        smoothed_history = []
+        win_size = 5
+        for i in range(len(history)):
+            sub = history[max(0, i - win_size // 2): min(len(history), i + win_size // 2 + 1)]
+            top_em = Counter([h['emotion'] for h in sub]).most_common(1)[0][0]
+            smoothed_history.append((history[i]['timestamp'], top_em))
+
+        transition_points = []
+        last_em = None
+        for ts, em in smoothed_history:
+            if last_em is not None and em != last_em:
+                transition_points.append({'time': round(ts), 'emotion': em})
+            last_em = em
+
+        # Combine & deduplicate points
+        combined = {round(pt['time']): pt['emotion'] for pt in raw_points + transition_points}
+        sorted_times = sorted(combined.keys())
+
+        # Build initial timeline
+        timeline = [{'time': t, 'emotion': combined[t]} for t in sorted_times]
+
+        # Neutral Suppression & Active Continuity Filter:
+        # Prevent the chart from constantly dropping to Neutral during brief resting-face moments
+        suppressed_timeline = []
+        last_active_em = None
+        for pt in timeline:
+            if pt['emotion'] != 'neutral':
+                suppressed_timeline.append(pt)
+                last_active_em = pt['emotion']
+            else:
+                # Check if this neutral point is surrounded by active cognitive emotions
+                nearby_em = [h['emotion'] for h in history if abs(h['timestamp'] - pt['time']) <= 4.0]
+                active_count = sum(1 for e in nearby_em if e != 'neutral')
+                if active_count == 0:
+                    # Pure prolonged neutral phase -> keep neutral
+                    suppressed_timeline.append(pt)
+                elif last_active_em:
+                    # Brief resting face between active learning -> maintain active state
+                    suppressed_timeline.append({'time': pt['time'], 'emotion': last_active_em})
+                else:
+                    suppressed_timeline.append(pt)
+
+        timeline = suppressed_timeline
+
+        # Guarantee every active emotion with >= 2.0% distribution is represented in timeline
+        present_emotions = {pt['emotion'] for pt in timeline}
+        for em, pct in distribution.items():
+            if em != 'neutral' and pct >= 2.0 and em not in present_emotions:
+                em_frames = [h for h in history if h['emotion'] == em]
+                if em_frames:
+                    best_frame = max(em_frames, key=lambda h: h.get('confidence', 0))
+                    t_val = round(best_frame['timestamp'])
+                    timeline.append({'time': t_val, 'emotion': em})
+
+        # Sort timeline chronologically
+        timeline.sort(key=lambda x: x['time'])
+
+        # Cap max points to 12 if too dense
+        if len(timeline) > 12:
+            step_idx = (len(timeline) - 1) / 11.0
+            sampled = [timeline[int(round(i * step_idx))] for i in range(12)]
+            unique_em_pts = []
+            seen_em = set()
+            for pt in timeline:
+                if pt['emotion'] not in seen_em:
+                    unique_em_pts.append(pt)
+                    seen_em.add(pt['emotion'])
+            
+            combined_pts = {pt['time']: pt['emotion'] for pt in sampled + unique_em_pts}
+            timeline = [{'time': t, 'emotion': combined_pts[t]} for t in sorted(combined_pts.keys())]
 
     emit('emotion_report', {
         'distribution': distribution,

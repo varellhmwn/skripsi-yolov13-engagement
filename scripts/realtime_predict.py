@@ -28,7 +28,8 @@ from ultralytics import YOLO
 
 # ─── Konfigurasi Default ────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEFAULT_WEIGHTS = str(BASE_DIR / 'runs' / 'yolov13_master_combined' / 'weights' / 'best.pt')
+DEFAULT_WEIGHTS = str(BASE_DIR / 'runs' /
+                      'yolov13_master_combined_v2' / 'weights' / 'best.pt')
 
 TARGET_CLASSES = {0: 'engaged', 1: 'confused', 2: 'bored', 3: 'frustrated'}
 
@@ -59,9 +60,9 @@ def parse_args():
                         help="Device inference (default: 0 = GPU)")
     parser.add_argument('--window_size', type=int, default=30,
                         help="Ukuran sliding window untuk smoothing (default: 30)")
-    parser.add_argument('--min_vote_ratio', type=float, default=0.50,
+    parser.add_argument('--min_vote_ratio', type=float, default=0.40,
                         help="Rasio voting minimum (default: 0.50)")
-    parser.add_argument('--min_avg_confidence', type=float, default=0.65,
+    parser.add_argument('--min_avg_confidence', type=float, default=0.50,
                         help="Threshold confidence untuk neutral trick (default: 0.65)")
     parser.add_argument('--show_raw', action='store_true',
                         help="Tampilkan prediksi mentah di samping prediksi stabil")
@@ -81,10 +82,12 @@ def main():
     print("  YOLOv13n — 4 Class + Neutral Trick")
     print("=" * 60)
     print(f"  Weights              : {args.weights}")
-    print(f"  Source               : {'Webcam' if args.source == '0' else args.source}")
+    print(
+        f"  Source               : {'Webcam' if args.source == '0' else args.source}")
     print(f"  Smoothing Window     : {args.window_size} frames")
     print(f"  Confidence Threshold : {args.min_avg_confidence}")
-    print(f"  Classes              : {list(TARGET_CLASSES.values())} + neutral")
+    print(
+        f"  Classes              : {list(TARGET_CLASSES.values())} + neutral")
     print()
 
     # Load model
@@ -139,7 +142,8 @@ def main():
                 area = w * h
                 if (area / frame_area) >= 0.02 and area > largest_area:
                     largest_area = area
-                    best_det = (int(det.cls[i].item()), float(det.conf[i].item()), xyxy)
+                    best_det = (int(det.cls[i].item()),
+                                float(det.conf[i].item()), xyxy)
 
             if best_det is not None:
                 cls_id, conf, bbox = best_det
@@ -154,7 +158,8 @@ def main():
                     dom_id, dom_count = counts.most_common(1)[0]
                     dom_label = TARGET_CLASSES.get(dom_id, "unknown")
                     vote_ratio = dom_count / len(window)
-                    dom_confs = [w['conf'] for w in window if w['class_id'] == dom_id]
+                    dom_confs = [w['conf']
+                                 for w in window if w['class_id'] == dom_id]
                     avg_conf = sum(dom_confs) / len(dom_confs)
 
                     # ─── Neutral Trick (Confidence Thresholding) ─
@@ -182,9 +187,12 @@ def main():
 
             # Label utama (stabil)
             label_text = f"{stable_label}"
-            (tw, th), _ = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_SIMPLEX, 0.9, 2)
-            cv2.rectangle(display, (x1, y1 - th - 10), (x1 + tw + 10, y1), color, -1)
-            text_color = (255, 255, 255) if stable_label != 'neutral' else (0, 0, 0)
+            (tw, th), _ = cv2.getTextSize(
+                label_text, cv2.FONT_HERSHEY_SIMPLEX, 0.9, 2)
+            cv2.rectangle(display, (x1, y1 - th - 10),
+                          (x1 + tw + 10, y1), color, -1)
+            text_color = (
+                255, 255, 255) if stable_label != 'neutral' else (0, 0, 0)
             cv2.putText(display, label_text, (x1 + 5, y1 - 5),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.9, text_color, 2)
 

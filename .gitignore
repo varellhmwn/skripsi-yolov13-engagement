@@ -32,8 +32,12 @@ venv/
 *.pt
 *.pth
 *.onnx
+*.zip
 runs/
 datasets/
+pipeline_retrain_from_scratch/raw_datasets/
+pipeline_retrain_from_scratch/datasets_processed/
+~$*.docx
 
 # IDE / Editor
 .idea/

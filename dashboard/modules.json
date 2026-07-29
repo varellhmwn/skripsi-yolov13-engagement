@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Pengenalan Machine Learning",
     "description": "Memahami konsep dasar Machine Learning, jenis-jenis ML, dan aplikasinya dalam kehidupan sehari-hari.",
-    "duration_minutes": 2,
+    "duration_minutes": 5,
     "content": [
       {
         "section": "Apa itu Machine Learning?",
@@ -21,7 +21,13 @@
     "questions": [
       {
         "id": "q1",
+        "category": "Concept",
         "question": "Apa definisi yang paling tepat untuk Machine Learning?",
+        "option_a": "Program komputer yang menjalankan instruksi secara berurutan",
+        "option_b": "Cabang AI yang memungkinkan sistem belajar dari data tanpa diprogram secara eksplisit",
+        "option_c": "Teknik untuk membuat website yang responsif",
+        "option_d": "Bahasa pemrograman untuk membuat aplikasi mobile",
+        "correct_answer": "B",
         "options": [
           "Program komputer yang menjalankan instruksi secara berurutan",
           "Cabang AI yang memungkinkan sistem belajar dari data tanpa diprogram secara eksplisit",
@@ -32,7 +38,13 @@
       },
       {
         "id": "q2",
+        "category": "Concept",
         "question": "Jenis Machine Learning yang menggunakan data berlabel untuk pelatihan disebut?",
+        "option_a": "Unsupervised Learning",
+        "option_b": "Reinforcement Learning",
+        "option_c": "Supervised Learning",
+        "option_d": "Transfer Learning",
+        "correct_answer": "C",
         "options": [
           "Unsupervised Learning",
           "Reinforcement Learning",
@@ -43,7 +55,13 @@
       },
       {
         "id": "q3",
+        "category": "Concept",
         "question": "Manakah yang merupakan contoh aplikasi Unsupervised Learning?",
+        "option_a": "Klasifikasi email spam",
+        "option_b": "Prediksi harga saham",
+        "option_c": "Segmentasi pelanggan",
+        "option_d": "Pengenalan suara",
+        "correct_answer": "C",
         "options": [
           "Klasifikasi email spam",
           "Prediksi harga saham",
@@ -54,7 +72,13 @@
       },
       {
         "id": "q4",
+        "category": "Concept",
         "question": "Komponen utama Machine Learning TIDAK termasuk...",
+        "option_a": "Data",
+        "option_b": "Model",
+        "option_c": "Algoritma",
+        "option_d": "Compiler",
+        "correct_answer": "D",
         "options": [
           "Data",
           "Model",
@@ -65,7 +89,13 @@
       },
       {
         "id": "q5",
+        "category": "Concept",
         "question": "Reinforcement Learning belajar melalui...",
+        "option_a": "Data berlabel",
+        "option_b": "Clustering data",
+        "option_c": "Interaksi dengan lingkungan dan reward/punishment",
+        "option_d": "Transfer dari model lain",
+        "correct_answer": "C",
         "options": [
           "Data berlabel",
           "Clustering data",
@@ -73,6 +103,128 @@
           "Transfer dari model lain"
         ],
         "correct": 2
+      },
+      {
+        "id": "q6",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nnilai = 80\n\nif nilai >= 75:\n    print(\"Lulus\")\nelse:\n    print(\"Tidak Lulus\")\n\nOutput program tersebut adalah:",
+        "option_a": "Lulus",
+        "option_b": "Tidak Lulus",
+        "option_c": "Error",
+        "option_d": "Tidak menghasilkan output",
+        "correct_answer": "A",
+        "options": [
+          "Lulus",
+          "Tidak Lulus",
+          "Error",
+          "Tidak menghasilkan output"
+        ],
+        "correct": 0
+      },
+      {
+        "id": "q7",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nfor i in range(5):\nprint(i)\n\nMasalah pada kode tersebut adalah:",
+        "option_a": "range tidak boleh digunakan",
+        "option_b": "Kurang indentasi",
+        "option_c": "print tidak bisa digunakan",
+        "option_d": "for harus diganti while",
+        "correct_answer": "B",
+        "options": [
+          "range tidak boleh digunakan",
+          "Kurang indentasi",
+          "print tidak bisa digunakan",
+          "for harus diganti while"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q8",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nx = 10\n\nwhile x > 0:\n    x -= 2\n\nPerulangan berhenti ketika:",
+        "option_a": "x menjadi 0",
+        "option_b": "x menjadi negatif",
+        "option_c": "x lebih dari 10",
+        "option_d": "Program error",
+        "correct_answer": "A",
+        "options": [
+          "x menjadi 0",
+          "x menjadi negatif",
+          "x lebih dari 10",
+          "Program error"
+        ],
+        "correct": 0
+      },
+      {
+        "id": "q9",
+        "category": "Problem Solving",
+        "question": "Seorang mahasiswa membuat program menghitung rata-rata nilai.\n\nLangkah awal yang benar adalah:",
+        "option_a": "Menampilkan hasil",
+        "option_b": "Mengambil input nilai",
+        "option_c": "Menghapus data",
+        "option_d": "Mengurutkan nilai",
+        "correct_answer": "B",
+        "options": [
+          "Menampilkan hasil",
+          "Mengambil input nilai",
+          "Menghapus data",
+          "Mengurutkan nilai"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q10",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nangka = 5\n\nif angka % 2 == 0:\n    print(\"Genap\")\nelse:\n    print(\"Ganjil\")\n\nOutput program tersebut adalah:",
+        "option_a": "Genap",
+        "option_b": "Ganjil",
+        "option_c": "Error",
+        "option_d": "Tidak ada output",
+        "correct_answer": "B",
+        "options": [
+          "Genap",
+          "Ganjil",
+          "Error",
+          "Tidak ada output"
+        ],
+        "correct": 1
+      }
+    ],
+    "coding_exercises": [
+      {
+        "id": "c1",
+        "instruction": "Isi bagian kode yang kosong di bawah ini untuk menampilkan teks \"Hello World\":",
+        "code_template": "___(\"Hello World\")",
+        "expected_answer": "print",
+        "hint": "Gunakan fungsi bawaan Python print() untuk mencetak teks ke layar."
+      },
+      {
+        "id": "c2",
+        "instruction": "Lengkapi sintaks percabangan berikut agar mencetak \"Lulus\" jika nilai >= 75:",
+        "code_template": "nilai = 80\n___ nilai >= 75:\n    print(\"Lulus\")",
+        "expected_answer": "if",
+        "hint": "Kata kunci percabangan kondisi utama dalam Python adalah if."
+      },
+      {
+        "id": "c3",
+        "instruction": "Lengkapi fungsi perulangan berikut untuk mengulang sebanyak 5 kali:",
+        "code_template": "for i in ___ (5):\n    print(i)",
+        "expected_answer": "range",
+        "hint": "Fungsi range(n) digunakan untuk menghasilkan deret angka perulangan."
+      },
+      {
+        "id": "c4",
+        "instruction": "Lengkapi operator sisa hasil bagi (modulo) untuk mengecek angka genap:",
+        "code_template": "angka = 4\nif angka ___ 2 == 0:\n    print(\"Genap\")",
+        "expected_answer": "%",
+        "hint": "Operator % (modulo) menghitung sisa hasil pembagian."
+      },
+      {
+        "id": "c5",
+        "instruction": "Lengkapi penghentian perulangan berikut saat x lebih besar dari 0:",
+        "code_template": "x = 10\n___ x > 0:\n    x -= 2",
+        "expected_answer": "while",
+        "hint": "Kata kunci perulangan while mengeksekusi blok kode selama kondisi bernilai True."
       }
     ]
   },
@@ -80,7 +232,7 @@
     "id": 2,
     "title": "Deep Learning & Neural Networks",
     "description": "Mempelajari arsitektur Neural Network, konsep Deep Learning, dan bagaimana jaringan saraf tiruan memproses informasi.",
-    "duration_minutes": 2,
+    "duration_minutes": 5,
     "content": [
       {
         "section": "Apa itu Neural Network?",
@@ -98,7 +250,13 @@
     "questions": [
       {
         "id": "q1",
+        "category": "Concept",
         "question": "Lapisan pada Neural Network yang memproses data disebut?",
+        "option_a": "Input Layer",
+        "option_b": "Output Layer",
+        "option_c": "Hidden Layer",
+        "option_d": "Data Layer",
+        "correct_answer": "C",
         "options": [
           "Input Layer",
           "Output Layer",
@@ -109,7 +267,13 @@
       },
       {
         "id": "q2",
+        "category": "Concept",
         "question": "Deep Learning berbeda dari ML tradisional karena...",
+        "option_a": "Tidak membutuhkan data",
+        "option_b": "Menggunakan Neural Network dengan banyak hidden layer",
+        "option_c": "Hanya bisa digunakan untuk teks",
+        "option_d": "Tidak memerlukan GPU",
+        "correct_answer": "B",
         "options": [
           "Tidak membutuhkan data",
           "Menggunakan Neural Network dengan banyak hidden layer",
@@ -120,7 +284,13 @@
       },
       {
         "id": "q3",
+        "category": "Concept",
         "question": "Arsitektur Neural Network yang cocok untuk data gambar adalah?",
+        "option_a": "RNN",
+        "option_b": "LSTM",
+        "option_c": "CNN",
+        "option_d": "GAN",
+        "correct_answer": "C",
         "options": [
           "RNN",
           "LSTM",
@@ -131,7 +301,13 @@
       },
       {
         "id": "q4",
+        "category": "Concept",
         "question": "Proses menghitung gradient error terhadap weight disebut?",
+        "option_a": "Forward Pass",
+        "option_b": "Backpropagation",
+        "option_c": "Regularization",
+        "option_d": "Normalization",
+        "correct_answer": "B",
         "options": [
           "Forward Pass",
           "Backpropagation",
@@ -142,7 +318,13 @@
       },
       {
         "id": "q5",
+        "category": "Concept",
         "question": "Teknik untuk mencegah overfitting pada Neural Network adalah...",
+        "option_a": "Menambah layer",
+        "option_b": "Mengurangi data",
+        "option_c": "Dropout dan Batch Normalization",
+        "option_d": "Menghilangkan activation function",
+        "correct_answer": "C",
         "options": [
           "Menambah layer",
           "Mengurangi data",
@@ -150,6 +332,128 @@
           "Menghilangkan activation function"
         ],
         "correct": 2
+      },
+      {
+        "id": "q6",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nnilai = 80\n\nif nilai >= 75:\n    print(\"Lulus\")\nelse:\n    print(\"Tidak Lulus\")\n\nOutput program tersebut adalah:",
+        "option_a": "Lulus",
+        "option_b": "Tidak Lulus",
+        "option_c": "Error",
+        "option_d": "Tidak menghasilkan output",
+        "correct_answer": "A",
+        "options": [
+          "Lulus",
+          "Tidak Lulus",
+          "Error",
+          "Tidak menghasilkan output"
+        ],
+        "correct": 0
+      },
+      {
+        "id": "q7",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nfor i in range(5):\nprint(i)\n\nMasalah pada kode tersebut adalah:",
+        "option_a": "range tidak boleh digunakan",
+        "option_b": "Kurang indentasi",
+        "option_c": "print tidak bisa digunakan",
+        "option_d": "for harus diganti while",
+        "correct_answer": "B",
+        "options": [
+          "range tidak boleh digunakan",
+          "Kurang indentasi",
+          "print tidak bisa digunakan",
+          "for harus diganti while"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q8",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nx = 10\n\nwhile x > 0:\n    x -= 2\n\nPerulangan berhenti ketika:",
+        "option_a": "x menjadi 0",
+        "option_b": "x menjadi negatif",
+        "option_c": "x lebih dari 10",
+        "option_d": "Program error",
+        "correct_answer": "A",
+        "options": [
+          "x menjadi 0",
+          "x menjadi negatif",
+          "x lebih dari 10",
+          "Program error"
+        ],
+        "correct": 0
+      },
+      {
+        "id": "q9",
+        "category": "Problem Solving",
+        "question": "Seorang mahasiswa membuat program menghitung rata-rata nilai.\n\nLangkah awal yang benar adalah:",
+        "option_a": "Menampilkan hasil",
+        "option_b": "Mengambil input nilai",
+        "option_c": "Menghapus data",
+        "option_d": "Mengurutkan nilai",
+        "correct_answer": "B",
+        "options": [
+          "Menampilkan hasil",
+          "Mengambil input nilai",
+          "Menghapus data",
+          "Mengurutkan nilai"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q10",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nangka = 5\n\nif angka % 2 == 0:\n    print(\"Genap\")\nelse:\n    print(\"Ganjil\")\n\nOutput program tersebut adalah:",
+        "option_a": "Genap",
+        "option_b": "Ganjil",
+        "option_c": "Error",
+        "option_d": "Tidak ada output",
+        "correct_answer": "B",
+        "options": [
+          "Genap",
+          "Ganjil",
+          "Error",
+          "Tidak ada output"
+        ],
+        "correct": 1
+      }
+    ],
+    "coding_exercises": [
+      {
+        "id": "c1",
+        "instruction": "Impor pustaka NumPy dan berikan alias np:",
+        "code_template": "import numpy ___ np",
+        "expected_answer": "as",
+        "hint": "Kata kunci as digunakan untuk memberikan nama alias modul."
+      },
+      {
+        "id": "c2",
+        "instruction": "Buat matriks nol berukuran 3x3 menggunakan NumPy:",
+        "code_template": "matrix = np.___((3, 3))",
+        "expected_answer": "zeros",
+        "hint": "np.zeros() membuat array berisikan angka nol."
+      },
+      {
+        "id": "c3",
+        "instruction": "Definisikan fungsi aktivasi ReLU sederhana:",
+        "code_template": "def relu(x):\n    return ___(0, x)",
+        "expected_answer": "max",
+        "hint": "Fungsi max(a, b) mengembalikan nilai terbesar."
+      },
+      {
+        "id": "c4",
+        "instruction": "Hitung perkalian matriks (dot product) antara array a dan b:",
+        "code_template": "hasil = np.___ (a, b)",
+        "expected_answer": "dot",
+        "hint": "np.dot() menghitung perkalian titik antar matriks."
+      },
+      {
+        "id": "c5",
+        "instruction": "Dapatkan indeks nilai tertinggi dari array prediksi:",
+        "code_template": "prediksi_kelas = np.______(y_pred)",
+        "expected_answer": "argmax",
+        "hint": "np.argmax() mengembalikan indeks dari nilai terbesar."
       }
     ]
   },
@@ -157,7 +461,7 @@
     "id": 3,
     "title": "Computer Vision & Object Detection",
     "description": "Memahami Computer Vision, teknik Object Detection, dan bagaimana YOLO bekerja untuk mendeteksi objek secara real-time.",
-    "duration_minutes": 2,
+    "duration_minutes": 5,
     "content": [
       {
         "section": "Apa itu Computer Vision?",
@@ -175,7 +479,13 @@
     "questions": [
       {
         "id": "q1",
+        "category": "Concept",
         "question": "Perbedaan utama Object Detection dengan Image Classification adalah...",
+        "option_a": "Object Detection lebih lambat",
+        "option_b": "Object Detection juga melokalisasi posisi objek dalam gambar",
+        "option_c": "Image Classification lebih akurat",
+        "option_d": "Tidak ada perbedaan",
+        "correct_answer": "B",
         "options": [
           "Object Detection lebih lambat",
           "Object Detection juga melokalisasi posisi objek dalam gambar",
@@ -186,7 +496,13 @@
       },
       {
         "id": "q2",
+        "category": "Concept",
         "question": "YOLO termasuk kategori detector jenis apa?",
+        "option_a": "Two-Stage Detector",
+        "option_b": "Three-Stage Detector",
+        "option_c": "One-Stage Detector",
+        "option_d": "Multi-Stage Detector",
+        "correct_answer": "C",
         "options": [
           "Two-Stage Detector",
           "Three-Stage Detector",
@@ -197,7 +513,13 @@
       },
       {
         "id": "q3",
+        "category": "Concept",
         "question": "Apa kepanjangan dari YOLO?",
+        "option_a": "Your Own Learning Output",
+        "option_b": "You Only Look Once",
+        "option_c": "Yield Optimized Layer Output",
+        "option_d": "You Only Learn Once",
+        "correct_answer": "B",
         "options": [
           "Your Own Learning Output",
           "You Only Look Once",
@@ -208,7 +530,13 @@
       },
       {
         "id": "q4",
+        "category": "Concept",
         "question": "Metrik evaluasi yang umum digunakan untuk Object Detection adalah?",
+        "option_a": "Accuracy",
+        "option_b": "F1-Score",
+        "option_c": "mAP (mean Average Precision)",
+        "option_d": "RMSE",
+        "correct_answer": "C",
         "options": [
           "Accuracy",
           "F1-Score",
@@ -219,7 +547,13 @@
       },
       {
         "id": "q5",
+        "category": "Concept",
         "question": "Teknik yang digunakan YOLO untuk memfilter prediksi duplikat adalah?",
+        "option_a": "Dropout",
+        "option_b": "Batch Normalization",
+        "option_c": "Non-Maximum Suppression (NMS)",
+        "option_d": "Data Augmentation",
+        "correct_answer": "C",
         "options": [
           "Dropout",
           "Batch Normalization",
@@ -227,6 +561,128 @@
           "Data Augmentation"
         ],
         "correct": 2
+      },
+      {
+        "id": "q6",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nnilai = 80\n\nif nilai >= 75:\n    print(\"Lulus\")\nelse:\n    print(\"Tidak Lulus\")\n\nOutput program tersebut adalah:",
+        "option_a": "Lulus",
+        "option_b": "Tidak Lulus",
+        "option_c": "Error",
+        "option_d": "Tidak menghasilkan output",
+        "correct_answer": "A",
+        "options": [
+          "Lulus",
+          "Tidak Lulus",
+          "Error",
+          "Tidak menghasilkan output"
+        ],
+        "correct": 0
+      },
+      {
+        "id": "q7",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nfor i in range(5):\nprint(i)\n\nMasalah pada kode tersebut adalah:",
+        "option_a": "range tidak boleh digunakan",
+        "option_b": "Kurang indentasi",
+        "option_c": "print tidak bisa digunakan",
+        "option_d": "for harus diganti while",
+        "correct_answer": "B",
+        "options": [
+          "range tidak boleh digunakan",
+          "Kurang indentasi",
+          "print tidak bisa digunakan",
+          "for harus diganti while"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q8",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nx = 10\n\nwhile x > 0:\n    x -= 2\n\nPerulangan berhenti ketika:",
+        "option_a": "x menjadi 0",
+        "option_b": "x menjadi negatif",
+        "option_c": "x lebih dari 10",
+        "option_d": "Program error",
+        "correct_answer": "A",
+        "options": [
+          "x menjadi 0",
+          "x menjadi negatif",
+          "x lebih dari 10",
+          "Program error"
+        ],
+        "correct": 0
+      },
+      {
+        "id": "q9",
+        "category": "Problem Solving",
+        "question": "Seorang mahasiswa membuat program menghitung rata-rata nilai.\n\nLangkah awal yang benar adalah:",
+        "option_a": "Menampilkan hasil",
+        "option_b": "Mengambil input nilai",
+        "option_c": "Menghapus data",
+        "option_d": "Mengurutkan nilai",
+        "correct_answer": "B",
+        "options": [
+          "Menampilkan hasil",
+          "Mengambil input nilai",
+          "Menghapus data",
+          "Mengurutkan nilai"
+        ],
+        "correct": 1
+      },
+      {
+        "id": "q10",
+        "category": "Problem Solving",
+        "question": "Perhatikan kode Python berikut:\n\nangka = 5\n\nif angka % 2 == 0:\n    print(\"Genap\")\nelse:\n    print(\"Ganjil\")\n\nOutput program tersebut adalah:",
+        "option_a": "Genap",
+        "option_b": "Ganjil",
+        "option_c": "Error",
+        "option_d": "Tidak ada output",
+        "correct_answer": "B",
+        "options": [
+          "Genap",
+          "Ganjil",
+          "Error",
+          "Tidak ada output"
+        ],
+        "correct": 1
+      }
+    ],
+    "coding_exercises": [
+      {
+        "id": "c1",
+        "instruction": "Impor pustaka OpenCV di Python:",
+        "code_template": "import ___",
+        "expected_answer": "cv2",
+        "hint": "OpenCV diimpor dengan nama modul cv2."
+      },
+      {
+        "id": "c2",
+        "instruction": "Baca gambar dari file \"face.jpg\" menggunakan OpenCV:",
+        "code_template": "img = cv2.______( \"face.jpg\" )",
+        "expected_answer": "imread",
+        "hint": "cv2.imread() membaca file gambar."
+      },
+      {
+        "id": "c3",
+        "instruction": "Ubah warna gambar dari BGR ke Gray (skala abu-abu):",
+        "code_template": "gray = cv2.cvtColor(img, cv2.COLOR_BGR2___)",
+        "expected_answer": "GRAY",
+        "hint": "cv2.COLOR_BGR2GRAY mengkonversi gambar ke skala abu-abu."
+      },
+      {
+        "id": "c4",
+        "instruction": "Gambar bentuk persegi (rectangle) pada lokasi wajah:",
+        "code_template": "cv2._________(img, (x, y), (x+w, y+h), (0, 255, 0), 2)",
+        "expected_answer": "rectangle",
+        "hint": "cv2.rectangle() menggambar bentuk persegi panjang pada gambar."
+      },
+      {
+        "id": "c5",
+        "instruction": "Tampilkan gambar pada jendela dengan nama \"Wajah\":",
+        "code_template": "cv2._______(\"Wajah\", img)",
+        "expected_answer": "imshow",
+        "hint": "cv2.imshow() menampilkan citra dalam jendela popup."
       }
     ]
   }

@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
@@ -113,17 +114,49 @@
                         <span class="timer-icon">⏱️</span>
                         <span>Durasi membaca: <strong id="readTimer">00:00</strong></span>
                     </div>
-                    <button class="btn-primary" id="btnNextToQuiz" onclick="goToQuiz()" disabled>
-                        <span>Lanjut ke Soal →</span>
-                    </button>
-                    <span class="min-time-note" id="minTimeNote">Minimal 1 menit membaca</span>
+                    <div class="reading-actions">
+                        <button class="btn-secondary btn-skip" id="btnSkipRead" onclick="skipReading()">
+                            <span>⏩ Skip Membaca</span>
+                        </button>
+                        <button class="btn-primary" id="btnNextToQuiz" onclick="goToModeChoice()" disabled>
+                            <span>Pilih Mode Evaluasi →</span>
+                        </button>
+                    </div>
+                    <span class="min-time-note" id="minTimeNote">Minimal 1 menit membaca (atau klik Skip)</span>
                 </div>
             </div>
 
-            <!-- ─── STEP 4: Quiz ─── -->
+            <!-- ─── STEP 3.5: Choice Mode ─── -->
+            <div class="step-view" id="stepChoice">
+                <div class="step-header">
+                    <div class="step-badge">Pilih Evaluasi</div>
+                    <h1>Pilih Jenis Evaluasi Pembelajaran</h1>
+                    <p>Setelah membaca modul, silakan pilih metode evaluasi yang ingin kamu kerjakan:</p>
+                </div>
+
+                <div class="eval-mode-grid">
+                    <div class="eval-mode-card" onclick="selectEvaluationMode('quiz')">
+                        <div class="mode-icon-circle">💡</div>
+                        <h3>Kuis Pilihan Ganda</h3>
+                        <p>10 Soal Evaluasi mencakup Teori Konsep & Analisis Problem Solving Pemrograman.</p>
+                        <div class="mode-card-badge">Pilihan Ganda</div>
+                        <button class="btn-primary btn-mode">Mulai Kuis Pilihan Ganda →</button>
+                    </div>
+
+                    <div class="eval-mode-card coding-theme" onclick="selectEvaluationMode('coding')">
+                        <div class="mode-icon-circle coding">💻</div>
+                        <h3>Latihan Koding Interaktif</h3>
+                        <p>Soal koding <i>fill-in-the-blank</i> (W3Schools Style). Lengkapi sintaks kode Python yang hilang!</p>
+                        <div class="mode-card-badge coding">Latihan Koding</div>
+                        <button class="btn-primary btn-mode btn-coding-accent">Mulai Latihan Koding →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── STEP 4A: Quiz ─── -->
             <div class="step-view" id="stepQuiz">
                 <div class="step-header">
-                    <div class="step-badge">Langkah 4 dari 4</div>
+                    <div class="step-badge">Kuis Pilihan Ganda</div>
                     <h1>Soal Evaluasi</h1>
                     <p>Jawab soal berikut. Waktu mengerjakan dibatasi <strong>5 menit</strong>.</p>
                 </div>
@@ -142,10 +175,40 @@
 
                 <div class="quiz-footer">
                     <div class="quiz-progress">
-                        <span id="quizProgress">0 / 5 dijawab</span>
+                        <span id="quizProgress">0 / 10 dijawab</span>
                     </div>
                     <button class="btn-primary btn-submit" id="btnSubmitQuiz" onclick="submitQuiz()">
                         <span>📩 Submit Jawaban</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ─── STEP 4B: Coding Exercise ─── -->
+            <div class="step-view" id="stepCoding">
+                <div class="step-header">
+                    <div class="step-badge">Latihan Koding Interaktif</div>
+                    <h1>Latihan Pemrograman (W3Schools Style)</h1>
+                    <p>Lengkapi bagian sintaks kode Python yang hilang di bawah ini.</p>
+                </div>
+
+                <div class="quiz-timer-bar" id="codingTimerBar">
+                    <div class="quiz-timer-fill" id="codingTimerFill"></div>
+                    <div class="quiz-timer-text">
+                        <span>⏱️ Sisa Waktu:</span>
+                        <strong id="codingTimerValue">05:00</strong>
+                    </div>
+                </div>
+
+                <div class="coding-exercises-wrapper" id="codingQuestions">
+                    <!-- Filled dynamically -->
+                </div>
+
+                <div class="quiz-footer">
+                    <div class="quiz-progress">
+                        <span id="codingProgress">0 / 5 dijawab</span>
+                    </div>
+                    <button class="btn-primary btn-submit" id="btnSubmitCoding" onclick="submitCodingExercises()">
+                        <span>📩 Submit Semua Soal Koding</span>
                     </button>
                 </div>
             </div>
@@ -157,19 +220,25 @@
                     <h1>Sesi Selesai!</h1>
                     <p class="finish-subtitle" id="finishModuleName">Modul: -</p>
 
+                    <!-- A. Learning Result Cards -->
                     <div class="results-grid">
                         <div class="result-card result-score">
-                            <div class="result-label">Skor Belajar</div>
+                            <div class="result-label">Total Score</div>
                             <div class="result-value" id="finalScore">0</div>
                             <div class="result-unit">/ 100</div>
                         </div>
-                        <div class="result-card result-correct">
-                            <div class="result-label">Jawaban Benar</div>
-                            <div class="result-value" id="finalCorrect">0</div>
-                            <div class="result-unit">dari <span id="finalTotal">5</span> soal</div>
+                        <div class="result-card result-category" id="cardConceptScore">
+                            <div class="result-label" id="labelConceptScore">Concept Score</div>
+                            <div class="result-value" id="conceptScore">0/5</div>
+                            <div class="result-unit" id="conceptPct">0%</div>
+                        </div>
+                        <div class="result-card result-category" id="cardProblemSolvingScore">
+                            <div class="result-label" id="labelProblemSolvingScore">Problem Solving Score</div>
+                            <div class="result-value" id="problemSolvingScore">0/5</div>
+                            <div class="result-unit" id="problemSolvingPct">0%</div>
                         </div>
                         <div class="result-card result-duration">
-                            <div class="result-label">Durasi Sesi</div>
+                            <div class="result-label">Total Time</div>
                             <div class="result-value" id="finalDuration">0:00</div>
                             <div class="result-unit">menit</div>
                         </div>
@@ -180,9 +249,21 @@
                         </div>
                     </div>
 
-                    <!-- Emotion Distribution Chart in Finish -->
+                    <!-- Rule-based Academic Interpretation Box -->
+                    <div class="finish-interpretation-box">
+                        <div class="interpretation-header">
+                            <span class="interpretation-icon">💡</span>
+                            <h4>Interpretasi Emosi Belajar</h4>
+                        </div>
+                        <p class="interpretation-text" id="finalInterpretation">
+                            Mahasiswa menunjukkan keterlibatan belajar yang baik.
+                        </p>
+                        <span class="interpretation-badge">*Analisis berbasis facial expression emotion detection (non-klinis)</span>
+                    </div>
+
+                    <!-- B. Emotion Distribution Chart -->
                     <div class="finish-emotion-chart">
-                        <h3>Distribusi Emosi Selama Sesi</h3>
+                        <h3>📊 Distribusi Emosi Selama Sesi</h3>
                         <div class="finish-bars" id="finishBars">
                             <div class="finish-bar-row">
                                 <span class="finish-bar-label">😊 Engaged</span>
@@ -210,6 +291,15 @@
                                 <span class="finish-bar-pct" id="finishPct-neutral">0%</span>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- C. Timeline Emotion Chart -->
+                    <div class="finish-emotion-timeline">
+                        <h3>📈 Timeline Emosi Belajar (Real-Time Log)</h3>
+                        <div class="timeline-chart-container">
+                            <canvas id="timelineChartCanvas" height="160"></canvas>
+                        </div>
+                        <div class="timeline-events-list" id="timelineEventsList"></div>
                     </div>
 
                     <button class="btn-primary" onclick="backToModules()">
