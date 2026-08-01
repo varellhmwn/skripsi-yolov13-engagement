@@ -37,6 +37,9 @@ runs/*
 !runs/yolov13_master_combined_v2/
 !runs/yolov13_master_combined_v2/**
 !runs/yolov13_master_combined_v2/weights/*.pt
+!runs/yolov13n_retrained_scratch/
+!runs/yolov13n_retrained_scratch/**
+!runs/yolov13n_retrained_scratch/weights/*.pt
 datasets/
 pipeline_retrain_from_scratch/raw_datasets/
 pipeline_retrain_from_scratch/datasets_processed/

@@ -3,8 +3,8 @@ import sys
 from pathlib import Path
 from ultralytics import YOLO
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_YAML = BASE_DIR / 'datasets_processed' / '03_master_combined_80_10_10' / 'data.yaml'
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+DATA_YAML = BASE_DIR / 'datasets' / 'master_combined_dataset' / 'data.yaml'
 OUTPUT_DIR = BASE_DIR / 'runs'
 RUN_NAME = 'yolov13n_retrained_scratch'
 

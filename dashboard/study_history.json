@@ -1,5 +1,412 @@
 [
   {
+    "id": "345465e6",
+    "nim": "123",
+    "name": "asdasdas",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "01 Aug 2026, 09:30",
+    "score": 100,
+    "correct_answers": 5,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 5,
+    "problem_solving_total": 5,
+    "duration_seconds": 289,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 50.6,
+      "confused": 2.6,
+      "bored": 11.8,
+      "frustrated": 28.8,
+      "neutral": 6.2
+    },
+    "timeline": [],
+    "question_tracking": [
+      {
+        "question_id": "c1",
+        "question_category": "Coding Exercise",
+        "answer": "print",
+        "time_spent": 11,
+        "timestamp": "09.30.26"
+      },
+      {
+        "question_id": "c2",
+        "question_category": "Coding Exercise",
+        "answer": "if",
+        "time_spent": 14,
+        "timestamp": "09.30.29"
+      },
+      {
+        "question_id": "c3",
+        "question_category": "Coding Exercise",
+        "answer": "range",
+        "time_spent": 19,
+        "timestamp": "09.30.34"
+      },
+      {
+        "question_id": "c4",
+        "question_category": "Coding Exercise",
+        "answer": "%",
+        "time_spent": 27,
+        "timestamp": "09.30.42"
+      },
+      {
+        "question_id": "c5",
+        "question_category": "Coding Exercise",
+        "answer": "while",
+        "time_spent": 40,
+        "timestamp": "09.30.55"
+      }
+    ],
+    "interpretation": "Mahasiswa menunjukkan keterlibatan belajar yang baik."
+  },
+  {
+    "id": "49fd2ce4",
+    "nim": "123",
+    "name": "asdasdas",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "01 Aug 2026, 09:11",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 8,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 31.1,
+      "confused": 0,
+      "bored": 29.7,
+      "frustrated": 28.4,
+      "neutral": 10.8
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Terdapat peningkatan indikasi kesulitan selama proses pembelajaran."
+  },
+  {
+    "id": "9b30ff01",
+    "nim": "123",
+    "name": "asdasdas",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "01 Aug 2026, 09:10",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 16,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 56.7,
+      "confused": 0,
+      "bored": 13.3,
+      "frustrated": 25.3,
+      "neutral": 4.7
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Terdapat peningkatan indikasi kesulitan selama proses pembelajaran."
+  },
+  {
+    "id": "c390497c",
+    "nim": "123",
+    "name": "asdasdas",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "01 Aug 2026, 09:09",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 5,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 84.1,
+      "confused": 0,
+      "bored": 0,
+      "frustrated": 0,
+      "neutral": 15.9
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "3350e209",
+    "nim": "123",
+    "name": "asdasdas",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "01 Aug 2026, 09:08",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 6,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 59.3,
+      "confused": 0,
+      "bored": 3.7,
+      "frustrated": 24.1,
+      "neutral": 13
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Terdapat peningkatan indikasi kesulitan selama proses pembelajaran."
+  },
+  {
+    "id": "0284bdc0",
+    "nim": "123",
+    "name": "asdasdas",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "01 Aug 2026, 09:07",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 17,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 46,
+      "confused": 0,
+      "bored": 4.3,
+      "frustrated": 37.4,
+      "neutral": 12.3
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Terdapat peningkatan indikasi kesulitan selama proses pembelajaran."
+  },
+  {
+    "id": "dca4f369",
+    "nim": "123",
+    "name": "asdasdas",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "01 Aug 2026, 09:06",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 6,
+    "dominant_emotion": "frustrated",
+    "emotion_distribution": {
+      "engaged": 0,
+      "confused": 0,
+      "bored": 34,
+      "frustrated": 52.8,
+      "neutral": 13.2
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Terdapat peningkatan indikasi kesulitan selama proses pembelajaran."
+  },
+  {
+    "id": "cbe416d4",
+    "nim": "123",
+    "name": "asdasdas",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "01 Aug 2026, 09:04",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 11,
+    "dominant_emotion": "bored",
+    "emotion_distribution": {
+      "engaged": 37.5,
+      "confused": 0,
+      "bored": 50,
+      "frustrated": 0,
+      "neutral": 12.5
+    },
+    "timeline": [],
+    "question_tracking": [
+      {
+        "question_id": "c1",
+        "question_category": "Coding Exercise",
+        "answer": "sdasdsad",
+        "time_spent": 3,
+        "timestamp": "09.04.49"
+      },
+      {
+        "question_id": "c2",
+        "question_category": "Coding Exercise",
+        "answer": "wdsdwsd",
+        "time_spent": 4,
+        "timestamp": "09.04.50"
+      },
+      {
+        "question_id": "c3",
+        "question_category": "Coding Exercise",
+        "answer": "sdsds",
+        "time_spent": 5,
+        "timestamp": "09.04.51"
+      },
+      {
+        "question_id": "c4",
+        "question_category": "Coding Exercise",
+        "answer": "sds",
+        "time_spent": 6,
+        "timestamp": "09.04.52"
+      }
+    ],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "8c6c2b78",
+    "nim": "123",
+    "name": "asep",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "01 Aug 2026, 02:33",
+    "score": 80,
+    "correct_answers": 4,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 4,
+    "problem_solving_total": 5,
+    "duration_seconds": 158,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 43.9,
+      "confused": 29.2,
+      "bored": 17,
+      "frustrated": 5.6,
+      "neutral": 4.4
+    },
+    "timeline": [],
+    "question_tracking": [
+      {
+        "question_id": "c1",
+        "question_category": "Coding Exercise",
+        "answer": "print",
+        "time_spent": 41,
+        "timestamp": "02.31.51"
+      },
+      {
+        "question_id": "c2",
+        "question_category": "Coding Exercise",
+        "answer": "if",
+        "time_spent": 116,
+        "timestamp": "02.33.05"
+      },
+      {
+        "question_id": "c3",
+        "question_category": "Coding Exercise",
+        "answer": "range",
+        "time_spent": 121,
+        "timestamp": "02.33.11"
+      },
+      {
+        "question_id": "c4",
+        "question_category": "Coding Exercise",
+        "answer": "%",
+        "time_spent": 135,
+        "timestamp": "02.33.24"
+      },
+      {
+        "question_id": "c5",
+        "question_category": "Coding Exercise",
+        "answer": "while True",
+        "time_spent": 141,
+        "timestamp": "02.33.30"
+      }
+    ],
+    "interpretation": "Mahasiswa menunjukkan keterlibatan belajar yang baik."
+  },
+  {
+    "id": "874e2323",
+    "nim": "123",
+    "name": "sadawd",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "01 Aug 2026, 02:24",
+    "score": 80,
+    "correct_answers": 4,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 4,
+    "problem_solving_total": 5,
+    "duration_seconds": 49,
+    "dominant_emotion": "bored",
+    "emotion_distribution": {
+      "engaged": 22,
+      "confused": 0,
+      "bored": 58.6,
+      "frustrated": 17.4,
+      "neutral": 2
+    },
+    "timeline": [],
+    "question_tracking": [
+      {
+        "question_id": "c1",
+        "question_category": "Coding Exercise",
+        "answer": "print",
+        "time_spent": 4,
+        "timestamp": "02.24.12"
+      },
+      {
+        "question_id": "c2",
+        "question_category": "Coding Exercise",
+        "answer": "if",
+        "time_spent": 11,
+        "timestamp": "02.24.18"
+      },
+      {
+        "question_id": "c3",
+        "question_category": "Coding Exercise",
+        "answer": "range",
+        "time_spent": 17,
+        "timestamp": "02.24.25"
+      },
+      {
+        "question_id": "c4",
+        "question_category": "Coding Exercise",
+        "answer": "%",
+        "time_spent": 25,
+        "timestamp": "02.24.33"
+      },
+      {
+        "question_id": "c5",
+        "question_category": "Coding Exercise",
+        "answer": "while True",
+        "time_spent": 42,
+        "timestamp": "02.24.50"
+      }
+    ],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil dengan hasil pemahaman yang baik."
+  },
+  {
     "id": "f1186b0a",
     "nim": "123",
     "name": "admin",
