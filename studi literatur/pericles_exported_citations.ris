@@ -1,0 +1,30 @@
+
+TY  - JOUR
+T1  - An online integrated programming platform to acquire students' behavior data for immediate feedback teaching
+AU  - Yu, Ju-Hua
+AU  - Chang, Xing-Zhi
+AU  - Liu, Wei
+AU  - Huan, Zhan
+Y1  - 2023/05/01
+PY  - 2023
+DA  - 2023/05/01
+DO  - https://doi.org/10.1002/cae.22596
+T2  - Computer Applications in Engineering Education
+JF  - Computer Applications in Engineering Education
+JO  - Computer Applications in Engineering Education
+JA  - Comput Appl Eng Educ
+SP  - 520
+EP  - 536
+VL  - 31
+IS  - 3
+KW  - behavior data
+KW  - feedback teaching
+KW  - learning analytics
+KW  - online programming platform
+KW  - real time
+PB  - John Wiley & Sons, Ltd
+SN  - 1061-3773
+UR  - https://doi.org/10.1002/cae.22596
+Y2  - 2026/08/01
+N2  - Abstract Programming-related courses prefer to put importance on practice rather than theoretical knowledge. However, the students' programming behavior data is difficult to be recorded and fed back to teachers anytime, allowing teachers to adjust their teaching in real-time. Aiming at this problem, this study develops an online integrated programming platform that provides a unified programming environment for teachers and students and logs students' procedural programming behavior data automatically to assist teachers in providing real-time feedback teaching. To verify the effectiveness of the data-driven immediate feedback teaching method, an exploratory case was conducted in the 2020/2021 academic year autumn semester. As the control group, cloud201 adopted the traditional hybrid online/offline mode, while cloud202, as the experimental group, adopted the hybrid online/offline mode and immediate feedback teaching mode. The effect is demonstrated through the questionnaire, the programming behavior data analysis, and the performance analysis. The results of the questionnaire show that there are significant differences in the students' satisfaction with interaction, supervision, feedback, and evaluation, of which feedback is the biggest part. In addition, the two analysis results indicate that students' individual learning development and the learning status of the class are objectively characterized, the overall grade distribution of cloud202 is more concentrated in medium grades and the difference on average scores between cloud201 and cloud202 is gradually increased. Since the students' immediate and comprehensive programming behavior data is perceived by teachers, the teaching adjustment is so flexible that the improvement of teaching efficiency and teaching effect is promoted accordingly.
+ER  - 

@@ -1,5 +1,103 @@
 [
   {
+    "id": "59738aaf",
+    "nim": "123456",
+    "name": "admin",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "01 Aug 2026, 16:32",
+    "score": 40,
+    "correct_answers": 4,
+    "total_questions": 10,
+    "concept_correct": 2,
+    "concept_total": 5,
+    "problem_solving_correct": 2,
+    "problem_solving_total": 5,
+    "duration_seconds": 70,
+    "dominant_emotion": "confused",
+    "emotion_distribution": {
+      "engaged": 24.2,
+      "confused": 45.2,
+      "bored": 23.1,
+      "frustrated": 0,
+      "neutral": 7.4
+    },
+    "timeline": [],
+    "question_tracking": [
+      {
+        "question_id": "q1",
+        "question_category": "Concept",
+        "answer": "B",
+        "time_spent": 2,
+        "timestamp": "16.32.33"
+      },
+      {
+        "question_id": "q2",
+        "question_category": "Concept",
+        "answer": "B",
+        "time_spent": 3,
+        "timestamp": "16.32.34"
+      },
+      {
+        "question_id": "q3",
+        "question_category": "Concept",
+        "answer": "B",
+        "time_spent": 4,
+        "timestamp": "16.32.35"
+      },
+      {
+        "question_id": "q4",
+        "question_category": "Concept",
+        "answer": "C",
+        "time_spent": 5,
+        "timestamp": "16.32.37"
+      },
+      {
+        "question_id": "q5",
+        "question_category": "Concept",
+        "answer": "C",
+        "time_spent": 9,
+        "timestamp": "16.32.40"
+      },
+      {
+        "question_id": "q6",
+        "question_category": "Problem Solving",
+        "answer": "A",
+        "time_spent": 12,
+        "timestamp": "16.32.43"
+      },
+      {
+        "question_id": "q7",
+        "question_category": "Problem Solving",
+        "answer": "C",
+        "time_spent": 15,
+        "timestamp": "16.32.46"
+      },
+      {
+        "question_id": "q8",
+        "question_category": "Problem Solving",
+        "answer": "B",
+        "time_spent": 16,
+        "timestamp": "16.32.47"
+      },
+      {
+        "question_id": "q9",
+        "question_category": "Problem Solving",
+        "answer": "B",
+        "time_spent": 17,
+        "timestamp": "16.32.48"
+      },
+      {
+        "question_id": "q10",
+        "question_category": "Problem Solving",
+        "answer": "A",
+        "time_spent": 19,
+        "timestamp": "16.32.50"
+      }
+    ],
+    "interpretation": "Mahasiswa menunjukkan indikasi kesulitan memahami materi."
+  },
+  {
     "id": "345465e6",
     "nim": "123",
     "name": "asdasdas",

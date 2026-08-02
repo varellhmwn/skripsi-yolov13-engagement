@@ -17,10 +17,12 @@ from pathlib import Path
 from ultralytics import YOLO
 
 # ─── Konfigurasi Path ───────────────────────────────────────
-BASE_DIR = Path(__file__).resolve().parent.parent        # skripsi_yolov13_engagement/
-DATA_YAML = str(BASE_DIR / 'datasets' / 'master_combined_dataset' / 'data.yaml')
+# skripsi_yolov13_engagement/
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_YAML = str(BASE_DIR / 'datasets' /
+                'master_combined_dataset' / 'data.yaml')
 OUTPUT_DIR = str(BASE_DIR / 'runs')
-RUN_NAME = 'yolov13_master_combined_v2'
+RUN_NAME = 'yolov13_master_combined_test_4_kelas'
 
 
 def main():
@@ -40,8 +42,8 @@ def main():
         print("        Pastikan folder datasets/master_combined_dataset/ ada.")
         sys.exit(1)
 
-    # Load base YOLOv13n pretrained weights for training from scratch
-    print("[INFO] Loading pretrained YOLOv13n base weights (training from scratch)...")
+    # Load base YOLOv13n pretrained weights (murni train dari nol)
+    print("[INFO] Loading base YOLOv13n pretrained weights (murni train dari nol)...")
     model = YOLO('yolov13n.pt')
 
     # Training

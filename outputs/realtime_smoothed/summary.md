@@ -1,6 +1,6 @@
 # Real-time Smoothed Inference Summary
 
-- **Model Weights:** `D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\runs\yolov13n_retrained_scratch\weights\best.pt`
+- **Model Weights:** `D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\runs\yolov13_master_combined_v2\weights\best.pt`
 - **Source:** `0`
 
 ## Smoothing Parameters
@@ -9,19 +9,19 @@
 - `min_avg_confidence`: 0.5
 
 ## Execution Stats
-- Total frames processed: 8473
-- Frames with `no_face`: 13
-- Frames with `neutral`: 166
+- Total frames processed: 4887
+- Frames with `no_face`: 7
+- Frames with `neutral`: 282
 - Hard samples collected: 0
 
 ## Raw Prediction Distribution
-- engaged: 7096
-- confused: 114
-- bored: 701
-- frustrated: 549
+- engaged: 2205
+- confused: 574
+- bored: 1296
+- frustrated: 805
 
 ## Stable Prediction Distribution
-- engaged: 7355
-- confused: 73
-- bored: 572
-- frustrated: 294
+- engaged: 2178
+- confused: 594
+- bored: 1160
+- frustrated: 666
