@@ -18,7 +18,7 @@ from ultralytics import YOLO
 
 # ─── Konfigurasi Default ────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
-DEFAULT_WEIGHTS = str(BASE_DIR / 'runs' / 'yolov13_master_combined' / 'weights' / 'best.pt')
+DEFAULT_WEIGHTS = str(BASE_DIR / 'runs' / 'yolov13_master_combined_v2' / 'weights' / 'best.pt')
 DEFAULT_DATA = str(BASE_DIR / 'datasets' / 'master_combined_dataset' / 'data.yaml')
 
 CLASS_NAMES = {0: 'engaged', 1: 'confused', 2: 'bored', 3: 'frustrated'}
@@ -43,6 +43,10 @@ def parse_args():
     parser.add_argument(
         '--imgsz', type=int, default=640,
         help="Ukuran input gambar (default: 640)"
+    )
+    parser.add_argument(
+        '--batch', type=int, default=16,
+        help="Batch size (default: 16)"
     )
     parser.add_argument(
         '--device', type=str, default='0',
@@ -87,10 +91,12 @@ def main():
         data=args.data,
         split=args.split,
         imgsz=args.imgsz,
+        batch=args.batch,
         device=args.device,
-        conf=args.conf,
         plots=True,
-        save_json=False,
+        project=str(BASE_DIR / 'runs' / 'evaluation'),
+        name='yolov13_master_combined_v2_test',
+        exist_ok=True,
     )
 
     # Tampilkan hasil
