@@ -5,6 +5,7 @@ Flask + SocketIO server untuk real-time emotion detection dashboard.
 Model: YOLOv13 Master Final 4-Class (engaged, confused, bored, frustrated) + Neutral trick
 """
 
+from ultralytics import YOLO
 import os
 import sys
 import json
@@ -23,7 +24,6 @@ from flask_socketio import SocketIO, emit
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR))
 
-from ultralytics import YOLO
 
 # ─── App Configuration ──────────────────────────────────────────────
 app = Flask(__name__)
@@ -33,8 +33,10 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 
 # ─── Model Configuration ────────────────────────────────────────────
-MODEL_V2_PATH = BASE_DIR / 'runs' / 'yolov13_master_combined_v2' / 'weights' / 'best.pt'
-MODEL_V1_PATH = BASE_DIR / 'runs' / 'yolov13_master_combined' / 'weights' / 'best.pt'
+MODEL_V2_PATH = BASE_DIR / 'runs' / \
+    'yolov13_master_combined_v2' / 'weights' / 'best.pt'
+MODEL_V1_PATH = BASE_DIR / 'runs' / \
+    'yolov13_master_combined' / 'weights' / 'best.pt'
 MODEL_PATH = str(MODEL_V2_PATH if MODEL_V2_PATH.exists() else MODEL_V1_PATH)
 MODULES_PATH = Path(__file__).resolve().parent / 'modules.json'
 HISTORY_PATH = Path(__file__).resolve().parent / 'study_history.json'
@@ -47,7 +49,7 @@ IMGSZ = 640
 CONF_THRESHOLD = 0.20
 MIN_VOTE_RATIO = 0.40
 MIN_AVG_CONFIDENCE = 0.40
-WINDOW_SIZE = 10
+WINDOW_SIZE = 30
 
 # ─── Global State ────────────────────────────────────────────────────
 model = None
@@ -57,7 +59,8 @@ camera_thread = None
 camera_lock = threading.Lock()
 
 # Per-session emotion tracking
-emotion_sessions = {}  # session_id -> { 'history': [...], 'window': deque, 'start_time': ... }
+# session_id -> { 'history': [...], 'window': deque, 'start_time': ... }
+emotion_sessions = {}
 
 
 def load_model():
@@ -155,7 +158,8 @@ def process_frame(frame, window):
             area = w * h
             if (area / frame_area) >= 0.02 and area > largest_area:
                 largest_area = area
-                best_det = (int(det.cls[i].item()), float(det.conf[i].item()), xyxy)
+                best_det = (int(det.cls[i].item()),
+                            float(det.conf[i].item()), xyxy)
 
         if best_det is not None:
             cls_id, conf, bbox_coords = best_det
@@ -170,7 +174,8 @@ def process_frame(frame, window):
                 dom_id, dom_count = counts.most_common(1)[0]
                 dom_label = TARGET_CLASSES.get(dom_id, "unknown")
                 vote_ratio = dom_count / len(window)
-                dom_confs = [w['conf'] for w in window if w['class_id'] == dom_id]
+                dom_confs = [w['conf']
+                             for w in window if w['class_id'] == dom_id]
                 avg_conf = sum(dom_confs) / len(dom_confs)
 
                 if vote_ratio >= MIN_VOTE_RATIO and avg_conf >= MIN_AVG_CONFIDENCE:
@@ -198,9 +203,11 @@ def process_frame(frame, window):
         cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
 
         label_text = f"{stable_label} ({avg_conf:.0%})"
-        (tw, th), _ = cv2.getTextSize(label_text, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2)
+        (tw, th), _ = cv2.getTextSize(
+            label_text, cv2.FONT_HERSHEY_SIMPLEX, 0.7, 2)
         cv2.rectangle(frame, (x1, y1 - th - 10), (x1 + tw + 10, y1), color, -1)
-        text_color = (255, 255, 255) if stable_label != 'neutral' else (0, 0, 0)
+        text_color = (
+            255, 255, 255) if stable_label != 'neutral' else (0, 0, 0)
         cv2.putText(frame, label_text, (x1 + 5, y1 - 5),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, text_color, 2)
 
@@ -236,7 +243,8 @@ def camera_stream():
 
             # Run inference
             frame_copy = frame.copy()
-            emotion, confidence, info = process_frame(frame_copy, session_data['window'])
+            emotion, confidence, info = process_frame(
+                frame_copy, session_data['window'])
 
             # Record to history
             timestamp = time.time() - session_data['start_time']
@@ -247,15 +255,18 @@ def camera_stream():
             })
 
             # Encode frame to base64 JPEG
-            _, buffer = cv2.imencode('.jpg', frame_copy, [cv2.IMWRITE_JPEG_QUALITY, 70])
+            _, buffer = cv2.imencode('.jpg', frame_copy, [
+                                     cv2.IMWRITE_JPEG_QUALITY, 70])
             frame_b64 = base64.b64encode(buffer).decode('utf-8')
 
             # Calculate emotion distribution from history
-            emotion_counts = Counter([h['emotion'] for h in session_data['history']])
+            emotion_counts = Counter([h['emotion']
+                                     for h in session_data['history']])
             total = len(session_data['history'])
             distribution = {}
             for em in ALL_EMOTIONS:
-                distribution[em] = round((emotion_counts.get(em, 0) / total) * 100, 1) if total > 0 else 0
+                distribution[em] = round(
+                    (emotion_counts.get(em, 0) / total) * 100, 1) if total > 0 else 0
 
             # Emit to specific client
             socketio.emit('camera_frame', {
@@ -435,8 +446,10 @@ def check_answer():
             })
 
         score = round((correct / total) * 100) if total > 0 else 0
-        concept_score_pct = round((concept_correct / concept_total) * 100) if concept_total > 0 else 0
-        problem_solving_score_pct = round((problem_solving_correct / problem_solving_total) * 100) if problem_solving_total > 0 else 0
+        concept_score_pct = round(
+            (concept_correct / concept_total) * 100) if concept_total > 0 else 0
+        problem_solving_score_pct = round(
+            (problem_solving_correct / problem_solving_total) * 100) if problem_solving_total > 0 else 0
 
     interpretation = generate_academic_interpretation(
         score, concept_correct, problem_solving_correct, emotion_dist
@@ -472,12 +485,16 @@ def get_history():
 
     # Calculate overall statistics
     total_sessions = len(user_history)
-    avg_score = round(sum(item.get('score', 0) for item in user_history) / total_sessions) if total_sessions > 0 else 0
-    total_duration_sec = sum(item.get('duration_seconds', 0) for item in user_history)
+    avg_score = round(sum(item.get('score', 0) for item in user_history) /
+                      total_sessions) if total_sessions > 0 else 0
+    total_duration_sec = sum(item.get('duration_seconds', 0)
+                             for item in user_history)
 
     # Calculate overall dominant emotion
-    emotion_counts = Counter([item.get('dominant_emotion') for item in user_history if item.get('dominant_emotion')])
-    overall_dominant = emotion_counts.most_common(1)[0][0] if emotion_counts else 'neutral'
+    emotion_counts = Counter([item.get('dominant_emotion')
+                             for item in user_history if item.get('dominant_emotion')])
+    overall_dominant = emotion_counts.most_common(
+        1)[0][0] if emotion_counts else 'neutral'
 
     return jsonify({
         'history': user_history,
@@ -545,7 +562,6 @@ def save_session():
         return jsonify({'error': 'Failed to save session'}), 500
 
 
-
 @app.route('/logout')
 def logout():
     """Handle logout."""
@@ -594,7 +610,8 @@ def handle_start_camera():
         if camera is None or not camera.isOpened():
             camera = cv2.VideoCapture(0)
             if not camera.isOpened():
-                emit('camera_error', {'message': 'Cannot open camera. Please check your webcam connection.'})
+                emit('camera_error', {
+                     'message': 'Cannot open camera. Please check your webcam connection.'})
                 return
 
             # Set camera properties
@@ -670,7 +687,8 @@ def handle_emotion_report():
                 # Active Cognitive Emotion Prioritization:
                 # If any active cognitive emotion (engaged, confused, bored, frustrated) is present,
                 # prioritize it over neutral to highlight learning state changes.
-                active_emotions = [h['emotion'] for h in nearby if h['emotion'] != 'neutral']
+                active_emotions = [h['emotion']
+                                   for h in nearby if h['emotion'] != 'neutral']
                 if active_emotions:
                     best_em = Counter(active_emotions).most_common(1)[0][0]
                 else:
@@ -684,7 +702,7 @@ def handle_emotion_report():
         smoothed_history = []
         win_size = 5
         for i in range(len(history)):
-            sub = history[max(0, i - win_size // 2): min(len(history), i + win_size // 2 + 1)]
+            sub = history[max(0, i - win_size // 2)                          : min(len(history), i + win_size // 2 + 1)]
             top_em = Counter([h['emotion'] for h in sub]).most_common(1)[0][0]
             smoothed_history.append((history[i]['timestamp'], top_em))
 
@@ -696,7 +714,8 @@ def handle_emotion_report():
             last_em = em
 
         # Combine & deduplicate points
-        combined = {round(pt['time']): pt['emotion'] for pt in raw_points + transition_points}
+        combined = {round(pt['time']): pt['emotion']
+                    for pt in raw_points + transition_points}
         sorted_times = sorted(combined.keys())
 
         # Build initial timeline
@@ -712,14 +731,16 @@ def handle_emotion_report():
                 last_active_em = pt['emotion']
             else:
                 # Check if this neutral point is surrounded by active cognitive emotions
-                nearby_em = [h['emotion'] for h in history if abs(h['timestamp'] - pt['time']) <= 4.0]
+                nearby_em = [h['emotion'] for h in history if abs(
+                    h['timestamp'] - pt['time']) <= 4.0]
                 active_count = sum(1 for e in nearby_em if e != 'neutral')
                 if active_count == 0:
                     # Pure prolonged neutral phase -> keep neutral
                     suppressed_timeline.append(pt)
                 elif last_active_em:
                     # Brief resting face between active learning -> maintain active state
-                    suppressed_timeline.append({'time': pt['time'], 'emotion': last_active_em})
+                    suppressed_timeline.append(
+                        {'time': pt['time'], 'emotion': last_active_em})
                 else:
                     suppressed_timeline.append(pt)
 
@@ -731,7 +752,8 @@ def handle_emotion_report():
             if em != 'neutral' and pct >= 2.0 and em not in present_emotions:
                 em_frames = [h for h in history if h['emotion'] == em]
                 if em_frames:
-                    best_frame = max(em_frames, key=lambda h: h.get('confidence', 0))
+                    best_frame = max(
+                        em_frames, key=lambda h: h.get('confidence', 0))
                     t_val = round(best_frame['timestamp'])
                     timeline.append({'time': t_val, 'emotion': em})
 
@@ -748,9 +770,11 @@ def handle_emotion_report():
                 if pt['emotion'] not in seen_em:
                     unique_em_pts.append(pt)
                     seen_em.add(pt['emotion'])
-            
-            combined_pts = {pt['time']: pt['emotion'] for pt in sampled + unique_em_pts}
-            timeline = [{'time': t, 'emotion': combined_pts[t]} for t in sorted(combined_pts.keys())]
+
+            combined_pts = {pt['time']: pt['emotion']
+                            for pt in sampled + unique_em_pts}
+            timeline = [{'time': t, 'emotion': combined_pts[t]}
+                        for t in sorted(combined_pts.keys())]
 
     emit('emotion_report', {
         'distribution': distribution,
@@ -789,10 +813,11 @@ if __name__ == '__main__':
     if not has_model:
         print("[WARNING] Running in simulation mode (no model loaded)")
         print("[WARNING] Emotion detection will use random values")
-    
+
     device = get_device()
     print(f"[INFO] Inference device: {device}")
     print(f"[INFO] Starting server on http://localhost:5000")
     print("=" * 60)
 
-    socketio.run(app, host='0.0.0.0', port=5000, debug=False, allow_unsafe_werkzeug=True)
+    socketio.run(app, host='0.0.0.0', port=5000,
+                 debug=False, allow_unsafe_werkzeug=True)
