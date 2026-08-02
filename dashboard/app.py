@@ -42,9 +42,9 @@ ALL_EMOTIONS = ['engaged', 'confused', 'bored', 'frustrated', 'neutral']
 
 # Inference parameters
 IMGSZ = 640
-CONF_THRESHOLD = 0.20
+CONF_THRESHOLD = 0.25
 MIN_VOTE_RATIO = 0.40
-MIN_AVG_CONFIDENCE = 0.40
+MIN_AVG_CONFIDENCE = 0.50
 WINDOW_SIZE = 30
 
 # ─── Global State ────────────────────────────────────────────────────
