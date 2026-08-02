@@ -33,11 +33,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 
 # ─── Model Configuration ────────────────────────────────────────────
-MODEL_V2_PATH = BASE_DIR / 'runs' / \
-    'yolov13_master_combined_v2' / 'weights' / 'best.pt'
-MODEL_V1_PATH = BASE_DIR / 'runs' / \
-    'yolov13_master_combined' / 'weights' / 'best.pt'
-MODEL_PATH = str(MODEL_V2_PATH if MODEL_V2_PATH.exists() else MODEL_V1_PATH)
+MODEL_PATH = str(BASE_DIR / 'runs' / 'yolov13_master_combined_v2' / 'weights' / 'best.pt')
 MODULES_PATH = Path(__file__).resolve().parent / 'modules.json'
 HISTORY_PATH = Path(__file__).resolve().parent / 'study_history.json'
 
