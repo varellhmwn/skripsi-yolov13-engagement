@@ -724,6 +724,7 @@ function showFinish(quizResult) {
         duration_seconds: duration,
         dominant_emotion: dominantEmotion ? dominantEmotion[0] : 'neutral',
         emotion_distribution: currentDistribution,
+        timeline: lastReceivedTimeline || [],
         interpretation: quizResult.interpretation || "Sesi belajar selesai.",
         question_tracking: questionTrackingData
     };
