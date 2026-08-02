@@ -814,6 +814,7 @@ function renderTimelineChart(timelineData) {
                 datasets: [{
                     label: 'Emosi Belajar',
                     data: values,
+                    clip: false,
                     borderColor: '#8b5cf6',
                     borderWidth: 3,
                     pointBackgroundColor: pointColors,
@@ -828,10 +829,13 @@ function renderTimelineChart(timelineData) {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                layout: {
+                    padding: { top: 15, bottom: 15 }
+                },
                 scales: {
                     y: {
-                        min: -0.3,
-                        max: 3.3,
+                        min: 0,
+                        max: 3,
                         ticks: {
                             stepSize: 1,
                             callback: function(val) {
