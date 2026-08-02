@@ -832,11 +832,16 @@ function renderTimelineChart(timelineData) {
                 maintainAspectRatio: false,
                 scales: {
                     y: {
-                        min: 0,
-                        max: 4,
+                        min: -0.3,
+                        max: 4.3,
                         ticks: {
                             stepSize: 1,
-                            callback: function(val) { return emotionLabels[val] || ''; },
+                            callback: function(val) {
+                                if (Number.isInteger(val) && val >= 0 && val <= 4) {
+                                    return emotionLabels[val] || '';
+                                }
+                                return '';
+                            },
                             color: '#94a3b8',
                             font: { family: 'Inter', weight: '600' }
                         },
