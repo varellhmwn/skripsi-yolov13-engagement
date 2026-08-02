@@ -58,6 +58,18 @@ camera_lock = threading.Lock()
 # session_id -> { 'history': [...], 'window': deque, 'start_time': ... }
 emotion_sessions = {}
 
+# ─── Shared Frame Buffer (dual-thread architecture) ──────────────────
+# Inference thread writes here; render thread reads and emits to browser
+# Structure per session_id: { 'frame': np.ndarray, 'emotion': str, 'confidence': float,
+#                             'info': dict, 'distribution': dict, 'duration': float }
+_latest_results: dict = {}  # sid -> last inference result
+_latest_frame: dict = {}    # sid -> last annotated frame (numpy array)
+_frame_lock = threading.Lock()
+
+# Render thread target: ~30 FPS display regardless of inference speed
+RENDER_FPS = 30
+INFER_FPS = 30   # YOLO inference target (GPU can handle this easily)
+
 
 def load_model():
     """Load the YOLOv13 model."""
@@ -216,68 +228,133 @@ def process_frame(frame, window):
     return stable_label, avg_conf, confidence_info
 
 
-def camera_stream():
-    """Background thread for camera capture + inference + streaming."""
+def _inference_thread():
+    """Thread A — YOLO inference at full GPU speed.
+    Reads raw frames from camera, runs inference, writes annotated frame
+    and latest results into shared buffer (_latest_frame, _latest_results).
+    Does NOT encode or transmit — that is handled by the render thread.
+    """
     global camera, camera_active
 
-    print("[INFO] Camera stream thread started")
+    infer_interval = 1.0 / INFER_FPS
+    print("[INFO] Inference thread started")
 
     while camera_active:
         if camera is None or not camera.isOpened():
-            time.sleep(0.1)
+            time.sleep(0.05)
             continue
 
-        ret, frame = camera.read()
+        t0 = time.time()
+
+        with camera_lock:
+            ret, frame = camera.read()
         if not ret:
-            time.sleep(0.1)
+            time.sleep(0.02)
             continue
 
-        # Process all active emotion sessions
-        for sid, session_data in list(emotion_sessions.items()):
-            if not session_data.get('active', False):
-                continue
+        active_sessions = [(sid, sd) for sid, sd in list(emotion_sessions.items())
+                           if sd.get('active', False)]
+        if not active_sessions:
+            time.sleep(0.02)
+            continue
 
-            # Run inference
+        # Run YOLO inference once per frame (shared across sessions)
+        with camera_lock:
             frame_copy = frame.copy()
-            emotion, confidence, info = process_frame(
-                frame_copy, session_data['window'])
 
-            # Record to history
-            timestamp = time.time() - session_data['start_time']
+        # Use the first active session's window for inference
+        # (all active sessions share the same camera feed)
+        primary_sid, primary_sd = active_sessions[0]
+        emotion, confidence, info = process_frame(frame_copy, primary_sd['window'])
+        timestamp = time.time() - primary_sd['start_time']
+
+        # Update history and distribution for ALL active sessions
+        for sid, session_data in active_sessions:
             session_data['history'].append({
                 'emotion': emotion,
                 'confidence': confidence,
                 'timestamp': timestamp
             })
 
-            # Encode frame to base64 JPEG
-            _, buffer = cv2.imencode('.jpg', frame_copy, [
-                                     cv2.IMWRITE_JPEG_QUALITY, 70])
-            frame_b64 = base64.b64encode(buffer).decode('utf-8')
-
-            # Calculate emotion distribution from history
-            emotion_counts = Counter([h['emotion']
-                                     for h in session_data['history']])
+            emotion_counts = Counter([h['emotion'] for h in session_data['history']])
             total = len(session_data['history'])
-            distribution = {}
-            for em in ALL_EMOTIONS:
-                distribution[em] = round(
-                    (emotion_counts.get(em, 0) / total) * 100, 1) if total > 0 else 0
+            distribution = {
+                em: round((emotion_counts.get(em, 0) / total) * 100, 1) if total > 0 else 0
+                for em in ALL_EMOTIONS
+            }
 
-            # Emit to specific client
-            socketio.emit('camera_frame', {
-                'frame': frame_b64,
-                'emotion': emotion,
-                'confidence': round(confidence, 2),
-                'distribution': distribution,
-                'duration': round(timestamp, 0),
-                'info': info
-            }, room=sid)
+            with _frame_lock:
+                _latest_results[sid] = {
+                    'emotion': emotion,
+                    'confidence': round(confidence, 2),
+                    'distribution': distribution,
+                    'duration': round(timestamp, 0),
+                    'info': info
+                }
+                _latest_frame[sid] = frame_copy.copy()
 
-        # Control frame rate (~15 FPS for balance between smoothness and performance)
-        time.sleep(0.066)
+        # Pace inference to target rate (GPU can handle 30 FPS easily)
+        elapsed = time.time() - t0
+        sleep_t = infer_interval - elapsed
+        if sleep_t > 0:
+            time.sleep(sleep_t)
 
-    print("[INFO] Camera stream thread stopped")
+    print("[INFO] Inference thread stopped")
+
+
+def _render_thread():
+    """Thread B — Encode & emit frames to browser at RENDER_FPS.
+    Reads the latest annotated frame + results from shared buffer and
+    sends them to connected clients. Completely independent of inference speed.
+    """
+    global camera_active
+
+    render_interval = 1.0 / RENDER_FPS
+    print("[INFO] Render thread started")
+
+    while camera_active:
+        t0 = time.time()
+
+        with _frame_lock:
+            sessions_to_emit = {
+                sid: (frame.copy(), dict(result))
+                for sid, frame in _latest_frame.items()
+                if sid in _latest_results
+                for result in [_latest_results[sid]]
+            }
+
+        for sid, (frame, result) in sessions_to_emit.items():
+            try:
+                _, buffer = cv2.imencode(
+                    '.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 60])
+                frame_b64 = base64.b64encode(buffer).decode('utf-8')
+                socketio.emit('camera_frame', {
+                    'frame': frame_b64,
+                    **result
+                }, room=sid)
+            except Exception as e:
+                print(f"[WARN] Render emit error for {sid}: {e}")
+
+        elapsed = time.time() - t0
+        sleep_t = render_interval - elapsed
+        if sleep_t > 0:
+            time.sleep(sleep_t)
+
+    print("[INFO] Render thread stopped")
+
+
+def camera_stream():
+    """Launch dual-thread camera pipeline:
+    - Thread A: YOLO inference at GPU speed
+    - Thread B: Frame encoding & emit at display rate
+    """
+    t_infer = threading.Thread(target=_inference_thread, daemon=True)
+    t_render = threading.Thread(target=_render_thread, daemon=True)
+    t_infer.start()
+    t_render.start()
+    t_infer.join()
+    t_render.join()
+    print("[INFO] Camera stream (dual-thread) stopped")
 
 
 # ─── Routes ──────────────────────────────────────────────────────────
@@ -580,6 +657,11 @@ def handle_disconnect():
     if sid in emotion_sessions:
         emotion_sessions[sid]['active'] = False
         del emotion_sessions[sid]
+
+    # Cleanup shared frame buffers
+    with _frame_lock:
+        _latest_frame.pop(sid, None)
+        _latest_results.pop(sid, None)
 
     # Stop camera if no active sessions
     if not any(s.get('active', False) for s in emotion_sessions.values()):
