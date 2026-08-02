@@ -69,16 +69,16 @@ def parse_args():
                         help="0 untuk webcam, atau path ke video file")
     parser.add_argument('--imgsz', type=int, default=640,
                         help="Ukuran input gambar (default: 640)")
-    parser.add_argument('--conf', type=float, default=0.20,
-                        help="Minimum confidence YOLO (default: 0.20)")
+    parser.add_argument('--conf', type=float, default=0.25,
+                        help="Minimum confidence YOLO (default: 0.25)")
     parser.add_argument('--device', type=str, default='0',
                         help="Device inference (default: 0 = GPU)")
     parser.add_argument('--window_size', type=int, default=30,
                         help="Ukuran sliding window untuk smoothing (default: 30)")
     parser.add_argument('--min_vote_ratio', type=float, default=0.40,
                         help="Rasio voting minimum (default: 0.40)")
-    parser.add_argument('--min_avg_confidence', type=float, default=0.40,
-                        help="Threshold confidence untuk neutral trick (default: 0.40)")
+    parser.add_argument('--min_avg_confidence', type=float, default=0.50,
+                        help="Threshold confidence untuk neutral trick (default: 0.50)")
     parser.add_argument('--show_raw', action='store_true',
                         help="Tampilkan prediksi mentah di samping prediksi stabil")
 
