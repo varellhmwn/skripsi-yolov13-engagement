@@ -38,7 +38,7 @@ MODULES_PATH = Path(__file__).resolve().parent / 'modules.json'
 HISTORY_PATH = Path(__file__).resolve().parent / 'study_history.json'
 
 TARGET_CLASSES = {0: 'engaged', 1: 'confused', 2: 'bored', 3: 'frustrated'}
-ALL_EMOTIONS = ['engaged', 'confused', 'bored', 'frustrated', 'neutral']
+ALL_EMOTIONS = ['engaged', 'confused', 'bored', 'frustrated']
 
 # Inference parameters
 IMGSZ = 640
@@ -799,29 +799,9 @@ def handle_emotion_report():
         # Build initial timeline
         timeline = [{'time': t, 'emotion': combined[t]} for t in sorted_times]
 
-        # Neutral Suppression & Active Continuity Filter:
-        # Prevent the chart from constantly dropping to Neutral during brief resting-face moments
-        suppressed_timeline = []
-        last_active_em = None
-        for pt in timeline:
-            if pt['emotion'] != 'neutral':
-                suppressed_timeline.append(pt)
-                last_active_em = pt['emotion']
-            else:
-                # Check if this neutral point is surrounded by active cognitive emotions
-                nearby_em = [h['emotion'] for h in history if abs(
-                    h['timestamp'] - pt['time']) <= 4.0]
-                active_count = sum(1 for e in nearby_em if e != 'neutral')
-                if active_count == 0:
-                    # Pure prolonged neutral phase -> keep neutral
-                    suppressed_timeline.append(pt)
-                elif last_active_em:
-                    # Brief resting face between active learning -> maintain active state
-                    suppressed_timeline.append(
-                        {'time': pt['time'], 'emotion': last_active_em})
-                else:
-                    suppressed_timeline.append(pt)
-
+        # Filter out neutral completely from timeline
+        suppressed_timeline = [pt for pt in timeline if pt['emotion'] != 'neutral']
+        
         timeline = suppressed_timeline
 
         # Guarantee every active emotion with >= 2.0% distribution is represented in timeline

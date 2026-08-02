@@ -787,15 +787,13 @@ function renderTimelineChart(timelineData) {
             }
         }
     }
-
-    const emotionMap = { 'engaged': 4, 'confused': 3, 'frustrated': 2, 'bored': 1, 'neutral': 0 };
-    const emotionLabels = ['Neutral', 'Bored', 'Frustrated', 'Confused', 'Engaged'];
+    const emotionMap = { 'engaged': 3, 'confused': 2, 'frustrated': 1, 'bored': 0 };
+    const emotionLabels = ['Bored', 'Frustrated', 'Confused', 'Engaged'];
     const emotionColors = {
         'engaged': '#10b981',
         'confused': '#f59e0b',
         'frustrated': '#ef4444',
-        'bored': '#8b5cf6',
-        'neutral': '#6b7280'
+        'bored': '#8b5cf6'
     };
 
     const labels = timelineData.map(item => {
@@ -833,11 +831,11 @@ function renderTimelineChart(timelineData) {
                 scales: {
                     y: {
                         min: -0.3,
-                        max: 4.3,
+                        max: 3.3,
                         ticks: {
                             stepSize: 1,
                             callback: function(val) {
-                                if (Number.isInteger(val) && val >= 0 && val <= 4) {
+                                if (Number.isInteger(val) && val >= 0 && val <= 3) {
                                     return emotionLabels[val] || '';
                                 }
                                 return '';
@@ -858,7 +856,7 @@ function renderTimelineChart(timelineData) {
                         callbacks: {
                             label: function(context) {
                                 const val = context.parsed.y;
-                                return ` Emosi: ${emotionLabels[val] || 'Neutral'}`;
+                                return ` Emosi: ${emotionLabels[val] || 'Unknown'}`;
                             }
                         }
                     }
