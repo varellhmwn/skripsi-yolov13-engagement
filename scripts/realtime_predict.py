@@ -42,7 +42,7 @@ from ultralytics import YOLO
 # ─── Konfigurasi Default ────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
 DEFAULT_WEIGHTS = str(BASE_DIR / 'runs' /
-                      'yolov13_master_combined_v2' / 'weights' / 'best.pt')
+                      'yolov13_master_combined_v3' / 'weights' / 'best.pt')
 DEFAULT_OUTPUT_DIR = str(BASE_DIR / 'outputs' / 'realtime_smoothed')
 
 TARGET_CLASSES = {0: 'engaged', 1: 'confused', 2: 'bored', 3: 'frustrated'}

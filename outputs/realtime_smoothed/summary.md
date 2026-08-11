@@ -1,33 +1,27 @@
 # Real-time Smoothed Inference Summary
 
-- **Model Weights:** `D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\runs\yolov13_master_combined_v2\weights\best.pt`
+- **Model Weights:** `D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\runs\yolov13_master_combined_v3\weights\best.pt`
 - **Source:** `0`
 
 ## Smoothing Parameters
 - `window_size`: 30
 - `min_vote_ratio`: 0.4
-- `min_avg_confidence`: 0.5
+- `min_avg_confidence`: 0.4
 
 ## Execution Stats
-- Total frames processed: 4930
-- Frames with `no_face`: 100
-- Frames with `neutral`: 183
-- Hard samples collected: 7
+- Total frames processed: 4095
+- Frames with `no_face`: 1
+- Frames with `neutral`: 100
+- Hard samples collected: 0
 
 ## Raw Prediction Distribution
-- engaged: 1509
-- confused: 784
-- bored: 598
-- frustrated: 1939
+- engaged: 1931
+- confused: 1250
+- bored: 555
+- frustrated: 358
 
 ## Stable Prediction Distribution
-- engaged: 1583
-- confused: 772
-- bored: 430
-- frustrated: 1862
-
-## Hard Samples per Kelas (Kumulatif)
-- engaged: 0 citra + label
-- confused: 6 citra + label
-- bored: 2 citra + label
-- frustrated: 0 citra + label
+- engaged: 1963
+- confused: 1310
+- bored: 438
+- frustrated: 283
