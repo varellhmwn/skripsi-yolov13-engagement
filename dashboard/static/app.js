@@ -26,16 +26,14 @@ const EMOTION_EMOJI = {
     engaged: '😊',
     confused: '😕',
     bored: '😴',
-    frustrated: '😤',
-    neutral: '😐'
+    frustrated: '😤'
 };
 
 const EMOTION_COLORS = {
     engaged: '#22c55e',
     confused: '#f59e0b',
     bored: '#f97316',
-    frustrated: '#ef4444',
-    neutral: '#94a3b8'
+    frustrated: '#ef4444'
 };
 
 // ─── Step Navigation ────────────────────────────────────────
@@ -142,7 +140,7 @@ function updateCurrentEmotion(emotion, confidence) {
 }
 
 function updateEmotionBars(distribution) {
-    const emotions = ['engaged', 'confused', 'bored', 'frustrated', 'neutral'];
+    const emotions = ['engaged', 'confused', 'bored', 'frustrated'];
     emotions.forEach(em => {
         const row = document.querySelector(`.emotion-bar-row[data-emotion="${em}"]`);
         if (row) {
@@ -181,7 +179,7 @@ function toggleDetailEmotion() {
 }
 
 function updateDetailBars(distribution) {
-    const emotions = ['engaged', 'confused', 'bored', 'frustrated', 'neutral'];
+    const emotions = ['engaged', 'confused', 'bored', 'frustrated'];
     emotions.forEach(em => {
         const bar = document.getElementById(`detailBar-${em}`);
         const val = document.getElementById(`detailVal-${em}`);
@@ -741,7 +739,7 @@ function showFinish(quizResult) {
 
 function drawFinishEmotionBars() {
     console.log('[Finish] Drawing bars, currentDistribution:', JSON.stringify(currentDistribution));
-    const emotions = ['engaged', 'confused', 'bored', 'frustrated', 'neutral'];
+    const emotions = ['engaged', 'confused', 'bored', 'frustrated'];
     emotions.forEach(em => {
         const bar = document.getElementById(`finishBar-${em}`);
         const pct = document.getElementById(`finishPct-${em}`);
@@ -948,7 +946,7 @@ function backToModules() {
     document.querySelector('.btn-detail-emotion').classList.remove('expanded');
 
     // Reset finish bars
-    ['engaged', 'confused', 'bored', 'frustrated', 'neutral'].forEach(em => {
+    ['engaged', 'confused', 'bored', 'frustrated'].forEach(em => {
         const fb = document.getElementById(`finishBar-${em}`);
         const fp = document.getElementById(`finishPct-${em}`);
         const db = document.getElementById(`detailBar-${em}`);
@@ -1024,7 +1022,7 @@ function renderHistory(items, stats) {
 
         let distBars = '';
         const dist = item.emotion_distribution || {};
-        ['engaged', 'confused', 'bored', 'frustrated', 'neutral'].forEach(em => {
+        ['engaged', 'confused', 'bored', 'frustrated'].forEach(em => {
             const val = dist[em] || 0;
             distBars += `
                 <div class="hist-dist-item">
