@@ -33,7 +33,8 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 
 # ─── Model Configuration ────────────────────────────────────────────
-MODEL_PATH = str(BASE_DIR / 'runs' / 'yolov13_master_combined_v2' / 'weights' / 'best.pt')
+MODEL_PATH = str(BASE_DIR / 'runs' /
+                 'yolov13_master_combined_v3' / 'weights' / 'best.pt')
 MODULES_PATH = Path(__file__).resolve().parent / 'modules.json'
 HISTORY_PATH = Path(__file__).resolve().parent / 'study_history.json'
 
@@ -265,7 +266,8 @@ def _inference_thread():
         # Use the first active session's window for inference
         # (all active sessions share the same camera feed)
         primary_sid, primary_sd = active_sessions[0]
-        emotion, confidence, info = process_frame(frame_copy, primary_sd['window'])
+        emotion, confidence, info = process_frame(
+            frame_copy, primary_sd['window'])
         timestamp = time.time() - primary_sd['start_time']
 
         # Update history and distribution for ALL active sessions
@@ -276,10 +278,12 @@ def _inference_thread():
                 'timestamp': timestamp
             })
 
-            emotion_counts = Counter([h['emotion'] for h in session_data['history']])
+            emotion_counts = Counter([h['emotion']
+                                     for h in session_data['history']])
             total = len(session_data['history'])
             distribution = {
-                em: round((emotion_counts.get(em, 0) / total) * 100, 1) if total > 0 else 0
+                em: round((emotion_counts.get(em, 0) / total)
+                          * 100, 1) if total > 0 else 0
                 for em in ALL_EMOTIONS
             }
 
@@ -780,7 +784,8 @@ def handle_emotion_report():
         smoothed_history = []
         win_size = 5
         for i in range(len(history)):
-            sub = history[max(0, i - win_size // 2)                          : min(len(history), i + win_size // 2 + 1)]
+            sub = history[max(0, i - win_size // 2)
+                              : min(len(history), i + win_size // 2 + 1)]
             top_em = Counter([h['emotion'] for h in sub]).most_common(1)[0][0]
             smoothed_history.append((history[i]['timestamp'], top_em))
 
@@ -800,8 +805,9 @@ def handle_emotion_report():
         timeline = [{'time': t, 'emotion': combined[t]} for t in sorted_times]
 
         # Filter out neutral completely from timeline
-        suppressed_timeline = [pt for pt in timeline if pt['emotion'] != 'neutral']
-        
+        suppressed_timeline = [
+            pt for pt in timeline if pt['emotion'] != 'neutral']
+
         timeline = suppressed_timeline
 
         # Guarantee every active emotion with >= 2.0% distribution is represented in timeline

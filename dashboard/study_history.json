@@ -1,5 +1,761 @@
 [
   {
+    "id": "0b07b401",
+    "nim": "123",
+    "name": "asep",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "12 Aug 2026, 22:20",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 6,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 91.4,
+      "confused": 0,
+      "bored": 0,
+      "frustrated": 0
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "527d4d40",
+    "nim": "123",
+    "name": "asep",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "12 Aug 2026, 22:04",
+    "score": 100,
+    "correct_answers": 5,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 5,
+    "problem_solving_total": 5,
+    "duration_seconds": 114,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 69.3,
+      "confused": 24.3,
+      "bored": 2.9,
+      "frustrated": 2.2
+    },
+    "timeline": [],
+    "question_tracking": [
+      {
+        "question_id": "c1",
+        "question_category": "Coding Exercise",
+        "answer": "print",
+        "time_spent": 63,
+        "timestamp": "22.03.14"
+      },
+      {
+        "question_id": "c2",
+        "question_category": "Coding Exercise",
+        "answer": "if",
+        "time_spent": 66,
+        "timestamp": "22.03.17"
+      },
+      {
+        "question_id": "c3",
+        "question_category": "Coding Exercise",
+        "answer": "range",
+        "time_spent": 70,
+        "timestamp": "22.03.21"
+      },
+      {
+        "question_id": "c4",
+        "question_category": "Coding Exercise",
+        "answer": "%",
+        "time_spent": 89,
+        "timestamp": "22.03.39"
+      },
+      {
+        "question_id": "c5",
+        "question_category": "Coding Exercise",
+        "answer": "while",
+        "time_spent": 108,
+        "timestamp": "22.03.58"
+      }
+    ],
+    "interpretation": "Mahasiswa menunjukkan keterlibatan belajar yang baik."
+  },
+  {
+    "id": "c17f7311",
+    "nim": "123",
+    "name": "asep",
+    "module_id": 2,
+    "module_title": "Deep Learning & Neural Networks",
+    "completed_at": "12 Aug 2026, 21:44",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 16,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 66.7,
+      "confused": 0,
+      "bored": 0,
+      "frustrated": 0
+    },
+    "timeline": [
+      {
+        "time": 10,
+        "emotion": "engaged"
+      },
+      {
+        "time": 16,
+        "emotion": "frustrated"
+      },
+      {
+        "time": 20,
+        "emotion": "engaged"
+      },
+      {
+        "time": 29,
+        "emotion": "bored"
+      },
+      {
+        "time": 30,
+        "emotion": "engaged"
+      },
+      {
+        "time": 40,
+        "emotion": "engaged"
+      },
+      {
+        "time": 41,
+        "emotion": "bored"
+      },
+      {
+        "time": 50,
+        "emotion": "engaged"
+      },
+      {
+        "time": 52,
+        "emotion": "frustrated"
+      },
+      {
+        "time": 56,
+        "emotion": "confused"
+      },
+      {
+        "time": 70,
+        "emotion": "confused"
+      },
+      {
+        "time": 72,
+        "emotion": "engaged"
+      }
+    ],
+    "question_tracking": [],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "845246d8",
+    "nim": "123",
+    "name": "asep",
+    "module_id": 2,
+    "module_title": "Deep Learning & Neural Networks",
+    "completed_at": "12 Aug 2026, 21:44",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 10,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 76,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 51.2,
+      "confused": 24.6,
+      "bored": 16,
+      "frustrated": 6.5
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "4d5b5628",
+    "nim": "123",
+    "name": "asd",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 16:06",
+    "score": 100,
+    "correct_answers": 5,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 5,
+    "problem_solving_total": 5,
+    "duration_seconds": 29,
+    "dominant_emotion": "bored",
+    "emotion_distribution": {
+      "engaged": 26.9,
+      "confused": 8.5,
+      "bored": 33.8,
+      "frustrated": 1
+    },
+    "timeline": [],
+    "question_tracking": [
+      {
+        "question_id": "c1",
+        "question_category": "Coding Exercise",
+        "answer": "print",
+        "time_spent": 7,
+        "timestamp": "16.06.34"
+      },
+      {
+        "question_id": "c2",
+        "question_category": "Coding Exercise",
+        "answer": "if",
+        "time_spent": 10,
+        "timestamp": "16.06.37"
+      },
+      {
+        "question_id": "c3",
+        "question_category": "Coding Exercise",
+        "answer": "range",
+        "time_spent": 10,
+        "timestamp": "16.06.37"
+      },
+      {
+        "question_id": "c4",
+        "question_category": "Coding Exercise",
+        "answer": "%",
+        "time_spent": 10,
+        "timestamp": "16.06.37"
+      },
+      {
+        "question_id": "c5",
+        "question_category": "Coding Exercise",
+        "answer": "while",
+        "time_spent": 10,
+        "timestamp": "16.06.37"
+      }
+    ],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil dengan hasil pemahaman yang baik."
+  },
+  {
+    "id": "8d8b4c3b",
+    "nim": "123",
+    "name": "asd",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 16:05",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 6,
+    "dominant_emotion": "neutral",
+    "emotion_distribution": {},
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "0b93e16a",
+    "nim": "20220801257",
+    "name": "Verell",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 06:16",
+    "score": 100,
+    "correct_answers": 5,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 5,
+    "problem_solving_total": 5,
+    "duration_seconds": 74,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 67.7,
+      "confused": 0,
+      "bored": 18.5,
+      "frustrated": 11.9
+    },
+    "timeline": [],
+    "question_tracking": [
+      {
+        "question_id": "c1",
+        "question_category": "Coding Exercise",
+        "answer": "print",
+        "time_spent": 3,
+        "timestamp": "06.15.27"
+      },
+      {
+        "question_id": "c2",
+        "question_category": "Coding Exercise",
+        "answer": "if",
+        "time_spent": 3,
+        "timestamp": "06.15.27"
+      },
+      {
+        "question_id": "c3",
+        "question_category": "Coding Exercise",
+        "answer": "range",
+        "time_spent": 3,
+        "timestamp": "06.15.27"
+      },
+      {
+        "question_id": "c4",
+        "question_category": "Coding Exercise",
+        "answer": "%",
+        "time_spent": 3,
+        "timestamp": "06.15.27"
+      },
+      {
+        "question_id": "c5",
+        "question_category": "Coding Exercise",
+        "answer": "while",
+        "time_spent": 3,
+        "timestamp": "06.15.27"
+      }
+    ],
+    "interpretation": "Mahasiswa menunjukkan keterlibatan belajar yang baik."
+  },
+  {
+    "id": "74dd8a37",
+    "nim": "123",
+    "name": "aseee",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 06:14",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 635,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 31.9,
+      "confused": 16.8,
+      "bored": 17.7,
+      "frustrated": 17.4
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "2d7b93bb",
+    "nim": "123123123",
+    "name": "Verell",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 04:43",
+    "score": 100,
+    "correct_answers": 5,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 5,
+    "problem_solving_total": 5,
+    "duration_seconds": 66,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 59,
+      "confused": 20.8,
+      "bored": 4.7,
+      "frustrated": 12.5,
+      "neutral": 3.1
+    },
+    "timeline": [],
+    "question_tracking": [
+      {
+        "question_id": "c1",
+        "question_category": "Coding Exercise",
+        "answer": "print",
+        "time_spent": 5,
+        "timestamp": "04.42.13"
+      },
+      {
+        "question_id": "c2",
+        "question_category": "Coding Exercise",
+        "answer": "if",
+        "time_spent": 49,
+        "timestamp": "04.42.57"
+      },
+      {
+        "question_id": "c3",
+        "question_category": "Coding Exercise",
+        "answer": "range",
+        "time_spent": 49,
+        "timestamp": "04.42.57"
+      },
+      {
+        "question_id": "c4",
+        "question_category": "Coding Exercise",
+        "answer": "%",
+        "time_spent": 49,
+        "timestamp": "04.42.57"
+      },
+      {
+        "question_id": "c5",
+        "question_category": "Coding Exercise",
+        "answer": "while",
+        "time_spent": 49,
+        "timestamp": "04.42.57"
+      }
+    ],
+    "interpretation": "Mahasiswa menunjukkan keterlibatan belajar yang baik."
+  },
+  {
+    "id": "60482c6a",
+    "nim": "123123123",
+    "name": "Verell",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 04:41",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 5,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 49.3,
+      "confused": 0,
+      "bored": 0,
+      "frustrated": 40.3,
+      "neutral": 10.4
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Terdapat peningkatan indikasi kesulitan selama proses pembelajaran."
+  },
+  {
+    "id": "a40c3753",
+    "nim": "123123123",
+    "name": "Verell",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 04:41",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 17,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 53.4,
+      "confused": 0,
+      "bored": 6.9,
+      "frustrated": 36.6,
+      "neutral": 3
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Terdapat peningkatan indikasi kesulitan selama proses pembelajaran."
+  },
+  {
+    "id": "5c508f07",
+    "nim": "123123123",
+    "name": "Verell",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 04:40",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 31,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 66.7,
+      "confused": 3.8,
+      "bored": 16.3,
+      "frustrated": 8.1,
+      "neutral": 5.1
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "3d55af62",
+    "nim": "123123123",
+    "name": "Verell",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 04:39",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 13,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 41.5,
+      "confused": 0,
+      "bored": 12.2,
+      "frustrated": 15.9,
+      "neutral": 30.5
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "82a49498",
+    "nim": "123123123",
+    "name": "Verell",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 04:38",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 7,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 57,
+      "confused": 0,
+      "bored": 0,
+      "frustrated": 35.5,
+      "neutral": 7.5
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Terdapat peningkatan indikasi kesulitan selama proses pembelajaran."
+  },
+  {
+    "id": "276840e4",
+    "nim": "123123123",
+    "name": "Verell",
+    "module_id": 3,
+    "module_title": "Computer Vision & Object Detection",
+    "completed_at": "03 Aug 2026, 04:29",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 9,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 66.3,
+      "confused": 0,
+      "bored": 0,
+      "frustrated": 17.4,
+      "neutral": 16.3
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "afded449",
+    "nim": "123123123",
+    "name": "Verell",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 04:29",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 8,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 90.8,
+      "confused": 0,
+      "bored": 0,
+      "frustrated": 0,
+      "neutral": 9.2
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "77a2eec1",
+    "nim": "123123123",
+    "name": "Verell",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 04:27",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 13,
+    "dominant_emotion": "engaged",
+    "emotion_distribution": {
+      "engaged": 84.5,
+      "confused": 0,
+      "bored": 10.1,
+      "frustrated": 0,
+      "neutral": 5.4
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil selama sesi pembelajaran."
+  },
+  {
+    "id": "f2c0c6ca",
+    "nim": "123123123",
+    "name": "Verell",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 04:27",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 166,
+    "dominant_emotion": "frustrated",
+    "emotion_distribution": {
+      "engaged": 45.9,
+      "confused": 0,
+      "bored": 6.1,
+      "frustrated": 46.8,
+      "neutral": 1.2
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Terdapat peningkatan indikasi kesulitan selama proses pembelajaran."
+  },
+  {
+    "id": "8e7f0f9c",
+    "nim": "123123123",
+    "name": "Verell",
+    "module_id": 3,
+    "module_title": "Computer Vision & Object Detection",
+    "completed_at": "03 Aug 2026, 04:22",
+    "score": 0,
+    "correct_answers": 0,
+    "total_questions": 10,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 0,
+    "problem_solving_total": 5,
+    "duration_seconds": 213,
+    "dominant_emotion": "frustrated",
+    "emotion_distribution": {
+      "engaged": 32.1,
+      "confused": 2.6,
+      "bored": 7.2,
+      "frustrated": 56.7,
+      "neutral": 1.4
+    },
+    "timeline": [],
+    "question_tracking": [],
+    "interpretation": "Terdapat peningkatan indikasi kesulitan selama proses pembelajaran."
+  },
+  {
+    "id": "2e23da25",
+    "nim": "123",
+    "name": "asdasd",
+    "module_id": 1,
+    "module_title": "Pengenalan Machine Learning",
+    "completed_at": "03 Aug 2026, 03:13",
+    "score": 100,
+    "correct_answers": 5,
+    "total_questions": 5,
+    "concept_correct": 0,
+    "concept_total": 5,
+    "problem_solving_correct": 5,
+    "problem_solving_total": 5,
+    "duration_seconds": 628,
+    "dominant_emotion": "neutral",
+    "emotion_distribution": {
+      "engaged": 32.7,
+      "confused": 1.3,
+      "bored": 8.5,
+      "frustrated": 10.2,
+      "neutral": 47.4
+    },
+    "timeline": [],
+    "question_tracking": [
+      {
+        "question_id": "c1",
+        "question_category": "Coding Exercise",
+        "answer": "print",
+        "time_spent": 3,
+        "timestamp": "03.12.06"
+      },
+      {
+        "question_id": "c2",
+        "question_category": "Coding Exercise",
+        "answer": "if",
+        "time_spent": 6,
+        "timestamp": "03.12.09"
+      },
+      {
+        "question_id": "c3",
+        "question_category": "Coding Exercise",
+        "answer": "range",
+        "time_spent": 13,
+        "timestamp": "03.12.15"
+      },
+      {
+        "question_id": "c4",
+        "question_category": "Coding Exercise",
+        "answer": "%",
+        "time_spent": 59,
+        "timestamp": "03.13.01"
+      },
+      {
+        "question_id": "c5",
+        "question_category": "Coding Exercise",
+        "answer": "while",
+        "time_spent": 63,
+        "timestamp": "03.13.06"
+      }
+    ],
+    "interpretation": "Mahasiswa menunjukkan indikasi emosi belajar yang relatif stabil dengan hasil pemahaman yang baik."
+  },
+  {
     "id": "ec9be163",
     "nim": "123",
     "name": "asdasd",
