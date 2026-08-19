@@ -1,0 +1,53 @@
+{
+  "train": {
+    "split": "train",
+    "image_count": 1319,
+    "label_file_count_total": 1358,
+    "orphan_images_count": 0,
+    "orphan_labels_count": 38,
+    "instance_count_in_valid_images": 1326,
+    "instance_count_per_class": {
+      "engaged": 394,
+      "confused": 309,
+      "bored": 298,
+      "frustrated": 325
+    },
+    "images_with_single_bbox": 1312,
+    "images_with_multi_bbox_count": 7,
+    "images_with_zero_bbox_count": 0
+  },
+  "val": {
+    "split": "val",
+    "image_count": 168,
+    "label_file_count_total": 168,
+    "orphan_images_count": 0,
+    "orphan_labels_count": 0,
+    "instance_count_in_valid_images": 168,
+    "instance_count_per_class": {
+      "engaged": 52,
+      "confused": 38,
+      "bored": 36,
+      "frustrated": 42
+    },
+    "images_with_single_bbox": 168,
+    "images_with_multi_bbox_count": 0,
+    "images_with_zero_bbox_count": 0
+  },
+  "test": {
+    "split": "test",
+    "image_count": 173,
+    "label_file_count_total": 173,
+    "orphan_images_count": 0,
+    "orphan_labels_count": 0,
+    "instance_count_in_valid_images": 173,
+    "instance_count_per_class": {
+      "engaged": 53,
+      "confused": 40,
+      "bored": 38,
+      "frustrated": 42
+    },
+    "images_with_single_bbox": 173,
+    "images_with_multi_bbox_count": 0,
+    "images_with_zero_bbox_count": 0
+  }
+}

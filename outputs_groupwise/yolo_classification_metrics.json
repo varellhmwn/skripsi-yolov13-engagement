@@ -1,0 +1,129 @@
+{
+  "model_name": "YOLOv13n Image-Level Classification (Group-Wise)",
+  "weights_path": "D:\\varell\\college\\tugas\\semester 7\\projek skripsi1\\skripsi_yolov13_engagement\\runs\\yolov13_master_groupwise_v1\\weights\\best.pt",
+  "total_images": 166,
+  "detected_images": 166,
+  "detection_failures": 0,
+  "detection_failure_rate": 0.0,
+  "end_to_end_accuracy": 0.6265060240963856,
+  "classification_metrics_detected_only": {
+    "accuracy": 0.6265060240963856,
+    "macro_precision": 0.6212418300653595,
+    "macro_recall": 0.6205496319195201,
+    "macro_f1": 0.6180341997872063,
+    "weighted_precision": 0.6284274352311205,
+    "weighted_recall": 0.6265060240963856,
+    "weighted_f1": 0.624616516586803,
+    "per_class": {
+      "engaged": {
+        "precision": 0.7333333333333333,
+        "recall": 0.673469387755102,
+        "f1": 0.7021276595744681,
+        "support": 49
+      },
+      "confused": {
+        "precision": 0.5555555555555556,
+        "recall": 0.5263157894736842,
+        "f1": 0.5405405405405406,
+        "support": 38
+      },
+      "bored": {
+        "precision": 0.5882352941176471,
+        "recall": 0.5263157894736842,
+        "f1": 0.5555555555555556,
+        "support": 38
+      },
+      "frustrated": {
+        "precision": 0.6078431372549019,
+        "recall": 0.7560975609756098,
+        "f1": 0.6739130434782609,
+        "support": 41
+      }
+    },
+    "confusion_matrix": [
+      [
+        33,
+        13,
+        1,
+        2
+      ],
+      [
+        8,
+        20,
+        5,
+        5
+      ],
+      [
+        3,
+        2,
+        20,
+        13
+      ],
+      [
+        1,
+        1,
+        8,
+        31
+      ]
+    ]
+  },
+  "accuracy": 0.6265060240963856,
+  "macro_precision": 0.6212418300653595,
+  "macro_recall": 0.6205496319195201,
+  "macro_f1": 0.6180341997872063,
+  "weighted_precision": 0.6284274352311205,
+  "weighted_recall": 0.6265060240963856,
+  "weighted_f1": 0.624616516586803,
+  "per_class": {
+    "engaged": {
+      "precision": 0.7333333333333333,
+      "recall": 0.673469387755102,
+      "f1": 0.7021276595744681,
+      "support": 49
+    },
+    "confused": {
+      "precision": 0.5555555555555556,
+      "recall": 0.5263157894736842,
+      "f1": 0.5405405405405406,
+      "support": 38
+    },
+    "bored": {
+      "precision": 0.5882352941176471,
+      "recall": 0.5263157894736842,
+      "f1": 0.5555555555555556,
+      "support": 38
+    },
+    "frustrated": {
+      "precision": 0.6078431372549019,
+      "recall": 0.7560975609756098,
+      "f1": 0.6739130434782609,
+      "support": 41
+    }
+  },
+  "confusion_matrix": [
+    [
+      33,
+      13,
+      1,
+      2
+    ],
+    [
+      8,
+      20,
+      5,
+      5
+    ],
+    [
+      3,
+      2,
+      20,
+      13
+    ],
+    [
+      1,
+      1,
+      8,
+      31
+    ]
+  ]
+}

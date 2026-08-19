@@ -1,0 +1,131 @@
+{
+  "model_name": "YOLO-based Face Crop + HOG-KNN Hybrid (Group-Wise)",
+  "weights_path": "D:\\varell\\college\\tugas\\semester 7\\projek skripsi1\\skripsi_yolov13_engagement\\runs\\yolov13_master_groupwise_v1\\weights\\best.pt",
+  "best_k": 1,
+  "knn_metric": "euclidean",
+  "total_images": 166,
+  "detected_images": 166,
+  "detection_failures": 0,
+  "detection_failure_rate": 0.0,
+  "end_to_end_accuracy": 0.3192771084337349,
+  "classification_metrics_detected_only": {
+    "accuracy": 0.3192771084337349,
+    "macro_precision": 0.31556300188946623,
+    "macro_recall": 0.30197008199942366,
+    "macro_f1": 0.2912464285311409,
+    "weighted_precision": 0.32182906164099,
+    "weighted_recall": 0.3192771084337349,
+    "weighted_f1": 0.3024434276613305,
+    "per_class": {
+      "engaged": {
+        "precision": 0.410958904109589,
+        "recall": 0.6122448979591837,
+        "f1": 0.4918032786885246,
+        "support": 49
+      },
+      "confused": {
+        "precision": 0.41379310344827586,
+        "recall": 0.3157894736842105,
+        "f1": 0.3582089552238806,
+        "support": 38
+      },
+      "bored": {
+        "precision": 0.125,
+        "recall": 0.15789473684210525,
+        "f1": 0.13953488372093023,
+        "support": 38
+      },
+      "frustrated": {
+        "precision": 0.3125,
+        "recall": 0.12195121951219512,
+        "f1": 0.17543859649122806,
+        "support": 41
+      }
+    },
+    "confusion_matrix": [
+      [
+        30,
+        7,
+        10,
+        2
+      ],
+      [
+        14,
+        12,
+        4,
+        8
+      ],
+      [
+        25,
+        6,
+        6,
+        1
+      ],
+      [
+        4,
+        4,
+        28,
+        5
+      ]
+    ]
+  },
+  "accuracy": 0.3192771084337349,
+  "macro_precision": 0.31556300188946623,
+  "macro_recall": 0.30197008199942366,
+  "macro_f1": 0.2912464285311409,
+  "weighted_precision": 0.32182906164099,
+  "weighted_recall": 0.3192771084337349,
+  "weighted_f1": 0.3024434276613305,
+  "per_class": {
+    "engaged": {
+      "precision": 0.410958904109589,
+      "recall": 0.6122448979591837,
+      "f1": 0.4918032786885246,
+      "support": 49
+    },
+    "confused": {
+      "precision": 0.41379310344827586,
+      "recall": 0.3157894736842105,
+      "f1": 0.3582089552238806,
+      "support": 38
+    },
+    "bored": {
+      "precision": 0.125,
+      "recall": 0.15789473684210525,
+      "f1": 0.13953488372093023,
+      "support": 38
+    },
+    "frustrated": {
+      "precision": 0.3125,
+      "recall": 0.12195121951219512,
+      "f1": 0.17543859649122806,
+      "support": 41
+    }
+  },
+  "confusion_matrix": [
+    [
+      30,
+      7,
+      10,
+      2
+    ],
+    [
+      14,
+      12,
+      4,
+      8
+    ],
+    [
+      25,
+      6,
+      6,
+      1
+    ],
+    [
+      4,
+      4,
+      28,
+      5
+    ]
+  ]
+}

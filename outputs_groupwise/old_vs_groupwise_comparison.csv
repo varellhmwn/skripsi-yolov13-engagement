@@ -1,0 +1,4 @@
+Model,Old Split Accuracy,New Group-Wise Accuracy,Old Split Macro F1,New Group-Wise Macro F1,Old Split mAP@0.5,New Group-Wise mAP@0.5,New Latency,New FPS
+YOLOv13n,98.84%,62.65%,98.80%,61.80%,99.42%,70.78%,25.35 ms,39.4 FPS
+HOG-KNN GT Crop,99.42%,25.90%,99.45%,25.35%,N/A,N/A,3.50 ms,285.4 FPS
+YOLO Crop + HOG-KNN,99.42%,31.93%,99.39%,29.12%,N/A,N/A,29.16 ms,34.3 FPS
