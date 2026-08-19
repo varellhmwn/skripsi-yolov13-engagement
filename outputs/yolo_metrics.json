@@ -1,0 +1,108 @@
+{
+  "model": "YOLOv13n",
+  "weights": "D:\\varell\\college\\tugas\\semester 7\\projek skripsi1\\skripsi_yolov13_engagement\\runs\\yolov13_master_combined_wtest_4_kelas\\weights\\best.pt",
+  "detection": {
+    "precision": 0.9937564809453416,
+    "recall": 0.9892337919524967,
+    "f1_detection": 0.9914899739058132,
+    "mAP_50": 0.9947619047619047,
+    "mAP_75": 0.9947619047619047,
+    "mAP_50_95": 0.9807587065140974
+  },
+  "per_class_detection": {
+    "engaged": {
+      "precision": 0.9944166302142701,
+      "recall": 1.0,
+      "ap50": 0.995,
+      "ap50_95": 0.983291772846734
+    },
+    "confused": {
+      "precision": 1.0,
+      "recall": 0.9569351678099867,
+      "ap50": 0.994047619047619,
+      "ap50_95": 0.9851960097242449
+    },
+    "bored": {
+      "precision": 0.9810996801528044,
+      "recall": 1.0,
+      "ap50": 0.995,
+      "ap50_95": 0.9832346446999853
+    },
+    "frustrated": {
+      "precision": 0.9995096134142918,
+      "recall": 1.0,
+      "ap50": 0.995,
+      "ap50_95": 0.9713123987854251
+    }
+  },
+  "classification": {
+    "accuracy": 0.9884393063583815,
+    "macro_precision": 0.9875,
+    "macro_recall": 0.9875,
+    "macro_f1": 0.9871794871794872,
+    "weighted_precision": 0.9890173410404623,
+    "weighted_recall": 0.9884393063583815,
+    "weighted_f1": 0.9884393063583815,
+    "per_class": {
+      "engaged": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 53
+      },
+      "confused": {
+        "precision": 1.0,
+        "recall": 0.95,
+        "f1": 0.9743589743589743,
+        "support": 40
+      },
+      "bored": {
+        "precision": 0.95,
+        "recall": 1.0,
+        "f1": 0.9743589743589743,
+        "support": 38
+      },
+      "frustrated": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 42
+      }
+    },
+    "confusion_matrix": [
+      [
+        53,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        38,
+        2,
+        0
+      ],
+      [
+        0,
+        0,
+        38,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        42
+      ]
+    ]
+  },
+  "timing": {
+    "mean_inference_ms": 22.84588381638643,
+    "median_inference_ms": 22.063200012780726,
+    "total_inference_sec": 3.952337900234852,
+    "estimated_fps": 43.77156112834385,
+    "num_images": 173,
+    "num_detected": 173,
+    "num_detection_failed": 0
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "accuracy": 0.9942196531791907,
+  "macro_precision": 0.9953703703703703,
+  "macro_recall": 0.99375,
+  "macro_f1": 0.9944989944398439,
+  "weighted_precision": 0.9943266966388354,
+  "weighted_recall": 0.9942196531791907,
+  "weighted_f1": 0.9942100796720937,
+  "per_class": {
+    "engaged": {
+      "precision": 0.9814814814814815,
+      "recall": 1.0,
+      "f1": 0.9906542056074766,
+      "support": 53
+    },
+    "confused": {
+      "precision": 1.0,
+      "recall": 0.975,
+      "f1": 0.9873417721518988,
+      "support": 40
+    },
+    "bored": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 38
+    },
+    "frustrated": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 42
+    }
+  },
+  "confusion_matrix": [
+    [
+      53,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      39,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      38,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      42
+    ]
+  ],
+  "timing": {
+    "knn_predict_total_sec": 0.013847399968653917,
+    "knn_predict_per_img_ms": 0.08004277438528276,
+    "full_pipeline_mean_ms": 9.807569364077718,
+    "full_pipeline_median_ms": 9.795199963264167,
+    "full_pipeline_total_sec": 1.6967094999854453,
+    "train_time_sec": 0.00470549997407943,
+    "num_test_samples": 173
+  },
+  "config": {
+    "k": 1,
+    "metric": "euclidean",
+    "hog_img_size": [
+      64,
+      64
+    ],
+    "hog_orientations": 9,
+    "hog_pixels_per_cell": [
+      8,
+      8
+    ],
+    "hog_cells_per_block": [
+      2,
+      2
+    ],
+    "hog_block_norm": "L2-Hys"
+  }
+}

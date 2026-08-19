@@ -1,0 +1,83 @@
+{
+  "model": "YOLO-HOG-KNN Hybrid",
+  "weights": "D:\\varell\\college\\tugas\\semester 7\\projek skripsi1\\skripsi_yolov13_engagement\\runs\\yolov13_master_combined_wtest_4_kelas\\weights\\best.pt",
+  "best_k": 1,
+  "classification": {
+    "accuracy": 0.9884393063583815,
+    "macro_precision": 0.990909090909091,
+    "macro_recall": 0.9875,
+    "macro_f1": 0.988960113960114,
+    "weighted_precision": 0.9888596952180767,
+    "weighted_recall": 0.9884393063583815,
+    "weighted_f1": 0.9883981357969797,
+    "per_class": {
+      "engaged": {
+        "precision": 0.9636363636363636,
+        "recall": 1.0,
+        "f1": 0.9814814814814815,
+        "support": 53
+      },
+      "confused": {
+        "precision": 1.0,
+        "recall": 0.95,
+        "f1": 0.9743589743589743,
+        "support": 40
+      },
+      "bored": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 38
+      },
+      "frustrated": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 42
+      }
+    },
+    "confusion_matrix": [
+      [
+        53,
+        0,
+        0,
+        0
+      ],
+      [
+        2,
+        38,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        38,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        42
+      ]
+    ]
+  },
+  "end_to_end": {
+    "total_images": 173,
+    "detected": 173,
+    "detection_failed": 0,
+    "end_to_end_accuracy": 0.9884393063583815,
+    "end_to_end_correct": 171
+  },
+  "timing": {
+    "yolo_detection_mean_ms": 26.157409248461764,
+    "yolo_detection_median_ms": 24.739200016483665,
+    "crop_hog_preprocess_mean_ms": 1.0679063560155817,
+    "knn_predict_mean_ms": 18.108048555683453,
+    "full_pipeline_mean_ms": 45.467328322604516,
+    "full_pipeline_median_ms": 43.94559998763725,
+    "full_pipeline_total_sec": 7.865847799810581,
+    "estimated_fps": 21.993814831271724
+  }
+}
