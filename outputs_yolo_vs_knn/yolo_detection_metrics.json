@@ -1,0 +1,18 @@
+{
+  "model_name": "YOLOv13n Native Object Detection",
+  "weights_path": "D:\\varell\\college\\tugas\\semester 7\\projek skripsi1\\skripsi_yolov13_engagement\\runs\\yolov13_master_combined_v2\\weights\\best.pt",
+  "dataset_yaml": "D:\\varell\\college\\tugas\\semester 7\\projek skripsi1\\skripsi_yolov13_engagement\\datasets\\master_combined_dataset\\data.yaml",
+  "test_images_count": 173,
+  "precision": 0.9943106714337211,
+  "recall": 0.9823495961123625,
+  "f1_detection": 0.9882939396199364,
+  "mAP_50": 0.9941666666666666,
+  "mAP_75": 0.9941666666666666,
+  "mAP_50_95": 0.9815272785883966,
+  "native_speed_ms": {
+    "preprocess": 0.18707865235433413,
+    "inference": 4.393734683880227,
+    "loss": 0.005825406554117368,
+    "postprocess": 1.092389828896936
+  }
+}

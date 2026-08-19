@@ -1,0 +1,64 @@
+{
+  "accuracy": 0.9884393063583815,
+  "macro_precision": 0.988960113960114,
+  "macro_recall": 0.9875,
+  "macro_f1": 0.9880065417448595,
+  "weighted_precision": 0.9886945638390724,
+  "weighted_recall": 0.9884393063583815,
+  "weighted_f1": 0.9883556380234032,
+  "per_class": {
+    "engaged": {
+      "precision": 0.9814814814814815,
+      "recall": 1.0,
+      "f1": 0.9906542056074766,
+      "support": 53
+    },
+    "confused": {
+      "precision": 1.0,
+      "recall": 0.95,
+      "f1": 0.9743589743589743,
+      "support": 40
+    },
+    "bored": {
+      "precision": 0.9743589743589743,
+      "recall": 1.0,
+      "f1": 0.987012987012987,
+      "support": 38
+    },
+    "frustrated": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 42
+    }
+  },
+  "confusion_matrix": [
+    [
+      53,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      38,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      38,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      42
+    ]
+  ],
+  "total_images": 173,
+  "correct_predictions_count": 171,
+  "detection_failures": 0
+}

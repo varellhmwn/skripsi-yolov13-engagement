@@ -1,0 +1,65 @@
+{
+  "accuracy": 0.930635838150289,
+  "macro_precision": 0.9355805446907142,
+  "macro_recall": 0.9258302005012531,
+  "macro_f1": 0.9290315962465086,
+  "weighted_precision": 0.933075926609776,
+  "weighted_recall": 0.930635838150289,
+  "weighted_f1": 0.9300905055012142,
+  "per_class": {
+    "engaged": {
+      "precision": 0.8983050847457628,
+      "recall": 1.0,
+      "f1": 0.9464285714285714,
+      "support": 53
+    },
+    "confused": {
+      "precision": 0.9722222222222222,
+      "recall": 0.875,
+      "f1": 0.9210526315789473,
+      "support": 40
+    },
+    "bored": {
+      "precision": 0.9230769230769231,
+      "recall": 0.9473684210526315,
+      "f1": 0.935064935064935,
+      "support": 38
+    },
+    "frustrated": {
+      "precision": 0.9487179487179487,
+      "recall": 0.8809523809523809,
+      "f1": 0.9135802469135802,
+      "support": 42
+    }
+  },
+  "confusion_matrix": [
+    [
+      53,
+      0,
+      0,
+      0
+    ],
+    [
+      3,
+      35,
+      1,
+      1
+    ],
+    [
+      0,
+      1,
+      36,
+      1
+    ],
+    [
+      3,
+      0,
+      2,
+      37
+    ]
+  ],
+  "k": 5,
+  "metric": "euclidean",
+  "total_images": 173,
+  "correct_predictions_count": 161
+}
