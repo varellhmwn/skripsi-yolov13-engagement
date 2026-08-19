@@ -1,0 +1,16 @@
+subject_identifier,source_type,train_count,val_count,test_count,total_count,splits_present,potential_subject_leakage,classes
+engaged_indexed,indexed_frame,201,31,36,268,"train, val, test",True,"bored, confused, engaged"
+frustrated_indexed,indexed_frame,133,19,18,170,"train, val, test",True,"engaged, frustrated"
+confused_indexed,indexed_frame,118,9,13,140,"train, val, test",True,confused
+bored_indexed,indexed_frame,107,10,12,129,"train, val, test",True,"bored, engaged"
+ardiansyah_26,bigdata_recorded,77,11,8,96,"train, val, test",True,"bored, confused, engaged, frustrated"
+nabielrafi_73,bigdata_recorded,76,12,8,96,"train, val, test",True,"bored, confused, engaged, frustrated"
+nian_74,bigdata_recorded,72,10,14,96,"train, val, test",True,"bored, confused, engaged, frustrated"
+arya_31,bigdata_recorded,75,9,11,95,"train, val, test",True,"bored, confused, engaged, frustrated"
+sultanbudi_44,bigdata_recorded,76,10,9,95,"train, val, test",True,"bored, confused, engaged, frustrated"
+ansyah_08,bigdata_recorded,70,19,5,94,"train, val, test",True,"bored, confused, engaged, frustrated"
+iann_62,bigdata_recorded,79,4,10,93,"train, val, test",True,"bored, confused, engaged, frustrated"
+rahyan_94,bigdata_recorded,78,7,6,91,"train, val, test",True,"bored, confused, engaged, frustrated"
+maguru_36,bigdata_recorded,69,10,10,89,"train, val, test",True,"bored, confused, engaged, frustrated"
+aksan_50,bigdata_recorded,67,6,11,84,"train, val, test",True,"bored, confused, engaged, frustrated"
+muhdaryadn_00,bigdata_recorded,21,1,2,24,"train, val, test",True,confused

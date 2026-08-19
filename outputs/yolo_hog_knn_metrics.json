@@ -1,26 +1,32 @@
 {
-  "model": "YOLO-HOG-KNN Hybrid",
-  "weights": "D:\\varell\\college\\tugas\\semester 7\\projek skripsi1\\skripsi_yolov13_engagement\\runs\\yolov13_master_combined_wtest_4_kelas\\weights\\best.pt",
+  "model_name": "YOLO-based Face Crop + HOG-KNN Hybrid",
+  "weights_path": "D:\\varell\\college\\tugas\\semester 7\\projek skripsi1\\skripsi_yolov13_engagement\\runs\\yolov13_master_combined_v2\\weights\\best.pt",
   "best_k": 1,
-  "classification": {
-    "accuracy": 0.9884393063583815,
-    "macro_precision": 0.990909090909091,
-    "macro_recall": 0.9875,
-    "macro_f1": 0.988960113960114,
-    "weighted_precision": 0.9888596952180767,
-    "weighted_recall": 0.9884393063583815,
-    "weighted_f1": 0.9883981357969797,
+  "knn_metric": "euclidean",
+  "total_images": 173,
+  "detected_images": 173,
+  "detection_failures": 0,
+  "detection_failure_rate": 0.0,
+  "end_to_end_accuracy": 0.9942196531791907,
+  "classification_metrics_detected_only": {
+    "accuracy": 0.9942196531791907,
+    "macro_precision": 0.9941860465116279,
+    "macro_recall": 0.99375,
+    "macro_f1": 0.9938942665673864,
+    "weighted_precision": 0.9943540798494421,
+    "weighted_recall": 0.9942196531791907,
+    "weighted_f1": 0.9942170707457638,
     "per_class": {
       "engaged": {
-        "precision": 0.9636363636363636,
+        "precision": 1.0,
         "recall": 1.0,
-        "f1": 0.9814814814814815,
+        "f1": 1.0,
         "support": 53
       },
       "confused": {
         "precision": 1.0,
-        "recall": 0.95,
-        "f1": 0.9743589743589743,
+        "recall": 0.975,
+        "f1": 0.9873417721518988,
         "support": 40
       },
       "bored": {
@@ -30,9 +36,9 @@
         "support": 38
       },
       "frustrated": {
-        "precision": 1.0,
+        "precision": 0.9767441860465116,
         "recall": 1.0,
-        "f1": 1.0,
+        "f1": 0.9882352941176471,
         "support": 42
       }
     },
@@ -44,10 +50,10 @@
         0
       ],
       [
-        2,
-        38,
         0,
-        0
+        39,
+        0,
+        1
       ],
       [
         0,
@@ -63,21 +69,63 @@
       ]
     ]
   },
-  "end_to_end": {
-    "total_images": 173,
-    "detected": 173,
-    "detection_failed": 0,
-    "end_to_end_accuracy": 0.9884393063583815,
-    "end_to_end_correct": 171
+  "accuracy": 0.9942196531791907,
+  "macro_precision": 0.9941860465116279,
+  "macro_recall": 0.99375,
+  "macro_f1": 0.9938942665673864,
+  "weighted_precision": 0.9943540798494421,
+  "weighted_recall": 0.9942196531791907,
+  "weighted_f1": 0.9942170707457638,
+  "per_class": {
+    "engaged": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 53
+    },
+    "confused": {
+      "precision": 1.0,
+      "recall": 0.975,
+      "f1": 0.9873417721518988,
+      "support": 40
+    },
+    "bored": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 38
+    },
+    "frustrated": {
+      "precision": 0.9767441860465116,
+      "recall": 1.0,
+      "f1": 0.9882352941176471,
+      "support": 42
+    }
   },
-  "timing": {
-    "yolo_detection_mean_ms": 26.157409248461764,
-    "yolo_detection_median_ms": 24.739200016483665,
-    "crop_hog_preprocess_mean_ms": 1.0679063560155817,
-    "knn_predict_mean_ms": 18.108048555683453,
-    "full_pipeline_mean_ms": 45.467328322604516,
-    "full_pipeline_median_ms": 43.94559998763725,
-    "full_pipeline_total_sec": 7.865847799810581,
-    "estimated_fps": 21.993814831271724
-  }
+  "confusion_matrix": [
+    [
+      53,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      39,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      38,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      42
+    ]
+  ]
 }

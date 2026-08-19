@@ -1,0 +1,93 @@
+{
+  "train": {
+    "split": "train",
+    "image_count": 1319,
+    "label_file_count_total": 1358,
+    "label_file_count_matched": 1319,
+    "orphan_images_count": 0,
+    "orphan_labels_count": 38,
+    "non_yolo_label_files": [
+      "labels.txt"
+    ],
+    "instance_count_in_valid_images": 1326,
+    "instance_count_per_class": {
+      "engaged": 394,
+      "confused": 309,
+      "bored": 298,
+      "frustrated": 325
+    },
+    "images_with_single_bbox": 1312,
+    "images_with_multi_bbox_count": 7,
+    "images_with_zero_bbox_count": 0,
+    "multi_bbox_details": [
+      {
+        "filename": "bigdata_bored_engaged_aksan_50_1773299657014_007_jpg.rf.21630569bfb63155b70f6a88e4e0ca38.jpg",
+        "bbox_count": 2
+      },
+      {
+        "filename": "bigdata_bored_engaged_arya_31_1773299395953_019_jpg.rf.dbdb29aab32dfc82f670b0b220952aa9.jpg",
+        "bbox_count": 2
+      },
+      {
+        "filename": "bigdata_bored_engaged_rahyan_94_1773299523712_013_jpg.rf.d1aeffbc2399fc8e3406787107b300eb.jpg",
+        "bbox_count": 2
+      },
+      {
+        "filename": "bigdata_bored_engaged_rahyan_94_1773299524602_016_jpg.rf.a242594b2804080bfdcb6015a0895cb2.jpg",
+        "bbox_count": 2
+      },
+      {
+        "filename": "bigdata_confused_engaged_nabielrafi_73_1773300490373_023_jpg.rf.d6b185a7a4a1d21bed1a6e850379bdb5.jpg",
+        "bbox_count": 2
+      },
+      {
+        "filename": "bigdata_engaged_sultanbudi_44_1773299407671_009_jpg.rf.d55346ffeb99536f89b088da406b8259.jpg",
+        "bbox_count": 2
+      },
+      {
+        "filename": "bigdata_engaged_sultanbudi_44_1773299408147_010_jpg.rf.39a3187951b9f74094472f6b0a65c3c8.jpg",
+        "bbox_count": 2
+      }
+    ]
+  },
+  "val": {
+    "split": "val",
+    "image_count": 168,
+    "label_file_count_total": 168,
+    "label_file_count_matched": 168,
+    "orphan_images_count": 0,
+    "orphan_labels_count": 0,
+    "non_yolo_label_files": [],
+    "instance_count_in_valid_images": 168,
+    "instance_count_per_class": {
+      "engaged": 52,
+      "confused": 38,
+      "bored": 36,
+      "frustrated": 42
+    },
+    "images_with_single_bbox": 168,
+    "images_with_multi_bbox_count": 0,
+    "images_with_zero_bbox_count": 0,
+    "multi_bbox_details": []
+  },
+  "test": {
+    "split": "test",
+    "image_count": 173,
+    "label_file_count_total": 173,
+    "label_file_count_matched": 173,
+    "orphan_images_count": 0,
+    "orphan_labels_count": 0,
+    "non_yolo_label_files": [],
+    "instance_count_in_valid_images": 173,
+    "instance_count_per_class": {
+      "engaged": 53,
+      "confused": 40,
+      "bored": 38,
+      "frustrated": 42
+    },
+    "images_with_single_bbox": 173,
+    "images_with_multi_bbox_count": 0,
+    "images_with_zero_bbox_count": 0,
+    "multi_bbox_details": []
+  }
+}

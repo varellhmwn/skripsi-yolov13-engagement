@@ -1,0 +1,38 @@
+{
+  "model_name": "YOLOv13n",
+  "weights_path": "D:\\varell\\college\\tugas\\semester 7\\projek skripsi1\\skripsi_yolov13_engagement\\runs\\yolov13_master_combined_v2\\weights\\best.pt",
+  "precision": 0.9943106714337211,
+  "recall": 0.9823495961123625,
+  "f1_detection": 0.9882939396199364,
+  "mAP_50": 0.9941666666666666,
+  "mAP_75": 0.9941666666666666,
+  "mAP_50_95": 0.9815272785883966,
+  "per_class": {
+    "engaged": {
+      "precision": 0.9799498873429208,
+      "recall": 1.0,
+      "ap50": 0.995
+    },
+    "confused": {
+      "precision": 1.0,
+      "recall": 0.9516658283667033,
+      "ap50": 0.9916666666666666
+    },
+    "bored": {
+      "precision": 0.9972927983919633,
+      "recall": 1.0,
+      "ap50": 0.995
+    },
+    "frustrated": {
+      "precision": 1.0,
+      "recall": 0.9777325560827466,
+      "ap50": 0.995
+    }
+  },
+  "native_speed_ms": {
+    "preprocess": 0.16913248624415755,
+    "inference": 4.337776603037223,
+    "loss": 0.0,
+    "postprocess": 0.885379107701296
+  }
+}

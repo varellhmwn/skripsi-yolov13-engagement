@@ -58,31 +58,7 @@
       42
     ]
   ],
-  "timing": {
-    "knn_predict_total_sec": 0.013847399968653917,
-    "knn_predict_per_img_ms": 0.08004277438528276,
-    "full_pipeline_mean_ms": 9.807569364077718,
-    "full_pipeline_median_ms": 9.795199963264167,
-    "full_pipeline_total_sec": 1.6967094999854453,
-    "train_time_sec": 0.00470549997407943,
-    "num_test_samples": 173
-  },
-  "config": {
-    "k": 1,
-    "metric": "euclidean",
-    "hog_img_size": [
-      64,
-      64
-    ],
-    "hog_orientations": 9,
-    "hog_pixels_per_cell": [
-      8,
-      8
-    ],
-    "hog_cells_per_block": [
-      2,
-      2
-    ],
-    "hog_block_norm": "L2-Hys"
-  }
+  "best_k": 1,
+  "metric": "euclidean",
+  "total_test_samples": 173
 }
