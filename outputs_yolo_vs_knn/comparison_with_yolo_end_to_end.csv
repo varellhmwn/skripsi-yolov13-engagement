@@ -1,0 +1,4 @@
+Model Pendekatan,Input,Face Detector,Emotion Classifier,Accuracy,Macro Precision,Macro Recall,Macro F1,Weighted F1,Total Latency (ms),Throughput (FPS)
+YOLOv13n End-to-End,Citra Utuh,YOLOv13n (Internal),YOLOv13n Head,98.84%,98.90%,98.75%,98.80%,98.84%,23.10 ms,43.3 FPS
+YOLO Detector + HOG-KNN (Revisi),Citra Utuh,YOLOv13n (Bounding Box),HOG-KNN (K=5),93.64%,93.72%,93.18%,93.37%,93.58%,40.02 ms,25.0 FPS
+Ground Truth Crop + HOG-KNN,Crop Wajah GT,Ground Truth BBox,HOG-KNN (K=5),93.06%,93.56%,92.58%,92.90%,93.01%,19.14 ms,52.2 FPS
