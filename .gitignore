@@ -51,3 +51,9 @@ pipeline_retrain_from_scratch/datasets_processed/
 *.swo
 *~
 .DS_Store
+*.cache
+*.tmp
+~*
+dedup_audit_dry_run/
+subject_wise_split_dry_run/
+scratch/
