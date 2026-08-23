@@ -1,0 +1,12 @@
+path: .
+train: images/train
+val: images/val
+test: images/test
+
+nc: 4
+
+names:
+  0: engaged
+  1: confused
+  2: bored
+  3: frustrated

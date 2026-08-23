@@ -1,0 +1,4 @@
+subset,total,engaged,confused,bored,frustrated,engaged_pct,confused_pct,bored_pct,frustrated_pct
+train,1311,376,310,288,337,28.68%,23.65%,21.97%,25.71%
+val,158,45,37,41,35,28.48%,23.42%,25.95%,22.15%
+test,156,41,39,39,37,26.28%,25.00%,25.00%,23.72%

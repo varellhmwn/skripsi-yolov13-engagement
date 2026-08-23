@@ -1,0 +1,45 @@
+{
+  "target_ratios": {
+    "train": 0.8,
+    "val": 0.1,
+    "test": 0.1
+  },
+  "subject_wise": true,
+  "sha256_dedup_check": true,
+  "chosen_candidate_id": 1,
+  "chosen_candidate_score": 0.04470473070343776,
+  "split_counts": {
+    "train": 1311,
+    "val": 158,
+    "test": 156
+  },
+  "split_subjects": {
+    "train": [
+      "P01",
+      "P02",
+      "P05",
+      "P06",
+      "P07",
+      "P08",
+      "P09",
+      "P10",
+      "P11",
+      "S01",
+      "S02"
+    ],
+    "val": [
+      "P03",
+      "S03",
+      "S06",
+      "S07",
+      "S10"
+    ],
+    "test": [
+      "P04",
+      "S04",
+      "S05",
+      "S08",
+      "S09"
+    ]
+  }
+}
