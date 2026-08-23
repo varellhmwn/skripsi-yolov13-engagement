@@ -1,0 +1,78 @@
+==========================================================================
+  LAPORAN AUDIT EXACT BINARY DEDUPLICATION (SHA-256) HARD SAMPLES
+==========================================================================
+Status Eksekusi                 : EKSEKUSI FISIK BERHASIL
+Input Directory                 : D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\hard_samples_subject_renamed
+Output Directory                : D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\hard_samples_subject_deduplicated
+
+--- 1. DATASET AWAL (SEBELUM DEDUPLIKASI) ---
+  Total Images                  : 707 citra
+  Total Labels                  : 707 label .txt
+  Total Subjects                : 10 subjek
+  Total Unique SHA-256 Hashes   : 672
+
+  Distribusi per Subjek (Awal):
+    - S01   :  421 citra
+    - S02   :  163 citra
+    - S03   :   33 citra
+    - S04   :   14 citra
+    - S05   :   12 citra
+    - S06   :   13 citra
+    - S07   :    8 citra
+    - S08   :    7 citra
+    - S09   :   28 citra
+    - S10   :    8 citra
+
+  Distribusi per Kelas (Awal):
+    - engaged     :  268 citra (37.91%)
+    - confused    :  141 citra (19.94%)
+    - bored       :  129 citra (18.25%)
+    - frustrated  :  169 citra (23.90%)
+
+--- 2. DUPLICATE AUDIT ---
+  Total Exact Duplicate Groups  : 35 grup
+  Images in Duplicate Groups    : 70 citra
+  Redundant Copies Excluded     : 35 citra
+  Duplicate Conflict Groups     : 0 grup
+
+--- 3. DATASET HASIL DEDUPLIKASI (BERSIH) ---
+  Total Images Retained         : 672 citra
+  Total Labels Retained         : 672 label .txt
+  Total Unique SHA-256 Hashes   : 672
+  Orphan Images / Labels        : 0
+  Invalid Labels                : 0
+
+  Distribusi per Subjek (Setelah Deduplikasi):
+    - S01   :  389 citra (berkurang 32 duplikat)
+    - S02   :  160 citra (berkurang 3 duplikat)
+    - S03   :   33 citra (berkurang 0 duplikat)
+    - S04   :   14 citra (berkurang 0 duplikat)
+    - S05   :   12 citra (berkurang 0 duplikat)
+    - S06   :   13 citra (berkurang 0 duplikat)
+    - S07   :    8 citra (berkurang 0 duplikat)
+    - S08   :    7 citra (berkurang 0 duplikat)
+    - S09   :   28 citra (berkurang 0 duplikat)
+    - S10   :    8 citra (berkurang 0 duplikat)
+
+  Distribusi per Kelas (Setelah Deduplikasi):
+    - engaged     :  233 citra (34.67%, berkurang 35 duplikat)
+    - confused    :  141 citra (20.98%, berkurang 0 duplikat)
+    - bored       :  129 citra (19.20%, berkurang 0 duplikat)
+    - frustrated  :  169 citra (25.15%, berkurang 0 duplikat)
+
+--- 4. TABEL PERBANDINGAN SEBELUM & SESUDAH DEDUPLIKASI ---
+  Metric                           | Before     | After      | Perubahan 
+  ---------------------------------+------------+------------+-----------
+  Total Images                     | 707        | 672        | -35       
+  Total Labels                     | 707        | 672        | -35       
+  Unique SHA-256 Hashes            | 672        | 672        | 0
+  Exact Duplicate Groups           | 35         | 0          | -35       
+  Redundant Duplicates             | 35         | 0          | -35       
+  engaged                          | 268        | 233        | -35       
+  frustrated                       | 169        | 169        | -0        
+  confused                         | 141        | 141        | -0        
+  bored                            | 129        | 129        | -0        
+  Orphan Images                    | 0          | 0          | 0
+  Orphan Labels                    | 0          | 0          | 0
+  Invalid Labels                   | 0          | 0          | 0
+==========================================================================
