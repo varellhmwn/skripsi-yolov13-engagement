@@ -1,0 +1,8 @@
+metric,legacy_random_split,subjectwise_split
+precision,0.994,0.57009
+recall,0.982,0.59456
+f1,0.988,0.58207
+map50,0.994,0.6185
+map75,0.988,0.52194
+map50_95,0.982,0.51137
+inference_ms,6.2,6.39

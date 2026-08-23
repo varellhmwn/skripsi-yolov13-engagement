@@ -1,0 +1,8 @@
+metric,value
+total_frames,4748
+duration_seconds,160.47
+mean_fps,31.53
+mean_fps_after_warmup,31.53
+median_fps,34.22
+p5_fps,19.87
+p95_fps,38.30

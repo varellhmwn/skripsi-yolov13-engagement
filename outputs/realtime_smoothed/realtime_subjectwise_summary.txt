@@ -1,0 +1,52 @@
+==================================================
+REAL-TIME EVALUATION — FINAL SUBJECT-WISE MODEL
+==================================================
+
+Model:
+D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\runs\train\yolov13_subject_wise_v1\weights\best.pt
+
+Post-processing configuration:
+Initial confidence: 0.20
+Minimum face area: 0.02 (2% of frame)
+Sliding window: 30 frames
+Minimum predictions: 8 frames
+Vote ratio: 0.40
+Average confidence: 0.40
+
+Evaluation source:
+new real-time evaluation session using final subject-wise model
+
+Duration: 160.47 seconds
+Total frames: 4748
+
+RAW PREDICTION
+Label changes: 361
+Segments: 362
+Segments < 8 frames: 258 (71.27%)
+Median segment length: 3.0 frames
+Median segment duration: 0.09 seconds
+
+POST-PROCESSING
+Label changes: 58
+Segments: 59
+Segments < 8 frames: 17 (28.81%)
+Median segment length: 22.0 frames
+Median segment duration: 0.71 seconds
+Neutral frames: 57
+Neutral percentage: 1.20%
+
+CHANGE
+Label-change reduction: 83.93%
+Short-segment reduction: 93.41%
+
+SPEED
+Average FPS: 31.53 (after warmup: 31.53)
+Median FPS: 34.22
+P5: 19.87
+P95: 38.30
+
+IMPORTANT:
+Post-processing results describe temporal stability.
+They do NOT represent improvements in precision, recall,
+F1-score, or mAP of the base detector.
+==================================================

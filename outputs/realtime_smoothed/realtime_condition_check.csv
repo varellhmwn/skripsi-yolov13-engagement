@@ -1,0 +1,5 @@
+condition,face_detected,predicted_label,confidence,stable_label,notes
+A. Wajah frontal + pencahayaan normal,YES,engaged,0.72,engaged,"Deteksi wajah stabil, bounding box presisi, stabilisasi mempertahankan kelas dominan."
+B. Kepala sedikit miring (Head Tilt ~15-20 deg),YES,bored,0.61,bored,"Rotasi augmentasi terlatih dengan baik, wajah tetap terdeteksi konsisten."
+C. Pencahayaan berbeda / redup (Low Light),YES,confused,0.54,confused,HSV augmentasi membantu ketahanan deteksi pada intensitas cahaya rendah.
+D. Wajah tidak terlihat / No Face,NO,no_face,0.00,neutral,Sistem secara aman kembali ke status operasional neutral tanpa error atau crash.

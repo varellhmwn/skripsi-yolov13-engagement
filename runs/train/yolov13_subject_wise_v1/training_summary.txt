@@ -1,0 +1,53 @@
+==================================================
+YOLOv13n SUBJECT-WISE FULL TRAINING SUMMARY
+==================================================
+Starting weights: yolov13n.pt
+Dataset: D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\subject_wise_dataset\data.yaml
+Run name: yolov13_subject_wise_v1
+
+Train images: 1311
+Validation images: 158
+Held-out test images: 156
+
+Train subjects: P01, P02, P05, P06, P07, P08, P09, P10, P11, S01, S02
+Validation subjects: P03, S03, S06, S07, S10
+Held-out test subjects: P04, S04, S05, S08, S09
+
+Subject leakage: 0 (ZERO LEAKAGE)
+Hash leakage: 0 (ZERO LEAKAGE)
+
+GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+PyTorch: 2.5.1+cu121
+CUDA: 12.1
+YOLO version: 8.3.63
+
+Requested epochs: 150
+Actual completed epochs: 50
+Early stopping: True (Patience: 25)
+Patience: 25
+
+Best epoch: 25
+Best fitness: 0.57657
+
+Validation metrics at best epoch:
+  Precision: 0.57886
+  Recall: 0.68911
+  mAP@0.5: 0.67023
+  mAP@0.5:0.95: 0.56616
+
+Training losses at best epoch:
+  box: 0.53466
+  cls: 0.61481
+  dfl: 0.99755
+
+Validation losses at best epoch:
+  box: 0.75620
+  cls: 1.45037
+  dfl: 1.22798
+
+best.pt: runs\train\yolov13_subject_wise_v1\weights\best.pt
+last.pt: runs\train\yolov13_subject_wise_v1\weights\last.pt
+
+TEST EVALUATION:
+NOT RUN / HELD OUT
+==================================================

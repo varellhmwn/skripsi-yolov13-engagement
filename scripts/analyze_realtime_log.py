@@ -57,6 +57,16 @@ def load_and_validate_data(csv_path: str) -> pd.DataFrame:
     print(f"[INFO] File dimuat: {csv_path}")
     print(f"[INFO] Ukuran awal: {len(df)} baris x {len(df.columns)} kolom")
 
+    # Mapping aliases
+    rename_map = {
+        'frame_id': 'frame_index',
+        'timestamp': 'timestamp_sec',
+        'raw_label': 'raw_class_name'
+    }
+    for old_c, new_c in rename_map.items():
+        if old_c in df.columns and new_c not in df.columns:
+            df.rename(columns={old_c: new_c}, inplace=True)
+
     # Validasi kolom
     missing = [c for c in REQUIRED_COLS if c not in df.columns]
     if missing:

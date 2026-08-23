@@ -1,0 +1,28 @@
+==================================================
+MODEL INTEGRATION CHANGE LOG
+==================================================
+
+Old application model:
+runs/yolov13_master_combined_v3/weights/best.pt
+
+New application model:
+runs/train/yolov13_subject_wise_v1/weights/best.pt
+
+Date of change:
+2026-08-24
+
+Application logic changed:
+NO
+
+Post-processing parameters changed:
+NO (Initial conf=0.20, Min face area=0.02, Window size=30, Min predictions=8, Vote ratio=0.40, Min avg conf=0.40, Neutral status=neutral)
+
+Target classes:
+0 = engaged
+1 = confused
+2 = bored
+3 = frustrated
+
+Verification:
+Model loaded successfully and verified with GPU inference.
+==================================================

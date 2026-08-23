@@ -37,6 +37,11 @@ runs/*
 !runs/yolov13_master_combined_v2/
 !runs/yolov13_master_combined_v2/**
 !runs/yolov13_master_combined_v2/weights/*.pt
+!runs/train/
+!runs/train/**
+!runs/train/yolov13_subject_wise_v1/
+!runs/train/yolov13_subject_wise_v1/**
+!runs/train/yolov13_subject_wise_v1/weights/*.pt
 !runs/evaluation/
 !runs/evaluation/**
 datasets/

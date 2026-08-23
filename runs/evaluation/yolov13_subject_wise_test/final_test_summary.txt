@@ -1,0 +1,48 @@
+==================================================
+YOLOv13n SUBJECT-WISE FINAL HELD-OUT TEST
+==================================================
+
+Model:
+D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\runs\train\yolov13_subject_wise_v1\weights\best.pt
+
+Dataset:
+D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\subject_wise_dataset\data.yaml
+
+Split:
+test
+
+Images: 156
+Instances: 157
+
+OVERALL RESULTS
+Precision: 0.570091
+Recall: 0.594563
+F1: 0.582070
+mAP@0.5: 0.618499
+mAP@0.75: 0.521943
+mAP@0.5:0.95: 0.511373
+
+SPEED
+Preprocess: 0.68 ms
+Inference: 5.59 ms
+Postprocess: 0.97 ms
+
+PER-CLASS RESULTS
+engaged     : Images=41  Instances=41  | P=0.481327 | R=0.249164 | F1=0.328353 | AP50=0.272320 | AP75=0.133117 | AP50-95=0.155233
+confused    : Images=39  Instances=39  | P=0.382367 | R=0.717949 | F1=0.498984 | AP50=0.729496 | AP75=0.642040 | AP50-95=0.663954
+bored       : Images=39  Instances=40  | P=0.704386 | R=0.675000 | F1=0.689380 | AP50=0.767102 | AP75=0.646273 | AP50-95=0.666895
+frustrated  : Images=37  Instances=37  | P=0.712286 | R=0.736137 | F1=0.724015 | AP50=0.705076 | AP75=0.666343 | AP50-95=0.559412
+
+DOMAIN BREAKDOWN (PUBLIC VS PRIVATE)
+Public  Test (95 images) : P=0.820552 | R=0.679294 | F1=0.743271 | mAP50=0.709598 | mAP75=0.709598 | mAP50-95=0.681722
+Private Test (61 images) : P=0.348077 | R=0.684290 | F1=0.461436 | mAP50=0.471422 | mAP75=0.201994 | mAP50-95=0.245714
+
+METRIC EXPORT VALIDATION & SANITY CHECKS:
+  Mean per-class AP50 vs overall mAP50      : 0.618499 vs 0.618499 (diff: 0.00e+00)
+  Mean per-class AP75 vs overall mAP75      : 0.521943 vs 0.521943 (diff: 0.00e+00)
+  Mean per-class AP50:95 vs overall mAP50:95: 0.511373 vs 0.511373 (diff: 0.00e+00)
+  Status                                    : PASS
+
+==================================================
+MODEL WAS NOT RETRAINED OR TUNED USING TEST DATA.
+==================================================

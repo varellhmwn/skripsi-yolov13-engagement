@@ -1,0 +1,42 @@
+==================================================
+YOLOv13n SUBJECT-WISE FINAL HELD-OUT TEST
+==================================================
+
+Weights:
+D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\runs\train\yolov13_subject_wise_v1\weights\best.pt
+
+Dataset:
+D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\subject_wise_dataset\data.yaml
+
+Split:
+test
+
+Test images: 156
+Test instances: 156
+
+OVERALL RESULTS
+Precision: 0.57009
+Recall: 0.59456
+F1-score: 0.58207
+mAP@0.5: 0.61850
+mAP@0.75: 0.52194
+mAP@0.5:0.95: 0.51137
+
+SPEED
+Preprocess: 0.73 ms
+Inference: 6.39 ms
+Postprocess: 1.26 ms
+
+PER-CLASS RESULTS
+engaged     : P=0.48133 | R=0.24916 | F1=0.32835 | mAP50=0.27232 | mAP50-95=0.13312
+confused    : P=0.38237 | R=0.71795 | F1=0.49898 | mAP50=0.72950 | mAP50-95=0.64204
+bored       : P=0.70439 | R=0.67500 | F1=0.68938 | mAP50=0.76710 | mAP50-95=0.64627
+frustrated  : P=0.71229 | R=0.73614 | F1=0.72402 | mAP50=0.70508 | mAP50-95=0.66634
+
+DOMAIN BREAKDOWN (PUBLIC VS PRIVATE)
+Public  Test (95 images) : P=0.82055 | R=0.67929 | F1=0.74327 | mAP50=0.70960 | mAP50-95=0.68172
+Private Test (61 images) : P=0.34808 | R=0.68429 | F1=0.46144 | mAP50=0.47142 | mAP50-95=0.24571
+
+==================================================
+MODEL WAS NOT RETRAINED OR TUNED USING TEST DATA.
+==================================================

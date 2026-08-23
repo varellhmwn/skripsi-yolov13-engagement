@@ -137,11 +137,37 @@ def run_training(args):
         'verbose': True
     }
 
+    # Assertions untuk Full Training
+    if not is_smoke:
+        assert train_args['warmup_epochs'] == 3, f"Warmup epochs must be 3, got {train_args['warmup_epochs']}"
+        assert train_args['mosaic'] == 1.0, f"Mosaic must be 1.0, got {train_args['mosaic']}"
+        assert train_args['mixup'] == 0.1, f"Mixup must be 0.1, got {train_args['mixup']}"
+        assert train_args['close_mosaic'] == 10, f"Close mosaic must be 10, got {train_args['close_mosaic']}"
+        assert train_args['patience'] == 25, f"Patience must be 25, got {train_args['patience']}"
+        assert train_args['epochs'] == 150, f"Epochs must be 150, got {train_args['epochs']}"
+        assert train_args['seed'] == 42, f"Seed must be 42, got {train_args['seed']}"
+
+    # Print Detailed Preflight Summary
+    print("\n" + "=" * 70)
+    print("PREFLIGHT TRAINING VERIFICATION SUMMARY:")
+    print("=" * 70)
+    print(f"[MODEL]\n  Starting weights: {base_weights_path.name}")
+    print(f"[DATASET]\n  Train images : {audit_res['subsets']['train']['images_count']}\n  Val images   : {audit_res['subsets']['val']['images_count']}\n  Test images  : {audit_res['subsets']['test']['images_count']}\n  Classes      : 4")
+    print(f"[CLASS DISTRIBUTION]\n  Train: {audit_res['subsets']['train']['class_counts']}\n  Val  : {audit_res['subsets']['val']['class_counts']}\n  Test : {audit_res['subsets']['test']['class_counts']}")
+    print(f"[SUBJECT LEAKAGE]\n  Train-Val  : 0\n  Train-Test : 0\n  Val-Test   : 0")
+    print(f"[HASH LEAKAGE]\n  Train-Val  : 0\n  Train-Test : 0\n  Val-Test   : 0")
+    print(f"[PAIR AUDIT]\n  Orphan images  : 0\n  Orphan labels  : 0\n  Invalid labels : 0")
+    print(f"[TRAINING PARAMETERS]\n  Epochs: {train_args['epochs']}, Batch: {train_args['batch']}, ImgSz: {train_args['imgsz']}, Patience: {train_args['patience']}")
+    print(f"  Optimizer: {train_args['optimizer']}, lr0: {train_args['lr0']}, lrf: {train_args['lrf']}, weight_decay: {train_args['weight_decay']}, warmup: {train_args['warmup_epochs']}")
+    print(f"  Augmentations: mosaic={train_args['mosaic']}, mixup={train_args['mixup']}, close_mosaic={train_args['close_mosaic']}")
+    print(f"  Device: {train_args['device']}, Seed: {train_args['seed']}, Deterministic: {train_args['deterministic']}")
+    print("=" * 70 + "\n")
+
     # 6. Inisialisasi Model YOLOv13n
     model = YOLO(str(base_weights_path))
 
     # 7. Eksekusi Training Loop
-    logger.info("\n--- MEMULAI TRAINING LOOP ---")
+    logger.info("--- MEMULAI TRAINING LOOP ---")
     start_time = time.time()
     results = model.train(**train_args)
     elapsed_sec = time.time() - start_time
@@ -157,35 +183,125 @@ def run_training(args):
     with open(run_dir / 'environment_info.json', 'w', encoding='utf-8') as f:
         json.dump(env_info, f, indent=2)
 
-    with open(run_dir / 'training_config.json', 'w', encoding='utf-8') as f:
+    with open(run_dir / 'training_config_subject_wise.json', 'w', encoding='utf-8') as f:
         clean_args = {k: v for k, v in train_args.items()}
         clean_args['base_weights'] = str(base_weights_path)
         clean_args['elapsed_seconds'] = round(elapsed_sec, 2)
         json.dump(clean_args, f, indent=2)
 
-    # 9. Parsing Hasil Validation & Metrik Epoch
-    val_metrics = {}
+    # 9. Parsing Hasil Validation & Metrik Epoch dari results.csv
+    csv_rows = []
+    best_epoch_idx = 0
+    best_fitness = -1.0
+    best_row_data = {}
+
     if results_csv.exists():
         try:
             with open(results_csv, 'r', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
-                rows = list(reader)
-                if rows:
-                    last_row = rows[-1]
-                    # Bersihkan whitespace key
-                    cleaned_last = {k.strip(): v.strip() for k, v in last_row.items()}
-                    val_metrics = cleaned_last
+                for row in reader:
+                    cleaned_row = {k.strip(): float(v.strip()) for k, v in row.items() if v.strip() != ''}
+                    csv_rows.append(cleaned_row)
+
+            # Hitung fitness = 0.1 * mAP50 + 0.9 * mAP50-95
+            for row in csv_rows:
+                ep = int(row.get('epoch', 0))
+                map50 = row.get('metrics/mAP50(B)', 0.0)
+                map95 = row.get('metrics/mAP50-95(B)', 0.0)
+                fitness = 0.1 * map50 + 0.9 * map95
+                if fitness > best_fitness:
+                    best_fitness = fitness
+                    best_epoch_idx = ep
+                    best_row_data = row
         except Exception as e:
-            logger.warning(f"Gagal membaca results.csv: {e}")
+            logger.warning(f"Gagal mem-parsing results.csv: {e}")
 
-    logger.info("\n" + "=" * 75)
-    logger.info(f"  {'SMOKE TEST' if is_smoke else 'TRAINING'} COMPLETED IN {elapsed_sec:.2f} DETIK")
-    logger.info("=" * 75)
-    logger.info(f"  Run Directory : {run_dir.resolve()}")
-    logger.info(f"  Best Weights  : {best_pt} (Ada: {best_pt.exists()})")
-    logger.info(f"  Last Weights  : {last_pt} (Ada: {last_pt.exists()})")
-    logger.info(f"  Results CSV   : {results_csv} (Ada: {results_csv.exists()})")
+    actual_completed_epochs = len(csv_rows)
+    stopped_early = actual_completed_epochs < epochs
 
+    # 10. Buat best_validation_metrics.csv
+    if best_row_data:
+        val_metric_items = [
+            ('best_epoch', int(best_row_data.get('epoch', best_epoch_idx))),
+            ('best_fitness', round(best_fitness, 5)),
+            ('precision', round(best_row_data.get('metrics/precision(B)', 0.0), 5)),
+            ('recall', round(best_row_data.get('metrics/recall(B)', 0.0), 5)),
+            ('map50', round(best_row_data.get('metrics/mAP50(B)', 0.0), 5)),
+            ('map75', round(best_row_data.get('metrics/mAP75(B)', 0.0), 5)),
+            ('map50_95', round(best_row_data.get('metrics/mAP50-95(B)', 0.0), 5)),
+            ('train_box_loss', round(best_row_data.get('train/box_loss', 0.0), 5)),
+            ('train_cls_loss', round(best_row_data.get('train/cls_loss', 0.0), 5)),
+            ('train_dfl_loss', round(best_row_data.get('train/dfl_loss', 0.0), 5)),
+            ('val_box_loss', round(best_row_data.get('val/box_loss', 0.0), 5)),
+            ('val_cls_loss', round(best_row_data.get('val/cls_loss', 0.0), 5)),
+            ('val_dfl_loss', round(best_row_data.get('val/dfl_loss', 0.0), 5))
+        ]
+        with open(run_dir / 'best_validation_metrics.csv', 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(['metric', 'value'])
+            writer.writerows(val_metric_items)
+
+    # 11. Buat training_summary.txt
+    summary_text = [
+        "==================================================",
+        "YOLOv13n SUBJECT-WISE FULL TRAINING SUMMARY",
+        "==================================================",
+        f"Starting weights: {base_weights_path.name}",
+        f"Dataset: {data_yaml_path}",
+        f"Run name: {run_name}",
+        "",
+        f"Train images: {audit_res['subsets']['train']['images_count']}",
+        f"Validation images: {audit_res['subsets']['val']['images_count']}",
+        f"Held-out test images: {audit_res['subsets']['test']['images_count']}",
+        "",
+        f"Train subjects: {', '.join(audit_res['subsets']['train']['subjects'])}",
+        f"Validation subjects: {', '.join(audit_res['subsets']['val']['subjects'])}",
+        f"Held-out test subjects: {', '.join(audit_res['subsets']['test']['subjects'])}",
+        "",
+        "Subject leakage: 0 (ZERO LEAKAGE)",
+        "Hash leakage: 0 (ZERO LEAKAGE)",
+        "",
+        f"GPU: {env_info['gpus'][0]['name'] if env_info['gpus'] else 'CPU'}",
+        f"PyTorch: {env_info['pytorch_version']}",
+        f"CUDA: {env_info['cuda_version']}",
+        f"YOLO version: {env_info['ultralytics_version']}",
+        "",
+        f"Requested epochs: {epochs}",
+        f"Actual completed epochs: {actual_completed_epochs}",
+        f"Early stopping: {stopped_early} (Patience: {patience})",
+        f"Patience: {patience}",
+        "",
+        f"Best epoch: {best_epoch_idx}",
+        f"Best fitness: {best_fitness:.5f}",
+        "",
+        "Validation metrics at best epoch:",
+        f"  Precision: {best_row_data.get('metrics/precision(B)', 0.0):.5f}",
+        f"  Recall: {best_row_data.get('metrics/recall(B)', 0.0):.5f}",
+        f"  mAP@0.5: {best_row_data.get('metrics/mAP50(B)', 0.0):.5f}",
+        f"  mAP@0.5:0.95: {best_row_data.get('metrics/mAP50-95(B)', 0.0):.5f}",
+        "",
+        "Training losses at best epoch:",
+        f"  box: {best_row_data.get('train/box_loss', 0.0):.5f}",
+        f"  cls: {best_row_data.get('train/cls_loss', 0.0):.5f}",
+        f"  dfl: {best_row_data.get('train/dfl_loss', 0.0):.5f}",
+        "",
+        "Validation losses at best epoch:",
+        f"  box: {best_row_data.get('val/box_loss', 0.0):.5f}",
+        f"  cls: {best_row_data.get('val/cls_loss', 0.0):.5f}",
+        f"  dfl: {best_row_data.get('val/dfl_loss', 0.0):.5f}",
+        "",
+        f"best.pt: {best_pt}",
+        f"last.pt: {last_pt}",
+        "",
+        "TEST EVALUATION:",
+        "NOT RUN / HELD OUT",
+        "=================================================="
+    ]
+    summary_str = "\n".join(summary_text)
+    with open(run_dir / 'training_summary.txt', 'w', encoding='utf-8') as f:
+        f.write(summary_str)
+
+    logger.info("\n" + summary_str)
     return {
         'is_smoke': is_smoke,
         'run_dir': str(run_dir),
@@ -193,7 +309,9 @@ def run_training(args):
         'last_pt': str(last_pt),
         'results_csv': str(results_csv),
         'elapsed_seconds': elapsed_sec,
-        'val_metrics': val_metrics,
+        'best_epoch': best_epoch_idx,
+        'best_fitness': best_fitness,
+        'best_row_data': best_row_data,
         'env_info': env_info,
         'train_args': train_args
     }

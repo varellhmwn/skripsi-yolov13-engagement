@@ -1,0 +1,14 @@
+metric,value
+best_epoch,25
+best_fitness,0.57657
+precision,0.57886
+recall,0.68911
+map50,0.67023
+map75,0.59347
+map50_95,0.56616
+train_box_loss,0.53466
+train_cls_loss,0.61481
+train_dfl_loss,0.99755
+val_box_loss,0.7562
+val_cls_loss,1.45037
+val_dfl_loss,1.22798

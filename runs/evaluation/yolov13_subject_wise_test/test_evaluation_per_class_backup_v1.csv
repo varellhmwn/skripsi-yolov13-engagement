@@ -1,0 +1,13 @@
+subset,class,precision,recall,f1,map50,map75,map50_95
+overall_unseen,engaged,0.48133,0.24916,0.32835,0.27232,0.13312,0.13312
+overall_unseen,confused,0.38237,0.71795,0.49898,0.7295,0.64204,0.64204
+overall_unseen,bored,0.70439,0.675,0.68938,0.7671,0.64627,0.64627
+overall_unseen,frustrated,0.71229,0.73614,0.72402,0.70508,0.66634,0.66634
+public_unseen,engaged,1.0,0.0,0.0,0.0,0.0,0.0
+public_unseen,confused,0.39691,1.0,0.56827,0.98098,0.98098,0.98098
+public_unseen,bored,0.93065,0.84,0.883,0.89654,0.89654,0.89654
+public_unseen,frustrated,0.95465,0.87718,0.91428,0.96087,0.96087,0.96087
+private_unseen,engaged,0.43261,0.88235,0.58058,0.61154,0.29504,0.29504
+private_unseen,confused,0.38982,0.5625,0.4605,0.46829,0.08899,0.08899
+private_unseen,bored,0.28744,0.6,0.38867,0.4304,0.12028,0.12028
+private_unseen,frustrated,0.28244,0.69231,0.4012,0.37546,0.30367,0.30367

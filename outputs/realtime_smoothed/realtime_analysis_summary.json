@@ -1,50 +1,50 @@
 {
   "fps": {
-    "total_frames": 3181,
-    "test_duration_sec": 106.0,
+    "total_frames": 4748,
+    "test_duration_sec": 159.98,
     "warmup_frames_excluded": 10,
-    "fps_samples": 3171,
-    "mean_fps": 50.19,
-    "median_fps": 51.17,
-    "min_fps": 18.24,
-    "max_fps": 101.25,
-    "p5_fps": 32.45,
-    "p95_fps": 60.18,
-    "frames_ge_30": 3066,
-    "pct_frames_ge_30": 96.69
+    "fps_samples": 4738,
+    "mean_fps": 31.53,
+    "median_fps": 34.22,
+    "min_fps": 13.8,
+    "max_fps": 43.46,
+    "p5_fps": 19.87,
+    "p95_fps": 38.3,
+    "frames_ge_30": 3164,
+    "pct_frames_ge_30": 66.78
   },
   "label_changes": {
-    "raw": 205,
-    "stable": 34,
-    "reduction_pct": 83.41
+    "raw": 361,
+    "stable": 58,
+    "reduction_pct": 83.93
   },
   "segments": {
     "raw": {
-      "total_segments": 206,
-      "short_segments": 144,
-      "pct_short_segments": 69.9,
-      "median_frame_count": 4,
-      "mean_frame_count": 15.44,
+      "total_segments": 362,
+      "short_segments": 258,
+      "pct_short_segments": 71.27,
+      "median_frame_count": 3,
+      "mean_frame_count": 13.12,
       "min_frame_count": 1,
-      "max_frame_count": 242,
-      "median_duration_sec": 0.13
+      "max_frame_count": 359,
+      "median_duration_sec": 0.12
     },
     "stable": {
-      "total_segments": 35,
-      "short_segments": 10,
-      "pct_short_segments": 28.57,
-      "median_frame_count": 25,
-      "mean_frame_count": 90.89,
+      "total_segments": 59,
+      "short_segments": 17,
+      "pct_short_segments": 28.81,
+      "median_frame_count": 22,
+      "mean_frame_count": 80.47,
       "min_frame_count": 1,
-      "max_frame_count": 991,
-      "median_duration_sec": 0.83
+      "max_frame_count": 1250,
+      "median_duration_sec": 0.73
     },
-    "short_segment_reduction_pct": 93.06
+    "short_segment_reduction_pct": 93.41
   },
   "neutral": {
-    "neutral_frames": 18,
-    "neutral_pct": 0.57,
-    "neutral_segments": 4,
-    "neutral_median_dur": 0.15
+    "neutral_frames": 57,
+    "neutral_pct": 1.2,
+    "neutral_segments": 9,
+    "neutral_median_dur": 0.12
   }
 }

@@ -1,0 +1,4 @@
+subset,images,precision,recall,f1,map50,map75,map50_95,preprocess_ms,inference_ms,postprocess_ms
+overall_unseen,156,0.57009,0.59456,0.58207,0.6185,0.52194,0.51137,0.73,6.39,1.26
+public_unseen,95,0.82055,0.67929,0.74327,0.7096,0.7096,0.68172,1.23,6.05,0.65
+private_unseen,61,0.34808,0.68429,0.46144,0.47142,0.20199,0.24571,1.24,11.06,1.19

@@ -33,8 +33,8 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 
 # ─── Model Configuration ────────────────────────────────────────────
-MODEL_PATH = str(BASE_DIR / 'runs' /
-                 'yolov13_master_combined_v3' / 'weights' / 'best.pt')
+MODEL_PATH = str(BASE_DIR / 'runs' / 'train' /
+                 'yolov13_subject_wise_v1' / 'weights' / 'best.pt')
 MODULES_PATH = Path(__file__).resolve().parent / 'modules.json'
 HISTORY_PATH = Path(__file__).resolve().parent / 'study_history.json'
 
@@ -76,7 +76,9 @@ def load_model():
     """Load the YOLOv13 model."""
     global model
     if model is None:
-        print(f"[INFO] Loading YOLOv13 model from: {MODEL_PATH}")
+        print("[MODEL]")
+        print("Loaded application model:")
+        print(f"{MODEL_PATH}")
         if not os.path.exists(MODEL_PATH):
             print(f"[ERROR] Model not found at: {MODEL_PATH}")
             print(f"[INFO] Falling back to simulation mode (no model)")
