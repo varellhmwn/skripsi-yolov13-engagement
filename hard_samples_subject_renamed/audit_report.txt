@@ -1,0 +1,47 @@
+==========================================================================
+  LAPORAN AUDIT PEMROSESAN & PENAMAAN ULANG HARD SAMPLES BERDASARKAN SUBJEK
+==========================================================================
+Status Eksekusi            : EKSEKUSI FISIK BERHASIL
+Total Citra Diproses       : 707 citra
+Total Pasangan Label       : 707 label .txt (100% Cocok & Utuh)
+Jumlah Subjek Unik         : 10 subjek
+Jumlah Duplicate Groups    : 35 grup (Total 70 citra duplikat biner)
+Jumlah Kesalahan/Missing   : 0 error (100% Lulus Validasi)
+
+--- Distribusi per Subjek ---
+  S01       :  421 citra
+  S02       :  163 citra
+  S03       :   33 citra
+  S04       :   14 citra
+  S05       :   12 citra
+  S06       :   13 citra
+  S07       :    8 citra
+  S08       :    7 citra
+  S09       :   28 citra
+  S10       :    8 citra
+
+--- Distribusi per Kelas Emosi ---
+  engaged     :  268 citra (37.91%)
+  frustrated  :  169 citra (23.90%)
+  confused    :  141 citra (19.94%)
+  bored       :  129 citra (18.25%)
+
+--- Distribusi Asal Subset (Master Dataset) ---
+  train     :  559 citra (79.07%)
+  test      :   79 citra (11.17%)
+  val       :   69 citra ( 9.76%)
+
+--- Contoh Rencana Penamaan Baru (10 Sampel Pertama) ---
+  Filename Asli                    -> Filename Baru                | Subjek | Kelas      | Subset
+  ------------------------------------+-----------------------------+--------+------------+-------
+  bored_2196.jpg                   -> S01_bored_0001.jpg           | S01    | bored      | train 
+  bored_2288.jpg                   -> S01_bored_0002.jpg           | S01    | bored      | train 
+  bored_2371.jpg                   -> S01_bored_0003.jpg           | S01    | bored      | train 
+  bored_2459.jpg                   -> S01_bored_0004.jpg           | S01    | bored      | train 
+  bored_4708.jpg                   -> S01_bored_0005.jpg           | S01    | bored      | test  
+  bored_4880.jpg                   -> S01_bored_0006.jpg           | S01    | bored      | train 
+  bored_5123.jpg                   -> S01_bored_0007.jpg           | S01    | bored      | train 
+  bored_5166.jpg                   -> S01_bored_0008.jpg           | S01    | bored      | train 
+  bored_5169.jpg                   -> S01_bored_0009.jpg           | S01    | bored      | train 
+  bored_5171.jpg                   -> S01_bored_0010.jpg           | S01    | bored      | train 
+==========================================================================
